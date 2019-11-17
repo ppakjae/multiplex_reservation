@@ -29,8 +29,8 @@ a {
 	width: 100vw;
 	height: calc(100vh/3);
 	box-sizing: border-box;
-	background-color: #efefef;
 	padding:  0 10vw;
+	/*background-color: #efefef;*/
 
 	/*Animation*/
 	transition-property: width;
@@ -104,6 +104,20 @@ transition-timing-function: ease-in;
 }
 
 
-#Content.menuOn{
+#Content.menuOn > div{
+	width: 100vw;
+
+	transition-property: width;
+	transition-duration: 0.5s;
+	transition-timing-function:ease-in;
+}
+
+
+#Content.menuOn, #Content.menuOn > div{
+	width: calc(100vw/3*2 - 10vw);
+}
+
+/*#content.menuOn > *{
 	width: calc(100vw/3*2);
 }
+*/
