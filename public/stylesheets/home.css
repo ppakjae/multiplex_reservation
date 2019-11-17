@@ -1,0 +1,37 @@
+#Content {
+	/*Display*/
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	/*Apperance*/
+
+	/*Animation*/
+}
+
+#movie-chart {
+	/*Display*/
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	overflow-x: scroll;
+	/*Apperance*/
+	width: 80vw;
+	height: calc(100vh/3);
+	background-color: rgba(0,0,0,0.2);
+	/*Animation*/
+}
+
+.movie{
+	/*Display*/
+	/*Apperance*/
+	min-width: 25vw;
+	/*Animation*/
+}
+.movie.selected{
+	min-width: 50vw;
+
+}
+
+	/*Display*/
+	/*Apperance*/
+	/*Animation*/
