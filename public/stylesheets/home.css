@@ -4,8 +4,46 @@
 	flex-direction: column;
 	align-items: flex-start;
 	overflow-y: visible;
+	padding-top: 10vh;
 	/*Apperance*/
+	color: #fff;
 	/*Animation*/
+}
+
+#Content-background {
+	/*Layout*/
+	position: absolute;
+	top: calc(100vh/6);
+	/*Apperance*/
+	content : ' ';
+	width: 100vw;
+	min-height: calc(100vh/3*2);
+	/*padding : 0 10vw;	*/
+	/*margin : 0 0 10vh;*/
+	overflow : hidden;
+	/*Animation*/
+	transition-property: width;
+	transition-duration: 0.5s;
+	transition-timing-function: ease-in;
+}
+
+#Content-background.in-detail {
+	/*min-height: calc(100vh/3*2); */
+
+}
+
+#img{
+	top: calc(100vh/6);
+	/*Apperance*/
+	content : ' ';
+	width: 100vw;
+	min-height: calc(100vh/3*2);
+	/*padding : 0 10vw;	*/
+	/*margin : 0 0 10vh;*/
+	transform: scale(1.05);
+	background-position : center;
+	background-image : url(https://m.media-amazon.com/images/M/MV5BNGVjNWI4ZGUtNzE0MS00YTJmLWE0ZDctN2ZiYTk2YmI3NTYyXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg);
+	filter :blur(10px);
 }
 
 #movie-filter {
@@ -33,16 +71,28 @@
 	display: flex;
 	flex-direction: row;
 	overflow-x: scroll;
-	overflow-y: visible;
+	overflow-y: hidden;
 	/*Apperance*/
 	width: 80vw;
 	height: calc(100vh/3);
+	min-height: calc(100vh/3);
 	background-color: rgba(0,0,0,0.2);
 	/*Animation*/
+	transition-property: min-height;
+	transition-duration: 0.1s;
+	transition-timing-function: ease-in;
 }
 
 #movie-chart.in-detail{
+	overflow-x: hidden;
 	min-height: calc(100vh/3*2); 
+}
+
+button{
+	position: absolute;
+	top:0;
+	left:50%;
+	z-index: 5;
 }
 
 .movie{

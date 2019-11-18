@@ -8,7 +8,7 @@ const toggle_menu = function(event) {
 	const Menu = document.querySelector("#menu");
 	const Nav = document.querySelector('#Nav');
 	const Login = document.querySelector('#login');
-	const Content = document.querySelector('#Content');
+	const Content = document	.querySelector('#Content');
 
 	if (Menu.classList.contains("hidden")){
 		setTimeout(()=>{

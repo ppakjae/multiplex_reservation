@@ -7,7 +7,9 @@ const movie =[
 const Movie= document.querySelectorAll('.movie')
 const Movie_filter = document.querySelectorAll('#movie-filter > li')
 const Movie_chart = document.querySelector('#movie-chart');
-const btn = document.querySelector('btn');
+const Content_Background = document.querySelector('#Content-background');
+const Content = document.querySelector('#Content');
+const btn = document.querySelector('button');
 
 
 
@@ -105,8 +107,25 @@ const change_select = function(event){
 make_movieChart();
 
 btn.addEventListener('click',()=>{
+	const Content = document.querySelector('#Content');
+	const img =document.querySelector('#img');
 	const Movie_selected = document.querySelector('.movie.selected');
 	const Movie_chart = document.querySelector('#movie-chart');
+		// Content_Background.classList.toggle('in-detail')
 		Movie_selected.classList.toggle('in-detail');
 		Movie_chart.classList.toggle('in-detail');
-})
+		setTimeout(()=>{
+			Content_Background.style.height =  Content.getBoundingClientRect().height+'px';
+			img.style.height =  Content.getBoundingClientRect().height+'px';
+			console.log( Content.getBoundingClientRect().height);
+		},100);
+});
+
+Menu_icon.addEventListener('click',()=>{
+	const Content = document.querySelector('#Content');
+		setTimeout(()=>{
+			Content_Background.style.width =  Content.getBoundingClientRect().width+'px';
+			img.style.width =  Content.getBoundingClientRect().width+'px';
+			console.log( Content.getBoundingClientRect().width);
+		},500);
+});
