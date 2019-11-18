@@ -3,6 +3,7 @@ body {
 }
 
 #Content{
+  padding: 0 5vw;
 }
 
 #Login {
@@ -12,7 +13,8 @@ body {
   justify-content: space-around;
   align-items: center;
 /*Apperance*/
-  width: 80vw; 
+  width: 90vw;
+  min-height: calc(100vh/3*2); 
   background-color: #3f3f3f;
   z-index: 3;
 }

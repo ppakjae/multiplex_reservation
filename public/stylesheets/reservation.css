@@ -1,0 +1,51 @@
+body {
+  background-color: #1f1f1f;
+}
+
+#Content{
+  display: flex;
+  flex-direction: row;
+
+  padding: 0 10vw;
+  background-color: black;
+}
+
+#screen{
+  position: absolute;
+  width: 80vw;
+  height: 100vh;
+  background-image: url("/images/screen.png");
+  background-size: 60%;
+  background-repeat:no-repeat;
+}
+
+#SeatChart{
+  position: absolute;
+  bottom: 50px;
+  left:270px;
+}
+.seat-row{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 1vh;
+}
+.seat {
+  display: inline-block;
+  width:18px;
+  min-height: 18px;
+  margin : 1px;
+  background-image:url("/images/seats.png");
+  background-size: cover;
+}
+
+.seat:hover{
+    background-color: red;
+}
+
+.empty_seat {
+  display: inline-block;
+  width: 18px;
+  margin:1px;
+  min-height: 18px;
+}
