@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel='stylesheet' href='/stylesheets/index.css' />
+	<link rel='stylesheet' href='/stylesheets/login.css' />
+</head>
+<body>
+	<div id="Nav">
+  			<h1 id="logo">Cinema</h1>
+  			<div id="login">
+          <div id="user_container"> 
+            <img src="https://www.booksie.com/files/profiles/22/mr-anonymous_230x230.png" /> 
+            <h4 id="user_name"> user_name </h4> 
+          </div> 
+          </div> 
+          <div id="menu_icon"> 
+            <h4>menu</h4>
+  			</div>
+  		</div>
+  		<div id="Content">
+  			<div id="Login">
+				<h2>Sign In</h2>
+				<form  id ="login-form"method="Get" action='/'>
+					<label for ="id">ID </label>
+					<input id="id" type="text" name="name" value="manager"/ > 
+					<label for ="id">Password  </label>
+					<input id = "password" type ="password" / >
+					<input type="submit"/>
+				</form>
+
+				<div id="login-footer">
+					<ul>
+						<li><NavLink to="/">아이디찾기</NavLink></li>
+						<li><NavLink to="/">비밀번호찾기</NavLink></li>
+					</ul>
+				</div>
+			</div>
+  		</div>
+
+  		<div id="menu" class="hidden">
+			<h2>예매내역</h2>
+			<h2>쿠폰</h2>
+			<h2>건의</h2>
+		</div>
+	<script type="text/javascript" src="/javascripts/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+body {
+  background-color: #1f1f1f;
+}
+
+#Content{
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  padding: 0 10vw;
+  background-color: black;
+  color: white;
+}
+
+#movie-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  margin : 5vh 0;
+}
+
+#movie-container > ul{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-grow: 1;
+
+  list-style: none;
+}
+
+#movie-cotianer > h4{
+  flex-grow : 0;
+}
+
+#Seats-container {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80vw;
+    height: 100vh;
+    overflow-x:hidden;
+    overflow-y: visible;
+    color:white;
+    transform : translateX(20%);
+}
+
+#Seats-container > h4 {
+  transform: translateY(10vh);
+  font-size: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+#screen{
+  /*position: absolute;*/
+  /*left:0vw;*/
+  width: 70vw;
+  height: calc(70vw/3*2);
+  background-image: url("/images/screen.png");
+  /*background-size: 60%;*/
+  background-repeat:no-repeat;
+  transform : translateX(8%);
+}
+
+#SeatChart{
+  /*position: absolute;*/
+  /*left:10vw;*/
+  /*bottom: 20vh;*/
+  transform : translateY(-20vh);
+}
+.seat-row{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 1vh;
+}
+.seat {
+  display: inline-block;
+  width:18px;
+  min-height: 18px;
+  margin : 1px;
+  background-image:url("/images/seats.png");
+  background-size: cover;
+}
+
+.seat:hover{
+    background-color: red;
+}
+
+.empty_seat {
+  display: inline-block;
+  width: 18px;
+  margin:1px;
+  min-height: 18px;
+}
