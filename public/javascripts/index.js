@@ -9,6 +9,8 @@ const toggle_menu = function(event) {
 	const Nav = document.querySelector('#Nav');
 	const Login = document.querySelector('#login');
 	const Content = document	.querySelector('#Content');
+	const login = document.querySelector("#login");
+
 
 	if (Menu.classList.contains("hidden")){
 		setTimeout(()=>{
@@ -31,4 +33,6 @@ const toggle_menu = function(event) {
 
 Menu_icon.addEventListener('click',toggle_menu);
 
-
+login.addEventListener('click',()=>{
+	window.location.href="/login";		
+});

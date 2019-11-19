@@ -114,18 +114,25 @@ button{
 	order:-1;
 }
 .movie.selected.in-detail{
-	min-width: 80vw;
+	min-width: 85vw;
 }
+
 
 .movie-image{
 	position: absolute;
 	left:0;
 	width: calc(100vh/3*5/7);
 	height : calc(100vh/3);
-	background-color: rgba(255,255,1,0.2);		
+	background-color: rgba(255,255,1,0.2);
+	box-shadow: 0 0 5vw rgba(0,0,0,0.5);	
+
 }
-.movie.selected .movie-image{
+.movie.selected.in-detail .movie-image{
+	width: calc(100vh/3*2*5/7);
+	height: calc(100vh/3*2)
 }
+
+
 .movie_name{
 	position: absolute;
 	left: 50%;
@@ -142,6 +149,10 @@ button{
 	font-size : 3rem;
 }
 
+.movie.selected.in-detail .movie_name {
+	left: calc(100vh/3*2*5/7 + 5vw);
+}
+
 .Info{
 	/*Layout*/
 	position: absolute;
@@ -150,7 +161,33 @@ button{
 	/*Apperance*/
 	left : calc(100vh/3*5/7 + 5vw);
 	bottom: 0;
+
 	/*Animation*/	
+}
+.movie.selected.in-detail .Info {
+	margin-bottom: 10vh;
+	left : calc(100vh/3*2*5/7 + 5vw);
+}
+
+#Cinema{
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+
+	min-width: 80vw;
+}
+
+#goReservation{
+	text-align: center;
+
+	width: 10vw;
+	padding:1.5vw;
+	background-color: rgba(255,255,255,0.3);
+}
+
+#goReservation:hover{
+
+	background-color: rgba(20,255,255,0.3);
 }
 
 	/*Layout*/

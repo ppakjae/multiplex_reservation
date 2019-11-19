@@ -10,8 +10,7 @@ const Movie_chart = document.querySelector('#movie-chart');
 const Content_Background = document.querySelector('#Content-background');
 const Content = document.querySelector('#Content');
 const btn = document.querySelector('button');
-
-
+const GoReservation = document.querySelector('#goReservation');
 
 const make_movieContainer = function(element){
 	const Movie_chart = document.querySelector('#movie-chart');
@@ -129,3 +128,11 @@ Menu_icon.addEventListener('click',()=>{
 			console.log( Content.getBoundingClientRect().width);
 		},500);
 });
+
+GoReservation.addEventListener('click', ()=>{
+	window.location.href="/reserv";
+
+});
+
+
+
