@@ -1,19 +1,27 @@
 // Data
 const movie =[ 
-["Jocker", "Parasite", "Shrek", "HarryPotter", "Walkingdead"],
-["Parisite","HarryPotter","Jocker","Walkingdead","Shrek"]
+	["Jocker", "Parasite", "Shrek", "HarryPotter", "Walkingdead"],
+	["Parisite","HarryPotter","Jocker","Walkingdead","Shrek"]
 ];
-// ellement ref
+
+const movie_selected = {
+	genre : "Horror/ Comedy",
+	ratio : 4,
+	releaseDate : "2019.99.99"
+};
+
+// Ellement ref
 const Movie= document.querySelectorAll('.movie')
 const Movie_filter = document.querySelectorAll('#movie-filter > li')
-const Movie_chart = document.querySelector('#movie-chart');
-const Content_Background = document.querySelector('#Content-background');
+const Movie_chart = document.querySelector('#Movie-chart');
+const Content_background = document.querySelector('#Content-background');
+const Content_backgroundImg = document.querySelector('#Content-background-img');
 const Content = document.querySelector('#Content');
-const btn = document.querySelector('button');
-const GoReservation = document.querySelector('#goReservation');
+const moreInfo_btn = document.querySelector('button');
+const goReservation_btn = document.querySelector('#goReservation');
 
 const make_movieContainer = function(element){
-	const Movie_chart = document.querySelector('#movie-chart');
+	const Movie_chart = document.querySelector('#Movie-chart');
 	
 	const container = document.createElement('div');
 	container.classList.add('movie');
@@ -44,7 +52,7 @@ const make_movieChart = function(){
 			element.addEventListener('click',()=>{
 				const Movie = document.querySelectorAll('.movie');
 				const Movie_name = document.querySelectorAll(".movie_name");
-				const Movie_chart = document.querySelector("#movie-chart");
+				const Movie_chart = document.querySelector("#Movie-chart");
 
 				setTimeout(()=>{
 					Movie_name.forEach((element,j)=>{
@@ -66,9 +74,9 @@ const make_simpleInfo = function(event){
 	const genre = document.createElement("p");
 	const ratio = document.createElement("p");
 	const releaseDate = document.createElement("p");
-	const genreText =document.createTextNode("Genre : Horror/Comedy");
-	const ratioText = document.createTextNode("Ratio : 4.0");
-	const releaseDateText = document.createTextNode(" 2019.99.99");
+	const genreText =document.createTextNode("Genre : "+movie_selected.genre);
+	const ratioText = document.createTextNode("Ratio : "+movie_selected.ratio);
+	const releaseDateText = document.createTextNode(movie_selected.releaseDate);
 	
 	const Movie_selected = document.querySelector('.movie.selected');
 	
@@ -90,7 +98,7 @@ const remove_simpleInfo = function(event){
 
 
 const change_select = function(event){
-	const Movie_chart = document.querySelector('#movie-chart');
+	const Movie_chart = document.querySelector('#Movie-chart');
 	const Movie = document.querySelectorAll('.movie');
 	remove_simpleInfo();
 	document.querySelector('.movie.selected').classList.remove('selected');
@@ -105,17 +113,16 @@ const change_select = function(event){
 
 make_movieChart();
 
-btn.addEventListener('click',()=>{
+moreInfo_btn.addEventListener('click',()=>{
 	const Content = document.querySelector('#Content');
-	const img =document.querySelector('#img');
+	const Content_backgroundImg =document.querySelector('#Content-background-img');
 	const Movie_selected = document.querySelector('.movie.selected');
-	const Movie_chart = document.querySelector('#movie-chart');
-		// Content_Background.classList.toggle('in-detail')
+	const Movie_chart = document.querySelector('#Movie-chart');
 		Movie_selected.classList.toggle('in-detail');
 		Movie_chart.classList.toggle('in-detail');
 		setTimeout(()=>{
-			Content_Background.style.height =  Content.getBoundingClientRect().height+'px';
-			img.style.height =  Content.getBoundingClientRect().height+'px';
+			Content_background.style.height =  Content.getBoundingClientRect().height+'px';
+			Content_backgroundImg.style.height =  Content.getBoundingClientRect().height+'px';
 			console.log( Content.getBoundingClientRect().height);
 		},100);
 });
@@ -123,13 +130,13 @@ btn.addEventListener('click',()=>{
 Menu_icon.addEventListener('click',()=>{
 	const Content = document.querySelector('#Content');
 		setTimeout(()=>{
-			Content_Background.style.width =  Content.getBoundingClientRect().width+'px';
-			img.style.width =  Content.getBoundingClientRect().width+'px';
+			Content_background.style.width =  Content.getBoundingClientRect().width+'px';
+			Content_backgroundImg.style.width =  Content.getBoundingClientRect().width+'px';
 			console.log( Content.getBoundingClientRect().width);
 		},500);
 });
 
-GoReservation.addEventListener('click', ()=>{
+goReservation_btn.addEventListener('click', ()=>{
 	window.location.href="/reserv";
 
 });

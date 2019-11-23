@@ -3,6 +3,10 @@ body {
 }
 
 #Content{
+  /*Layout*/
+  display: flex;
+  flex-direction: column;
+  /*Apperance*/
   padding: 0 5vw;
 }
 
@@ -19,23 +23,37 @@ body {
   z-index: 3;
 }
 
-#login-form {
-
-  min-height: 40vh;
-  margin : 0 auto; 
+#Login-form {
+  /*Layout*/
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: flex-start;
+  /*Apperance*/
+  min-height: 40vh;
+  margin : 0 auto; 
 }
 
-#login-form > *{
+#Login-form > *{
 
 }
 
-#login-footer > ul {
+#Login-footer > ul {
+  /*Layout*/
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  /*Apperance*/
+  margin: 0;
+  padding: 0;
+  font-size: 0.5rem;
+  color: white;
+  list-style: none;
+}
 
-  font-size: 1rem;
-  margin : 0;
-  padding : 0;
+#Login-footer li {
+  padding: 0.5rem;
+  margin-left: 0.5rem;
+  border : 1px solid white; 
+  border-radius: 0.5rem;
 }
