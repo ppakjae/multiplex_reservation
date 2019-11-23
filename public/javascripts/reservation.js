@@ -1,3 +1,4 @@
+//Data
 const seats = [
 	[1,1,0,1,1,1,1,1,1,1,1,1,0,1,1],
 	[1,1,1,0,1,1,1,1,1,1,1,1,1,0,1,1,1],
@@ -20,7 +21,7 @@ const seats2 =[
 	[1,1,1,1,1,0,0,1,1,1,1,1],
 	[1,1,1,1,9,0,0,0,1,1,1,1],
 
-];
+];	
 
 	
 
@@ -43,7 +44,7 @@ const make_seatChart = function(){
 				newRow.appendChild(newSeat);				
 			}
 		}
-	}
+	}	
 }
 
 make_seatChart();

@@ -32,7 +32,7 @@
 
 }
 
-#img{
+#Content-background-img{
 	top: calc(100vh/6);
 	/*Apperance*/
 	content : ' ';
@@ -65,7 +65,7 @@
 	color: red;
 }
 
-#movie-chart {
+#Movie-chart {
 	/*Layout*/
 	position: relative;
 	display: flex;
@@ -83,7 +83,7 @@
 	transition-timing-function: ease-in;
 }
 
-#movie-chart.in-detail{
+#Movie-chart.in-detail{
 	overflow-x: hidden;
 	min-height: calc(100vh/3*2); 
 }

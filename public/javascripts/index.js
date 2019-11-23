@@ -1,14 +1,17 @@
+//Data
 
-
+// Element ref
 const Menu_icon = document.querySelector("#menu_icon");
+const logo= document.querySelector('#logo');
+const login = document.querySelector("#login");
 
 
 
 const toggle_menu = function(event) {
-	const Menu = document.querySelector("#menu");
+	const Menu = document.querySelector("#Menu");
 	const Nav = document.querySelector('#Nav');
 	const Login = document.querySelector('#login');
-	const Content = document	.querySelector('#Content');
+	const Content = document.querySelector('#Content');
 	const login = document.querySelector("#login");
 
 
@@ -30,9 +33,16 @@ const toggle_menu = function(event) {
 
 };
 
+if(Menu_icon != null){
+	Menu_icon.addEventListener('click',toggle_menu);
+}
 
-Menu_icon.addEventListener('click',toggle_menu);
+if(login != null){
+	login.addEventListener('click',()=>{
+		window.location.href="/login";		
+	});	
+}
 
-login.addEventListener('click',()=>{
-	window.location.href="/login";		
+logo.addEventListener('click',()=>{
+	window.location.href="/";
 });
