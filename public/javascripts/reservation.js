@@ -167,3 +167,9 @@ make_movieList();
 make_dateList();
 make_screenList();
 make_seatChart();
+
+var first = $("button").val();
+$("button").click(function () {
+	var first = $(this).val();
+	alert(first);
+});
