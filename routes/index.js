@@ -50,7 +50,9 @@ router.get('/register',function(req,res,next){
 });
 
 router.get('/reserv',function(req,res,next){
-	res.render('reservation');
+	res.render('reservation',{
+        test : "success"
+    });
 });
 
 router.get('/suggestion',function(req,res,next){

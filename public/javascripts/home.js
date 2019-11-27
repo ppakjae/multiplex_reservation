@@ -138,7 +138,6 @@ Menu_icon.addEventListener('click',()=>{
 
 goReservation_btn.addEventListener('click', ()=>{
 	window.location.href="/reserv";
-
 });
 
 
