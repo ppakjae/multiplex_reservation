@@ -4,20 +4,33 @@
 // 	["Parisite","HarryPotter","Jocker","Walkingdead","Shrek"]
 // ];
 
-const movie_selected = {
-	genre : "Horror/ Comedy",
-	ratio : 4,
-	releaseDate : "2019.99.99",
-	country :  "Korea",
-	running_time : 130,
-	movie_director : "Son HeungMin",
-	actors : ["Park SeongSoo", "Park JaeSeon", "Oh HyeongSeo", "Woo HyeongSeok", "Jeon JongHa","Kim DeokYoung"],
-	agency : "CJEnt",
-	translator : "",
-	age_limit : 15,
-	number_of_spectators : 123456789, 
-	reservation_rates : 15
+// let movie_selected = {
+// 	genre : "Horror/ Comedy",
+// 	ratio : 4,
+// 	releaseDate : "2019.99.99",
+// 	country :  "Korea",
+// 	running_time : 130,
+// 	movie_director : "Son HeungMin",
+// 	actors : ["Park SeongSoo", "Park JaeSeon", "Oh HyeongSeo", "Woo HyeongSeok", "Jeon JongHa","Kim DeokYoung"],
+// 	agency : "CJEnt",
+// 	translator : "",
+// 	age_limit : 15,
+// 	number_of_spectators : 123456789, 
+// 	reservation_rates : 15
+// };
+
+var req = new XMLHttpRequest();
+req.onreadystatechange = function(e){
+	console.log(""+req.readyState + req.status);
+	if( req.readyState == 4) {
+		if( req.status == 200){
+		movie_selected = req.response;
+		remove_simpleInfo();
+		make_simpleInfo();
+		}
+	}
 };
+req.responseType = "json";
 
 // Ellement ref
 const Movie= document.querySelectorAll('.movie')
@@ -185,12 +198,18 @@ const change_select = function(event){
 	const Movie_chart = document.querySelector('#Movie-chart');
 	const Movie = document.querySelectorAll('.movie');
 	remove_simpleInfo();
+	change_selected_movie_Info();	
 	document.querySelector('.movie.selected').classList.remove('selected');
 	setTimeout(()=>{
 		this.classList.add('selected');
 		make_simpleInfo();
 		Movie_chart.scrollLeft = 0;
 	},700);
+};
+
+const change_selected_movie_Info = function(){
+req.open("GET","/movie",true);
+req.send(null);
 };
 
 const handle_more = function(){
@@ -211,7 +230,7 @@ const handle_more = function(){
 		remove_detailedInfo();
 		make_simpleInfo();
 	}
-	
+
 	setTimeout(()=>{
 		Content_background.style.height =  Content.getBoundingClientRect().height+'px';
 		Content_backgroundImg.style.height =  Content.getBoundingClientRect().height+'px';
