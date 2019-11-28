@@ -168,16 +168,27 @@ body {
   width:18px;
   min-height: 18px;
   margin : 1px;
-  background-image:url("/images/seats.png");
+  /* background-image:url("/images/seats.png"); */
+  background-color: white;
   background-size: cover;
   z-index: 2;
 }
 .seat:hover{
-    background-color: red;
+    background-color: gray;
 }
 .empty_seat {
   display: inline-block;
   width: 18px;
   margin:1px;
   min-height: 18px;
+}
+
+.disable{
+  display: inline-block;
+  width:18px;
+  min-height: 18px;
+  margin : 1px;
+  background-size: cover;
+  z-index: 2;
+  background-color: red;
 }
