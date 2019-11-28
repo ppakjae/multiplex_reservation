@@ -31,13 +31,21 @@ router.get('/', function (req, res, next) {
 		console.log(req.session.user);
         res.render('index', {
             logined: req.session.user.logined,
-			username: req.session.user.username
+			username: req.session.user.username,
+            moive :[ 
+                ["Jocker", "Parasite", "Shrek", "HarryPotter", "Walkingdead"],
+                ["Parisite","HarryPotter","Jocker","Walkingdead","Shrek"]
+            ]
         });
     }
     else {
         res.render('index.ejs', {
             logined: false,
-            username: " "
+            username: " ",
+            movie : [ 
+                ["Jocker", "Parasite", "Shrek", "HarryPotter", "Walkingdead"],
+                ["Parisite","HarryPotter","Jocker","Walkingdead","Shrek"]
+            ]
         });
     }
 });
