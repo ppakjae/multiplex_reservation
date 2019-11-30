@@ -2,13 +2,15 @@ var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
 var session = require('express-session');
+var AWS = require('aws-sdk');
+AWS.config.region= 'ap-northeast-2';
+var ec2 = new AWS.EC2()
 
 var connection = mysql.createConnection({
-    multipleStatements: true,
-    host: 'localhost',
-    user: 'root',
-    post: 3000,
-    password: '',
+    post:3306,
+    host:"cenema.cpnxmgyidpor.ap-northeast-2.rds.amazonaws.com",
+    user : "admin",
+    password:"11111111",
     database: 'cenema',
     multipleStatements: true
 });
@@ -29,17 +31,76 @@ router.get('/', function (req, res, next) {
 		console.log(req.session.user);
         res.render('index', {
             logined: req.session.user.logined,
-			username: req.session.user.username
+			username: req.session.user.username,
+            moive :[ 
+                ["Jocker", "Parasite", "Shrek", "HarryPotter", "Walkingdead"],
+                ["Parisite","HarryPotter","Jocker","Walkingdead","Shrek"]
+            ],
+            movie_selected : {
+                genre : "Horror/ Comedy",
+                ratio : 4,
+                releaseDate : "2019.99.99",
+                country :  "Korea",
+                running_time : 130,
+                movie_director : "Son HeungMin",
+                actors : ["Park SeongSoo", "Park JaeSeon", "Oh HyeongSeo", "Woo HyeongSeok", "Jeon JongHa","Kim DeokYoung"],
+                agency : "CJEnt",
+                translator : "",
+                age_limit : 15, 
+                number_of_spectators : 123456789, 
+                reservation_rates : 15
+            }
         });
     }
     else {
         res.render('index.ejs', {
             logined: false,
-            username: " "
+            username: " ",
+            movie : [ 
+                ["Jocker", "Parasite", "Shrek", "HarryPotter", "Walkingdead"],
+                ["Parisite","HarryPotter","Jocker","Walkingdead","Shrek"]
+            ],
+            movie_selected : {
+                genre : "Horror/ Comedy",
+                ratio : 4,
+                releaseDate : "2019.99.99",
+                country :  "Korea",
+                running_time : 130,
+                movie_director : "Son HeungMin",
+                actors : ["Park SeongSoo", "Park JaeSeon", "Oh HyeongSeo", "Woo HyeongSeok", "Jeon JongHa","Kim DeokYoung"],
+                agency : "CJEnt",
+                translator : "",
+                age_limit : 15,
+                number_of_spectators : 123456789, 
+                reservation_rates : 15
+            }
         });
     }
 });
 
+router.get('/ec2',function(rq,res){
+    ec2.describeInstances({},function(err,data){
+        res.json(data);
+    })
+});
+
+router.get('/movie',function(req,res){
+    // res.status = 200;
+    res.json({
+    genre : "changed",
+    ratio : 1,
+    releaseDate : "2019.99.99",
+    country :  "changed",
+    running_time : 130,
+    movie_director : "changde",
+    actors : ["changed"],
+    agency : "changed",
+    translator : "changed",
+    age_limit : 15,
+    number_of_spectators : 123456789, 
+    reservation_rates : 15
+    })
+});
 
 router.get('/login',function(req,res,next){
 	res.render('login');
@@ -50,9 +111,11 @@ router.get('/register',function(req,res,next){
 });
 
 router.get('/reserv',function(req,res,next){
-	res.render('reservation', {
-		test : "test"
-	});
+	res.render('reservation',{
+        test : "success",
+        test2 : ["string1","string2"],
+        test3 : { a : "string", b : 2}
+    });
 });
 
 router.get('/suggestion', function (req, res) {

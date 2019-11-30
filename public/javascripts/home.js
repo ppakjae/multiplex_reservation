@@ -1,14 +1,36 @@
 // Data
-const movie =[ 
-	["Jocker", "Parasite", "Shrek", "HarryPotter", "Walkingdead"],
-	["Parisite","HarryPotter","Jocker","Walkingdead","Shrek"]
-];
+// const movie =[ 
+// 	["Jocker", "Parasite", "Shrek", "HarryPotter", "Walkingdead"],
+// 	["Parisite","HarryPotter","Jocker","Walkingdead","Shrek"]
+// ];
 
-const movie_selected = {
-	genre : "Horror/ Comedy",
-	ratio : 4,
-	releaseDate : "2019.99.99"
+// let movie_selected = {
+// 	genre : "Horror/ Comedy",
+// 	ratio : 4,
+// 	releaseDate : "2019.99.99",
+// 	country :  "Korea",
+// 	running_time : 130,
+// 	movie_director : "Son HeungMin",
+// 	actors : ["Park SeongSoo", "Park JaeSeon", "Oh HyeongSeo", "Woo HyeongSeok", "Jeon JongHa","Kim DeokYoung"],
+// 	agency : "CJEnt",
+// 	translator : "",
+// 	age_limit : 15,
+// 	number_of_spectators : 123456789, 
+// 	reservation_rates : 15
+// };
+
+var req = new XMLHttpRequest();
+req.onreadystatechange = function(e){
+	console.log(""+req.readyState + req.status);
+	if( req.readyState == 4) {
+		if( req.status == 200){
+		movie_selected = req.response;
+		remove_simpleInfo();
+		make_simpleInfo();
+		}
+	}
 };
+req.responseType = "json";
 
 // Ellement ref
 const Movie = document.querySelectorAll('.movie')
@@ -91,10 +113,85 @@ const make_simpleInfo = function(event){
 
 };
 
+const make_detailedInfo = function(event){
+	const Info = document.createElement("div");
+	Info.classList.add("Info");
+
+	const genre = document.createElement("p");
+	const ratio = document.createElement("p");
+	const releaseDate = document.createElement("p");
+	const running_time = document.createElement("p");
+	const country = document.createElement("p");
+	const movie_director = document.createElement("p");
+	const actors = document.createElement("ul");
+	const agency = document.createElement("p");
+	const translator = document.createElement("p");
+	const age_limit = document.createElement("p");
+	const number_of_spectators = document.createElement("p");
+	const reservation_rates = document.createElement("p")
+
+	const genreText =document.createTextNode("Genre : "+movie_selected.genre);
+	const ratioText = document.createTextNode("Ratio : "+movie_selected.ratio);
+	const releaseDateText = document.createTextNode("Release Date :"+movie_selected.releaseDate);
+	const running_timeText = document.createTextNode("Running Time :"+movie_selected.running_timeText);
+	const countryText = document.createTextNode("Country : "+movie_selected.country);
+	const movie_directorText = document.createTextNode("Movie Director : "+movie_selected.movie_director);
+	const agencyText = document.createTextNode("Agency : "+movie_selected.agency);
+	const translatorText = document.createTextNode("Translator :"+movie_selected.translator);
+	const age_limitText = document.createTextNode("Age limit :"+movie_selected.age_limit);
+	const number_of_spectatorsText = document.createTextNode("Number of spectators :"+movie_selected.number_of_spectators);
+	const reservation_ratesText = document.createTextNode("Reservation rates :"+movie_selected.reservation_rates);
+
+	genre.appendChild(genreText);
+	ratio.appendChild(ratioText);
+	releaseDate.appendChild(releaseDateText);
+	running_time.appendChild(running_timeText);
+	country.appendChild(countryText);
+	movie_director.appendChild(movie_directorText);
+	agency.appendChild(agencyText);
+	translator.appendChild(translatorText);
+	agency.appendChild(agencyText);
+	age_limit.appendChild(age_limitText);
+	number_of_spectators.appendChild(number_of_spectatorsText);
+	reservation_rates.appendChild(reservation_ratesText);
+
+
+	for(let i =0 ; i<movie_selected.actors.length;i++){
+		const actor = document.createElement("li");
+		const actorText = document.createTextNode("Actor :"+movie_selected.actors[i]);
+
+		actor.appendChild(actorText);
+		actors.appendChild(actor);
+	}
+	
+	const Movie_selected = document.querySelector('.movie.selected');
+	
+
+	Info.appendChild(genre);
+	Info.appendChild(ratio);
+	Info.appendChild(releaseDate);
+	Info.appendChild(running_time);
+	Info.appendChild(country);
+	Info.appendChild(movie_director);
+	Info.appendChild(actors);
+	Info.appendChild(agency);
+	Info.appendChild(translator);
+	Info.appendChild(agency);
+	Info.appendChild(age_limit);
+	Info.appendChild(number_of_spectators);
+	Info.appendChild(reservation_rates);
+	Movie_selected.appendChild(Info);
+}
+
 const remove_simpleInfo = function(event){
 	const Movie_deselected = document.querySelector('.movie.selected');
 	Movie_deselected.removeChild(document.querySelector('.Info'));
 };
+
+const remove_detailedInfo = function(event){
+	const Movie_selected = document.querySelector('.movie.selected');
+	Movie_selected.removeChild(document.querySelector('.Info'));
+}
 
 
 
@@ -102,6 +199,7 @@ const change_select = function(event){
 	const Movie_chart = document.querySelector('#Movie-chart');
 	const Movie = document.querySelectorAll('.movie');
 	remove_simpleInfo();
+	change_selected_movie_Info();	
 	document.querySelector('.movie.selected').classList.remove('selected');
 	setTimeout(()=>{
 		this.classList.add('selected');
@@ -110,23 +208,45 @@ const change_select = function(event){
 	},700);
 };
 
-make_movieChart();
+const change_selected_movie_Info = function(){
+req.open("GET","/movie",true);
+req.send(null);
+};
 
-moreInfo_btn.addEventListener('click',()=>{
+const handle_more = function(){
 	const Content = document.querySelector('#Content');
 	const Content_backgroundImg =document.querySelector('#Content-background-img');
 	const Movie_selected = document.querySelector('.movie.selected');
 	const Movie_chart = document.querySelector('#Movie-chart');
+
+	
+	if(!Movie_selected.classList.contains('in-detail')){
 		Movie_selected.classList.toggle('in-detail');
 		Movie_chart.classList.toggle('in-detail');
-		setTimeout(()=>{
-			Content_background.style.height =  Content.getBoundingClientRect().height+'px';
-			Content_backgroundImg.style.height =  Content.getBoundingClientRect().height+'px';
-			console.log( Content.getBoundingClientRect().height);
-		},100);
-});
+		remove_simpleInfo();
+		make_detailedInfo();
+	} else{
+		Movie_selected.classList.toggle('in-detail');
+		Movie_chart.classList.toggle('in-detail');
+		remove_detailedInfo();
+		make_simpleInfo();
+	}
 
-if(Menu_icon != null){
+	setTimeout(()=>{
+		Content_background.style.height =  Content.getBoundingClientRect().height+'px';
+		Content_backgroundImg.style.height =  Content.getBoundingClientRect().height+'px';
+		console.log( Content.getBoundingClientRect().height);
+	},100);
+
+}
+
+
+
+make_movieChart();
+
+moreInfo_btn.addEventListener('click', handle_more);
+
+if(Menu_icon){
 	Menu_icon.addEventListener('click',()=>{
 		const Content = document.querySelector('#Content');
 			setTimeout(()=>{
@@ -135,12 +255,10 @@ if(Menu_icon != null){
 				console.log( Content.getBoundingClientRect().width);
 			},500);
 	});
-	
 }
 
 goReservation_btn.addEventListener('click', ()=>{
 	window.location.href="/reserv";
-
 });
 
 
