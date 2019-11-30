@@ -39,7 +39,7 @@ const Movie_chart = document.querySelector('#Movie-chart');
 const Content_background = document.querySelector('#Content-background');
 const Content_backgroundImg = document.querySelector('#Content-background-img');
 const Content = document.querySelector('#Content');
-const moreInfo_btn = document.querySelector('button');
+const moreInfo_btn = document.querySelector('#more');
 const goReservation_btn = document.querySelector('#goReservation');
 
 const make_movieContainer = function(element){
@@ -55,7 +55,7 @@ const make_movieContainer = function(element){
 
 	Movie_chart.appendChild(container);
 	container.appendChild(image);
-	container.appendChild(name);		
+	container.appendChild(name);	
 	name.appendChild(nameText);
 };
 
@@ -197,11 +197,14 @@ const remove_detailedInfo = function(event){
 const change_select = function(event){
 	const Movie_chart = document.querySelector('#Movie-chart');
 	const Movie = document.querySelectorAll('.movie');
+	const more = document.querySelector("#more");
 	remove_simpleInfo();
 	change_selected_movie_Info();	
 	document.querySelector('.movie.selected').classList.remove('selected');
+	more.classList.add('changing');
 	setTimeout(()=>{
 		this.classList.add('selected');
+		more.classList.remove('changing');
 		make_simpleInfo();
 		Movie_chart.scrollLeft = 0;
 	},700);
@@ -217,16 +220,19 @@ const handle_more = function(){
 	const Content_backgroundImg =document.querySelector('#Content-background-img');
 	const Movie_selected = document.querySelector('.movie.selected');
 	const Movie_chart = document.querySelector('#Movie-chart');
+	const more = document.querySelector('#more');
 
 	
 	if(!Movie_selected.classList.contains('in-detail')){
-		Movie_selected.classList.toggle('in-detail');
-		Movie_chart.classList.toggle('in-detail');
+		Movie_selected.classList.add('in-detail');
+		Movie_chart.classList.add('in-detail');
+		more.classList.add('in-detail');
 		remove_simpleInfo();
 		make_detailedInfo();
 	} else{
-		Movie_selected.classList.toggle('in-detail');
-		Movie_chart.classList.toggle('in-detail');
+		Movie_selected.classList.remove('in-detail');
+		Movie_chart.classList.remove('in-detail');
+		more.classList.remove('in-detail');
 		remove_detailedInfo();
 		make_simpleInfo();
 	}

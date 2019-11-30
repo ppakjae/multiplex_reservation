@@ -88,13 +88,6 @@
 	min-height: calc(100vh/3*2); 
 }
 
-button{
-	position: absolute;
-	top:0;
-	left:50%;
-	z-index: 5;
-}
-
 .movie{
 	/*Layout*/
 	position:relative;
@@ -107,14 +100,14 @@ button{
 	transition-property: min-width;
 	transition-duration: 0.3s;
 	transition-timing-function: ease-in;
-
+	order : 1;
 }
 .movie.selected{
 	min-width: 50vw;
 	order:-1;
 }
 .movie.selected.in-detail{
-	min-width: 85vw;
+	min-width: 80vw;
 }
 
 
@@ -132,6 +125,44 @@ button{
 	height: calc(100vh/3*2)
 }
 
+#more{
+	position: relative;
+	content : ' ';
+	width: 2.5vw;
+	height: 100%;
+	min-width: 2.5vw;
+	min-height: 100%;
+	background : url("/images/more.svg");
+	background-size : 50%;
+	background-position: center;
+	background-repeat: no-repeat;
+	mix-blend-mode: screen;
+	z-index: 5;
+	opacity: 0.2;
+	order:0;
+}
+
+#more:hover{
+	opacity: 0.5;
+}
+
+#more.in-detail{
+	position: absolute;
+	right :0;
+	-webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+}
+
+#more:hover{
+	background-color: rgba(255,255,255,0.1);
+
+}
+
+#more.changing{
+	width: 0;
+	opacity: 0;
+	order :5;
+}
 
 .movie_name{
 	position: absolute;
@@ -144,7 +175,6 @@ button{
 
 .movie.selected .movie_name {
 	top:0;
-	bottom: none;
 	left: calc(100vh/3*5/7 + 5vw);
 	font-size : 3rem;
 }
@@ -195,6 +225,10 @@ button{
 	background-color: rgba(20,255,255,0.3);
 }
 
+::-webkit-scrollbar {
+  width:0;
+  height: 0;
+}
 	/*Layout*/
 	/*Apperance*/
 	/*Animation*/

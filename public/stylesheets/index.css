@@ -161,6 +161,11 @@ transition-timing-function: ease-in;
 	width: calc(100vw/3*2 - 10vw);
 }
 
+::-webkit-scrollbar {
+  width:0;
+  height: 0;
+}
+
 /*#content.menuOn > *{
 	width: calc(100vw/3*2);
 }
