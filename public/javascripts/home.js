@@ -221,7 +221,7 @@ const handle_more = function(){
 	const Movie_selected = document.querySelector('.movie.selected');
 	const Movie_chart = document.querySelector('#Movie-chart');
 	const more = document.querySelector('#more');
-
+	Movie_chart.scrollLeft = 0;
 	
 	if(!Movie_selected.classList.contains('in-detail')){
 		Movie_selected.classList.add('in-detail');

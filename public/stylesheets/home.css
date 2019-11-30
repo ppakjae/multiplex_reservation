@@ -77,7 +77,7 @@
 	height: calc(100vh/3);
 	min-height: calc(100vh/3);
 	background-color: rgba(0,0,0,0.2);
-	padding: 3vh 0;
+	padding: 2vh 0 0vh;
 	/*Animation*/
 	transition-property: min-height;
 	transition-duration: 0.1s;
@@ -87,6 +87,7 @@
 #Movie-chart.in-detail{
 	overflow-x: hidden;
 	min-height: calc(100vh/3*2); 
+	padding-top: 0vh;
 }
 
 .movie{
