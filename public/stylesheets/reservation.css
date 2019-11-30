@@ -30,10 +30,28 @@ body {
   flex-direction: row;
   /*justify-content: space-between;*/
   overflow-x: scroll;
+  padding-bottom: 2vh;
   /*flex-grow: 1;*/
 }
 #movie-cotainer > h4{
   /*flex-grow : 0;*/
+}
+
+#movie-container > ul::-webkit-scrollbar{
+  height : 1vh;
+  min-height: 10px;
+}
+#movie-container > ul::-webkit-scrollbar-track{
+    background: radial-gradient(rgba(255,255,255,1),rgba(255,255,255,0),  rgba(255,255,255,0));
+
+}
+
+#movie-container > ul::-webkit-scrollbar-thumb{
+  width: 2vw;
+  background: url("/images/scrollthumb1.svg");
+  background-repeat: no-repeat;
+  background-size: 1rem;
+  background-position: center;
 }
 
 #cinema-list > li,
