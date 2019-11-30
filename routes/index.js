@@ -50,11 +50,71 @@ router.get('/register',function(req,res,next){
 });
 
 router.get('/reserv',function(req,res,next){
-	res.render('reservation');
+	res.render('reservation', {
+		test : "test"
+	});
 });
 
-router.get('/suggestion',function(req,res,next){
-	res.render('suggestion');
+router.get('/suggestion', function (req, res) {
+    var sql = 'SELECT * FROM suggestion';
+    connection.query(sql, function (error, results, fields) {
+        if (req.session.user) {
+            res.render('suggestion', {
+                logined: req.session.user.logined,
+                user_name: req.session.user.user_name,
+                results
+            });
+        }
+        else {
+            res.render('suggestion', {
+                logined: false,
+                user_name: " ",
+                results
+            });
+        }
+    });
+});
+
+router.get('/suggestion_insert', function (req, res) {
+    if (req.session.user) {
+        res.render('suggestion_insert', {
+            logined: req.session.user.logined,
+            user_name: req.session.user.user_name
+        });
+    }
+    else {
+        res.redirect('login');
+    }
+});
+
+router.get('/suggestion/:suggestion_id', function (req, res) {
+    var notice_id = req.url.split("/")[2];
+    var sql1 = 'SELECT * FROM suggestion WHERE suggestion_id = ?; ';
+    var sql2 = 'SELECT * FROM comment WHERE suggestion_id = ?; ';
+
+    connection.query('UPDATE suggestion SET view = view + 1 WHERE suggestion_id = ?', [notice_id]);
+    connection.query(sql1 + sql2, [notice_id, notice_id], function(error, results, fields){
+        results1 = results[0];
+        results2 = results[1];
+        if (req.session.user) {    
+            res.render('suggestion_id', {
+                logined: req.session.user.logined,
+                user_name: req.session.user.user_name,
+                results1,
+                results2,
+                notice_id
+            });
+        }
+        else {
+            res.render('suggestion_id', {
+                logined: false,
+                user_name: " ",
+                results1,
+                results2,
+                notice_id
+            });
+        }
+    })
 });
 
 module.exports = router;
@@ -131,9 +191,9 @@ router.post('/suggestion/:suggestion_id', function(req, res){
         var notice_id = req.url.split("/")[2];
         var comment = req.body.comment;
         var writer_name = req.session.user.user_name;
-        var sql = `INSERT INTO comment(notice_id, comment, writer_name) VALUES (?,?,?) ;`
+        var sql = `INSERT INTO comment(suggestion_id, comment, writer_name) VALUES (?,?,?) ;`
         connection.query(sql, [notice_id, comment, writer_name], function(error, results, fields){
-            res.redirect(`/notice/${suggestion_id}`);
+            res.redirect(`/suggestion/${suggestion_id}`);
         });
     }
     else {

@@ -11,7 +11,7 @@ const movie_selected = {
 };
 
 // Ellement ref
-const Movie= document.querySelectorAll('.movie')
+const Movie = document.querySelectorAll('.movie')
 const Movie_filter = document.querySelectorAll('#movie-filter > li')
 const Movie_chart = document.querySelector('#Movie-chart');
 const Content_background = document.querySelector('#Content-background');
@@ -19,6 +19,7 @@ const Content_backgroundImg = document.querySelector('#Content-background-img');
 const Content = document.querySelector('#Content');
 const moreInfo_btn = document.querySelector('button');
 const goReservation_btn = document.querySelector('#goReservation');
+// const Menu_icon = document.querySelector("#menu_icon");
 
 const make_movieContainer = function(element){
 	const Movie_chart = document.querySelector('#Movie-chart');
@@ -109,8 +110,6 @@ const change_select = function(event){
 	},700);
 };
 
-
-
 make_movieChart();
 
 moreInfo_btn.addEventListener('click',()=>{
@@ -127,14 +126,17 @@ moreInfo_btn.addEventListener('click',()=>{
 		},100);
 });
 
-Menu_icon.addEventListener('click',()=>{
-	const Content = document.querySelector('#Content');
-		setTimeout(()=>{
-			Content_background.style.width =  Content.getBoundingClientRect().width+'px';
-			Content_backgroundImg.style.width =  Content.getBoundingClientRect().width+'px';
-			console.log( Content.getBoundingClientRect().width);
-		},500);
-});
+if(Menu_icon != null){
+	Menu_icon.addEventListener('click',()=>{
+		const Content = document.querySelector('#Content');
+			setTimeout(()=>{
+				Content_background.style.width =  Content.getBoundingClientRect().width+'px';
+				Content_backgroundImg.style.width =  Content.getBoundingClientRect().width+'px';
+				console.log( Content.getBoundingClientRect().width);
+			},500);
+	});
+	
+}
 
 goReservation_btn.addEventListener('click', ()=>{
 	window.location.href="/reserv";

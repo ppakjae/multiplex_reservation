@@ -5,8 +5,6 @@ const Menu_icon = document.querySelector("#menu_icon");
 const logo= document.querySelector('#logo');
 const login = document.querySelector("#login");
 
-
-
 const toggle_menu = function(event) {
 	const Menu = document.querySelector("#Menu");
 	const Nav = document.querySelector('#Nav');
