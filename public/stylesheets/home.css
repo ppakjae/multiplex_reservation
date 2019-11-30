@@ -77,6 +77,7 @@
 	height: calc(100vh/3);
 	min-height: calc(100vh/3);
 	background-color: rgba(0,0,0,0.2);
+	padding: 3vh 0;
 	/*Animation*/
 	transition-property: min-height;
 	transition-duration: 0.1s;
@@ -225,10 +226,26 @@
 	background-color: rgba(20,255,255,0.3);
 }
 
-::-webkit-scrollbar {
-  width:0;
-  height: 0;
+#Movie-chart::-webkit-scrollbar{
+	height : 1vh;
+	min-height: 10px;
 }
+
+#Movie-chart::-webkit-scrollbar-track{
+	background: radial-gradient(rgba(255,255,255,1),rgba(255,255,255,0),	rgba(255,255,255,0),	rgba(255,255,255,0),	rgba(255,255,255,0));
+}
+
+#Movie-chart::-webkit-scrollbar-thumb{	
+	width: 2vw;
+	background: url("/images/scrollthumb1.svg");
+	background-repeat: no-repeat;
+	background-size: 3%;
+	background-position: center;
+}
+#Movie-chart::-webkit-scrollbar-button{
+	width:5vw;
+}
+
 	/*Layout*/
 	/*Apperance*/
 	/*Animation*/
