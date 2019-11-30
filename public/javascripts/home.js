@@ -25,8 +25,10 @@ req.onreadystatechange = function(e){
 	if( req.readyState == 4) {
 		if( req.status == 200){
 		movie_selected = req.response;
-		remove_simpleInfo();
-		make_simpleInfo();
+		setTimeout(()=>{
+			remove_simpleInfo();
+			make_simpleInfo();
+		},800);
 		}
 	}
 };
@@ -42,26 +44,34 @@ const Content = document.querySelector('#Content');
 const moreInfo_btn = document.querySelector('#more');
 const goReservation_btn = document.querySelector('#goReservation');
 
-const make_movieContainer = function(element){
+const make_movieContainer = function(element,index){
 	const Movie_chart = document.querySelector('#Movie-chart');
 	
 	const container = document.createElement('div');
 	container.classList.add('movie');
 	const image = document.createElement('div');
 	image.classList.add('movie-image');
+	const Info_container = document.createElement('div');
+	Info_container.classList.add('Info_container');
 	const name = document.createElement('h3');
 	name.classList.add('movie_name');
 	const nameText=document.createTextNode(element);
+	const rank= document.createElement("h3");
+	rank.classList.add('rank');
+	const rankText= document.createTextNode(index+1);
 
 	Movie_chart.appendChild(container);
 	container.appendChild(image);
-	container.appendChild(name);	
+	container.appendChild(Info_container);
+	Info_container.appendChild(name);	
+	Info_container.appendChild(rank);
 	name.appendChild(nameText);
+	rank.appendChild(rankText);
 };
 
 const make_movieChart = function(){
-		movie[0].forEach((element)=>{
-		make_movieContainer(element)
+		movie[0].forEach((element,index)=>{
+		make_movieContainer(element,index);
 		});
 		const Movie = document.querySelectorAll('.movie');
 		Movie[0].classList.add('selected');
@@ -91,28 +101,44 @@ const make_movieChart = function(){
 };
 
 const make_simpleInfo = function(event){
+	const Info_container = document.querySelector(".movie.selected .Info_container");
+
 	const Info = document.createElement("div");
 	Info.classList.add("Info");
-	const genre = document.createElement("p");
-	const ratio = document.createElement("p");
-	const releaseDate = document.createElement("p");
-	const genreText =document.createTextNode("Genre : "+movie_selected.genre);
-	const ratioText = document.createTextNode("Ratio : "+movie_selected.ratio);
+
+	const genre = document.createElement("span");
+	const releaseDate = document.createElement("span");
+	const genreText =document.createTextNode(movie_selected.genre);
 	const releaseDateText = document.createTextNode(movie_selected.releaseDate);
+
+	const ratio = document.createElement("div");
+	let k = movie_selected.ratio;
+	for(var i=0;i<5;i++){
+		const newstar = document.createElement("div");
+		const newstarinner = document.createElement("div");
+		newstar.appendChild(document.createTextNode(" "));
+		newstar.appendChild(newstarinner);
+		newstar.classList.add('star');
+		newstarinner.classList.add('starinner');
+		if(k<1){
+			newstarinner.style.transform="translateX("+Math.floor(k*10-10)+"px)";
+		};
+		k+=-1;
+		ratio.appendChild(newstar);
+	}
 	
-	const Movie_selected = document.querySelector('.movie.selected');
+	genre.appendChild(genreText);
+	releaseDate.appendChild(releaseDateText);
 	
-	Movie_selected.appendChild(Info);
+	Info_container.appendChild(Info);
+	Info.appendChild(releaseDate);
 	Info.appendChild(genre);
-	Info.appendChild(genreText);
 	Info.appendChild(ratio);
-	Info.appendChild(ratioText);
-	Info.appendChild(releaseDateText);
-	Info.appendChild(releaseDateText);
 
 };
 
 const make_detailedInfo = function(event){
+	const Info_container = document.querySelector('.movie.selected.in-detail .Info_container');
 	const Info = document.createElement("div");
 	Info.classList.add("Info");
 
@@ -130,7 +156,7 @@ const make_detailedInfo = function(event){
 	const reservation_rates = document.createElement("p")
 
 	const genreText =document.createTextNode("Genre : "+movie_selected.genre);
-	const ratioText = document.createTextNode("Ratio : "+movie_selected.ratio);
+	const ratioText = document.createTextNode("Ratio :   ");
 	const releaseDateText = document.createTextNode("Release Date :"+movie_selected.releaseDate);
 	const running_timeText = document.createTextNode("Running Time :"+movie_selected.running_timeText);
 	const countryText = document.createTextNode("Country : "+movie_selected.country);
@@ -142,7 +168,22 @@ const make_detailedInfo = function(event){
 	const reservation_ratesText = document.createTextNode("Reservation rates :"+movie_selected.reservation_rates);
 
 	genre.appendChild(genreText);
+	ratio.classList.add("ratio_container");
 	ratio.appendChild(ratioText);
+	let k = movie_selected.ratio;
+	for(var i=0;i<5;i++){
+		const newstar = document.createElement("div");
+		const newstarinner = document.createElement("div");
+		newstar.appendChild(document.createTextNode(" "));
+		newstar.appendChild(newstarinner);
+		newstar.classList.add('star');
+		newstarinner.classList.add('starinner');
+		if(k<1){
+			newstarinner.style.transform="translateX("+Math.floor(k*10-10)+"px)";
+		};
+		k+=-1;
+		ratio.appendChild(newstar);
+	}
 	releaseDate.appendChild(releaseDateText);
 	running_time.appendChild(running_timeText);
 	country.appendChild(countryText);
@@ -163,32 +204,30 @@ const make_detailedInfo = function(event){
 		actors.appendChild(actor);
 	}
 	
-	const Movie_selected = document.querySelector('.movie.selected');
 	
-
 	Info.appendChild(genre);
 	Info.appendChild(ratio);
 	Info.appendChild(releaseDate);
 	Info.appendChild(running_time);
 	Info.appendChild(country);
 	Info.appendChild(movie_director);
-	Info.appendChild(actors);
 	Info.appendChild(agency);
 	Info.appendChild(translator);
 	Info.appendChild(agency);
 	Info.appendChild(age_limit);
 	Info.appendChild(number_of_spectators);
 	Info.appendChild(reservation_rates);
-	Movie_selected.appendChild(Info);
+	Info.appendChild(actors);
+	Info_container.appendChild(Info);
 }
 
 const remove_simpleInfo = function(event){
-	const Movie_deselected = document.querySelector('.movie.selected');
-	Movie_deselected.removeChild(document.querySelector('.Info'));
+	const Movie_selected = document.querySelector('.movie.selected .Info_container');
+	Movie_selected.removeChild(document.querySelector('.Info'));
 };
 
 const remove_detailedInfo = function(event){
-	const Movie_selected = document.querySelector('.movie.selected');
+	const Movie_selected = document.querySelector('.movie.selected .Info_container');
 	Movie_selected.removeChild(document.querySelector('.Info'));
 }
 
@@ -199,8 +238,8 @@ const change_select = function(event){
 	const Movie = document.querySelectorAll('.movie');
 	const more = document.querySelector("#more");
 	remove_simpleInfo();
-	change_selected_movie_Info();	
 	document.querySelector('.movie.selected').classList.remove('selected');
+	change_selected_movie_Info();	
 	more.classList.add('changing');
 	setTimeout(()=>{
 		this.classList.add('selected');
@@ -211,8 +250,8 @@ const change_select = function(event){
 };
 
 const change_selected_movie_Info = function(){
-req.open("GET","/movie",true);
-req.send(null);
+	req.open("GET","/movie",true);
+	req.send(null);
 };
 
 const handle_more = function(){
