@@ -22,27 +22,42 @@
 			
 			<ul id="Cuppon-list">
 				<h3>Cuppon List</h3>
-				<p>보유하신 쿠폰이 없습니다.</p>
-				<li><label><input type="checkbox"/>쿠폰1</label></li>
-				<li><label ><input type="checkbox"/>쿠폰2</label></li>
 			</ul>
 			<ul id="Payment-methods">
 				<h3>Payment method</h3>
-				<li><label><input type="radio" name="pay_method"/>신용카드</label></li>
-				<li><label><input type="radio" name="pay_method"/>휴대폰결제</label></li>
-				<li><label><input type="radio" name="pay_method"/>계좌이체</label></li>
-				<li><label><input type="radio" name="pay_method"/>간편결제</label></li>
+				<li><label><input type="radio" name="pay_method" value="신용카드"/><h5>신용카드</h5>
+						<select>
+							<option>신한카드</option>
+							<option>BC카드</option>
+							<option>국민카드</option>
+							<option>현대카드</option>
+							<option>우리카드</option>
+						</select>
+				</label>
+				</li>
+				<li><label><input type="radio" name="pay_method" value="휴대폰결제" /><h5>휴대폰결제</h5>
+					<select>
+						<option>payco</option>
+						<option>카카오페이</option>
+						<option>카카오페이</option>
+						<option>카카오페이</option>
+					</select>
+				</label>
+				</li>
+				<li><label><input type="radio" name="pay_method" value="계좌이체"/><h5>계좌이체</h5></label></li>
+				<li><label><input type="radio" name="pay_method" value="간편결제" /><h5>간편결제</h5></label></li>
 			</ul>
 			<div id="Payment">
 				<h3>Pay</h3>
-				<p>Tickets Price: <span>8000</span>원</p>
-				<p>Discounts : <span>3000</span>원</p>
-				<p>Total : <span>3000</span>원</p>
+				<p>Tickets Price: <span id="price">8000</span>원</p>
+				<p>Discounts : <span id="discounts">3000</span>원</p>
+				<p>Total : <span id="total_price">3000</span>원</p>
 			<input type="submit" value="Check out!"/>
 			</div>
 		</form>
 	</div>
 	<% include menu %>
 	<script type="text/javascript" src="/javascripts/index.js"></script>
+	<script type="text/javascript" src="/javascripts/payment.js"></script>
 </body>
 </html>
