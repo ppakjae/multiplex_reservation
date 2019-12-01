@@ -2,12 +2,15 @@
 
 // Element ref
 const Menu_icon = document.querySelector("#menu_icon");
+const body = document.querySelector('body');
 const logo= document.querySelector('#logo');
 const login = document.querySelector("#login");
+const beforeHeight = body.scrollHeight;
 
 
 
 const toggle_menu = function(event) {
+	const body = document.querySelector('body');
 	const Menu = document.querySelector("#Menu");
 	const Nav = document.querySelector('#Nav');
 	const Login = document.querySelector('#login');
@@ -21,6 +24,7 @@ const toggle_menu = function(event) {
 			Login.classList.add("menuOn");
 			Content.classList.add("menuOn");
 			Nav.classList.add("menuOn");
+			Menu.style.height= body.scrollHeight+"px";
 		},300);
 	} else{
 		setTimeout(()=>{
@@ -28,6 +32,7 @@ const toggle_menu = function(event) {
 			Nav.classList.remove("menuOn");
 			Content.classList.remove("menuOn");
 			Login.classList.remove("menuOn");
+			Menu.style.height= beforeHeight+"px";
 		})
 	}
 
