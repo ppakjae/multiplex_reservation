@@ -9,7 +9,7 @@ body {
   align-items: flex-start;
   flex-wrap: wrap;
   width:80vw;
-  padding: 0 10vw;
+  padding: 0 10vw 15vh;
   background-color: black;
   color: white;
 }
@@ -210,3 +210,19 @@ body {
   z-index: 2;
   background-color: red;
 }
+
+#goPayment {
+  position: absolute;
+  bottom: 5vh;
+  right: 20vw;
+  width: 15vw;
+  padding:1.5vw;
+  text-align: center;
+  background-color : rgba(255,255,255,0.3);
+}
+
+#goPayment:hover {
+
+    background-color: rgba(20,255,255,0.3);
+}
+

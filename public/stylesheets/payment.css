@@ -1,0 +1,11 @@
+#Content{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;  
+  align-items: flex-start;
+  flex-wrap: wrap;
+  width:80vw;
+  padding: 0 10vw 15vh;
+  background-color: black;
+  color: white;
+}
