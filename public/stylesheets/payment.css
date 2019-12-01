@@ -59,6 +59,20 @@ form > ul{
 
 
 #Payment-methods li label {
+    position: relative;
     display: flex;
     flex-direction: row;
+    width : 15vw;
+    height: 10vh;
 }
+
+#Payment-methods h5{
+  margin : 0;
+}
+
+#Payment-methods li label select{
+  position: absolute;
+  top:0;
+  right:0;
+}
+
