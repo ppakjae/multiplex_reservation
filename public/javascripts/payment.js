@@ -57,6 +57,10 @@ const make_CupponList = function(){
 		const newCuppon_discounts = document.createElement("h5");
 		const newCuppon_expiredate= document.createElement("h5");
 
+		newCuppon_name.classList.add("cuppon_name");
+		newCuppon_discounts.classList.add("cuppon_discounts");
+		newCuppon_expiredate.classList.add("cuppon_expireDate");
+
 		newCuppon_input.setAttribute("value", cupponList[i].cuppon_discounts);
 		const newCuppon_discountsText = document.createTextNode(cupponList[i].cuppon_discounts);
 		const newCuppon_nameText = document.createTextNode(cupponList[i].cuppon_name);
