@@ -112,6 +112,8 @@ router.get('/register',function(req,res,next){
 
 router.get('/reserv',function(req,res,next){
 	res.render('reservation',{
+        logined : true,
+        username : "admin",
         test : "success",
         test2 : ["string1","string2"],
         test3 : { a : "string", b : 2}
