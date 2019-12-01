@@ -1,11 +1,26 @@
 #Content{
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;  
-  align-items: flex-start;
+  justify-content: center;  
+  align-items: center;
   flex-wrap: wrap;
   width:80vw;
   padding: 0 10vw 15vh;
   background-color: black;
   color: white;
+}
+
+form{
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+  justify-content: space-between;
+
+  width: 80vw;
+  padding:10vh 5vw;
+}
+
+form > ul{
+	margin : 0;
+	list-style: none;
 }
