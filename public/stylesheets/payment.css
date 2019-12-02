@@ -1,0 +1,78 @@
+#Content{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;  
+  align-items: center;
+  flex-wrap: wrap;
+  width:80vw;
+  padding: 0 10vw 15vh;
+  background-color: black;
+  color: white;
+}
+
+form{
+	display: flex;
+	flex-direction: row;
+  flex-wrap: wrap;
+	align-items: flex-start;
+  justify-content: space-between;
+
+  width: 80vw;
+  padding:10vh 5vw;
+}
+
+form > ul{
+	margin : 0;
+	list-style: none;
+}
+
+
+#Cuppon-list > li > label{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  width: 15vw;
+  height: 10vh;
+  padding: 1vh 1vw;
+  margin: 2vh 0;
+  background-color: rgba(255,255,255,0.2);
+}
+
+#Cuppon-list > li > label h5{
+  margin:0;
+}
+
+.cuppon_name {
+
+}
+
+.cuppon_discounts{
+  position : absolute;
+  bottom: 1vh;
+  right: 1vw;
+}
+.cuppon_expireDate{
+  position : absolute;
+  bottom:1vh;
+  left:1vw;
+}
+
+
+#Payment-methods li label {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width : 15vw;
+    height: 10vh;
+}
+
+#Payment-methods h5{
+  margin : 0;
+}
+
+#Payment-methods li label select{
+  position: absolute;
+  top:0;
+  right:0;
+}
+

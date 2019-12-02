@@ -107,10 +107,11 @@ img {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: center;
+	justify-content: flex-start;
 
 	/*Appearance*/
 	margin : 0;
+	padding-top: 20vh;
 	width: calc(100vw/3);
 	height: 100vh;
 	/*background-color: black;*/
@@ -159,6 +160,11 @@ transition-timing-function: ease-in;
 
 #Content.menuOn, #Content.menuOn > div{
 	width: calc(100vw/3*2 - 10vw);
+}
+
+body::-webkit-scrollbar {
+  width:0;
+  height: 0;
 }
 
 /*#content.menuOn > *{

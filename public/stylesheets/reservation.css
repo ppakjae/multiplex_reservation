@@ -9,7 +9,7 @@ body {
   align-items: flex-start;
   flex-wrap: wrap;
   width:80vw;
-  padding: 0 10vw;
+  padding: 0 10vw 15vh;
   background-color: black;
   color: white;
 }
@@ -30,10 +30,28 @@ body {
   flex-direction: row;
   /*justify-content: space-between;*/
   overflow-x: scroll;
+  padding-bottom: 2vh;
   /*flex-grow: 1;*/
 }
 #movie-cotainer > h4{
   /*flex-grow : 0;*/
+}
+
+#movie-container > ul::-webkit-scrollbar{
+  height : 1vh;
+  min-height: 10px;
+}
+#movie-container > ul::-webkit-scrollbar-track{
+    background: radial-gradient(rgba(255,255,255,1),rgba(255,255,255,0),  rgba(255,255,255,0));
+
+}
+
+#movie-container > ul::-webkit-scrollbar-thumb{
+  width: 2vw;
+  background: url("/images/scrollthumb1.svg");
+  background-repeat: no-repeat;
+  background-size: 1rem;
+  background-position: center;
 }
 
 #cinema-list > li,
@@ -192,3 +210,19 @@ body {
   z-index: 2;
   background-color: red;
 }
+
+#goPayment {
+  position: absolute;
+  bottom: 5vh;
+  right: 20vw;
+  width: 15vw;
+  padding:1.5vw;
+  text-align: center;
+  background-color : rgba(255,255,255,0.3);
+}
+
+#goPayment:hover {
+
+    background-color: rgba(20,255,255,0.3);
+}
+

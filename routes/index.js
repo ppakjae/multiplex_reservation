@@ -118,6 +118,15 @@ router.get('/reserv',function(req,res,next){
     });
 });
 
+router.get('/payment',function(req,res,next){
+    res.render('payment',{
+        logined : true,
+        username : "admin"
+    });
+});
+
+router.get('/suggestion',function(req,res,next){
+	res.render('suggestion');
 router.get('/suggestion', function (req, res) {
     var sql = 'SELECT * FROM suggestion';
     connection.query(sql, function (error, results, fields) {
