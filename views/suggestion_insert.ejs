@@ -3,7 +3,7 @@
   <head>
     <title> title </title>
     <link rel='stylesheet' href='/stylesheets/index.css' />
-    <link rel='stylesheet' href='/stylesheets/home.css' />
+    <link rel='stylesheet' href='/stylesheets/suggestion.css' />
   </head>
 
   <body>
@@ -25,21 +25,16 @@
             </div>
           <% } %>
   		</div>
-
-      <div id="Content-background">
-        <div id="Content-background-img">
-          <p>.</p>
-        </div>
-      </div>
       
+        <section class="suggestion_insert">
+          <form action="/suggestion_insert" method="post">
+              <input type="text" name="title" placeholder="Title">
+              <textarea name="content" placeholder="Write content"></textarea>
+              <input type="submit" value="Submit">
+          </form>    
+        </section>     
   		
-  			
-        <div id="Cinema">
-          <h4 id="goReservation"> Reservation</h4>
-  			</div>
-
   		</div>
-
 
 		<div id="Menu" class="hidden">
 			<h2>예매내역</h2>
@@ -47,6 +42,5 @@
 			<h2><a href="/suggestion">건의</a></h2>
 		</div>
   		<script type="text/javascript" src="/javascripts/index.js"></script>
-  		<script type="text/javascript" src="/javascripts/home.js"></script>
   </body>
 </html>

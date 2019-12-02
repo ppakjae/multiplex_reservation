@@ -3,7 +3,7 @@
   <head>
     <title> title </title>
     <link rel='stylesheet' href='/stylesheets/index.css' />
-    <link rel='stylesheet' href='/stylesheets/home.css' />
+    <link rel='stylesheet' href='/stylesheets/suggestion.css' />
   </head>
 
   <body>
@@ -24,19 +24,37 @@
               <h4>menu</h4>
             </div>
           <% } %>
-  		</div>
-
-      <div id="Content-background">
-        <div id="Content-background-img">
-          <p>.</p>
-        </div>
       </div>
       
-  		
-  			
-        <div id="Cinema">
-          <h4 id="goReservation"> Reservation</h4>
-  			</div>
+  
+      <section class="suggestion">
+        <table>
+            <thead>
+                <tr>
+                    <th>NO</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>작성일</th>
+                    <th>조회수</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%  results.reverse().forEach(function(row){
+                    var date = JSON.stringify(row.date);
+                    date = date.substring(1,11).split("-");
+                %>
+                <tr>
+                    <td><%= row.suggestion_id %></td>
+                    <td><a href="suggestion/<%= row.suggestion_id %>"><%= row.title %></a></td>
+                    <td><%= row.writer_name %></td>
+                    <td><%= `${date[0]}/${date[1]}/${date[2]}` %></td>
+                    <td><%= row.view %></td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        <a href="suggestion_insert"><button>글쓰기</button></a>
+    </section>
 
   		</div>
 
@@ -47,6 +65,5 @@
 			<h2><a href="/suggestion">건의</a></h2>
 		</div>
   		<script type="text/javascript" src="/javascripts/index.js"></script>
-  		<script type="text/javascript" src="/javascripts/home.js"></script>
   </body>
 </html>

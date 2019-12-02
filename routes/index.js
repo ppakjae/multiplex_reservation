@@ -15,6 +15,25 @@ var connection = mysql.createConnection({
     multipleStatements: true
 });
 
+// var connection = mysql.createConnection({
+//     multipleStatements: true,
+//     host: 'localhost',
+//     user: 'root',
+//     post: 3000,
+//     password: '',
+//     database: 'cenema',
+//     multipleStatements: true
+// });
+
+// connection.connect(function (err) {
+//     if (err) {
+//         console.error('error connecting: ' + err.stack);
+//         return;
+//     }
+//     console.log('Success DB connection');
+// });
+
+
 //session
 router.use(session({
     secret: 'sid',
@@ -28,7 +47,6 @@ router.use(session({
 /* GET home page. */
 router.get('/', function (req, res, next) {
     if (req.session.user) {
-		console.log(req.session.user);
         res.render('index', {
             logined: req.session.user.logined,
 			username: req.session.user.username,
@@ -102,6 +120,11 @@ router.get('/movie',function(req,res){
     })
 });
 
+router.get('/adminIndex',function(req,res,next){
+	res.render('adminIndex');
+});
+
+
 router.get('/login',function(req,res,next){
 	res.render('login');
 });
@@ -125,22 +148,20 @@ router.get('/payment',function(req,res,next){
     });
 });
 
-router.get('/suggestion',function(req,res,next){
-	res.render('suggestion');
 router.get('/suggestion', function (req, res) {
     var sql = 'SELECT * FROM suggestion';
     connection.query(sql, function (error, results, fields) {
         if (req.session.user) {
             res.render('suggestion', {
                 logined: req.session.user.logined,
-                user_name: req.session.user.user_name,
+                username: req.session.user.user_name,
                 results
             });
         }
         else {
             res.render('suggestion', {
                 logined: false,
-                user_name: " ",
+                username: " ",
                 results
             });
         }
@@ -151,7 +172,7 @@ router.get('/suggestion_insert', function (req, res) {
     if (req.session.user) {
         res.render('suggestion_insert', {
             logined: req.session.user.logined,
-            user_name: req.session.user.user_name
+            username: req.session.user.user_name
         });
     }
     else {
@@ -160,30 +181,30 @@ router.get('/suggestion_insert', function (req, res) {
 });
 
 router.get('/suggestion/:suggestion_id', function (req, res) {
-    var notice_id = req.url.split("/")[2];
+    var suggestion_id = req.url.split("/")[2];
     var sql1 = 'SELECT * FROM suggestion WHERE suggestion_id = ?; ';
     var sql2 = 'SELECT * FROM comment WHERE suggestion_id = ?; ';
 
-    connection.query('UPDATE suggestion SET view = view + 1 WHERE suggestion_id = ?', [notice_id]);
-    connection.query(sql1 + sql2, [notice_id, notice_id], function(error, results, fields){
+    connection.query('UPDATE suggestion SET view = view + 1 WHERE suggestion_id = ?', [suggestion_id]);
+    connection.query(sql1 + sql2, [suggestion_id, suggestion_id], function(error, results, fields){
         results1 = results[0];
         results2 = results[1];
         if (req.session.user) {    
             res.render('suggestion_id', {
                 logined: req.session.user.logined,
-                user_name: req.session.user.user_name,
+                username: req.session.user.user_name,
                 results1,
                 results2,
-                notice_id
+                suggestion_id
             });
         }
         else {
             res.render('suggestion_id', {
                 logined: false,
-                user_name: " ",
+                username: " ",
                 results1,
                 results2,
-                notice_id
+                suggestion_id
             });
         }
     })
@@ -219,7 +240,7 @@ router.post('/', function(req, res){
             }
         }
     });
-})
+});
 
 router.post('/register', function (req, res) {
     var username = req.body.username;
@@ -251,6 +272,9 @@ router.post('/suggestion_insert', function (req, res) {
     var title = req.body.title;
     var content = req.body.content;
     var writer_name = req.session.user.username;
+
+    
+    console.log(req.body);
 
     var sql = 'INSERT INTO suggestion(title, content, writer_name) VALUES (?,?,?)';
     connection.query(sql, [title, content, writer_name], function (error, results, fields) {
