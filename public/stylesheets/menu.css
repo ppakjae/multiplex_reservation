@@ -1,0 +1,103 @@
+#User_Info{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	opacity: 1;
+	transition-property: opacity;
+	transition-duration: 0.5s;
+	transition-timing-function: ease-in;
+}
+
+#User_Info.hidden{
+	opacity: 0;
+}
+
+#User_Info img{
+	width: 10vh;
+	height: 10vh;
+
+}
+
+#reservation_list_container{
+	opacity: 1;
+}
+
+.reservation_list_item{
+	position: relative;
+	display: flex;
+	flex-wrap: wrap;
+	width: 25vw;
+	height: 25vh;
+	margin : 3vh 3vw;
+	padding: 1vh 1vw;
+	box-sizing: border-box;
+	border-bottom:1px solid white;
+	border-top:1px solid white;
+}
+
+.reservation_list_item > span{
+	padding: 0.2rem;
+}
+.movie_image{
+	position: absolute;
+	top:0;
+	left: 0;
+	content: ' ';
+	width: calc(25vh/7*5);
+	height:25vh;
+	background-color: rgba(255,255,255,0.2);
+}
+
+.reservation_list_item .Info {
+	position: absolute;
+	right: 0;
+	top:0;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 25vh;
+	font-size: 0.8rem;
+}
+.reservation_no{
+	/*position: absolute;*/
+}
+.movie_name{
+	/*position: absolute;*/
+}
+.cinema_branch{
+	/*position: absolute;*/
+}
+.screen_no{
+	/*position: absolute;*/
+}
+.date{
+	/*position: absolute;*/
+}
+.showing_start_time{
+	/*position: absolute;*/
+}
+.showing_end_time{
+	/*position: absolute;*/
+}
+.seat_no{
+	/*position: absolute;*/
+}
+.payment_amount{
+	/*position: absolute;*/
+}
+.cancel{
+/*	position: absolute;
+	bottom: 0;
+	right: 0;
+*/	text-align: center;
+	width: 10vw;
+	padding: 0.2rem;
+	background-color: red;
+}
+
+
+#reservation_list_container.hidden{
+	width: 0;
+	height: 0;
+	opacity: 0;
+}
