@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> title </title>
+    <link rel='stylesheet' href='/stylesheets/index.css' />
+    <link rel='stylesheet' href='/stylesheets/suggestion.css' />
+  </head>
+
+  <body>
+  		<div id="Nav">
+  			<h1 id="logo">Cinema</h1>
+  			<div id="login">
+          <div id="user_container">   
+            <img src="https://www.booksie.com/files/profiles/22/mr-anonymous_230x230.png" /> 
+          <% if(logined) { %>
+              <h4 id="user_name"> <%=username%> </h4> 
+          <% } else { %>
+            <h4 id="user_name"> SIGN IN </h4> 
+          <% } %>            
+          </div> 
+          </div> 
+          <% if(logined) { %>
+            <div id="menu_icon"> 
+              <h4>menu</h4>
+            </div>
+          <% } %>
+      </div>
+
+      <section class="suggestion_id">
+        <% var date = JSON.stringify(results1[0].date);
+           date = date.substring(1,11).split("-"); 
+          %> 
+       <h2><%= results1[0].title %></h2>
+       <p>
+           <%= results1[0].writer_name %>
+            <span><%= `${date[0]}/${date[1]}/${date[2]}` %></span> 
+       </p>
+
+       <p>
+           <%= results1[0].content %>
+       </p>
+       <div>
+           <form action=<%=`/suggestion/${suggestion_id}`%> method="post">
+               <h3>댓글</h3>
+               <%  var id = 0;
+                   results2.forEach(function(row){
+                   var date = JSON.stringify(row.date);
+                   date = date.substring(1,11).split("-");
+               %>
+               
+                   <div class="comment">
+                       <p>
+                           <%=row.writer_name%><br>
+                           <%=`${date[0]}/${date[1]}/${date[2]}`%>
+                       </p>
+                       <button type="button">답글</button>
+                       <p><%=row.comment%></p>
+                       <input class="write_reply none" name="reply" type="text">
+                       <input id = <%=id%> class="submit none" type="submit" value="Submit" onclick="javascript: from.action='<%=`/notice/${notice_id}/reply/${id}`%>'">
+                   </div>
+               
+               <% id++;
+                   }) %>
+               <input class="write_comment" name="comment" type="text" placeholder="write a comment">
+               <input class="comment_writing" type="submit" value="Submit" >
+
+           </form>
+       </div>
+      </section>
+      
+      
+  		
+  			
+        <div id="Cinema">
+          <h4 id="goReservation"> Reservation</h4>
+  			</div>
+
+  		</div>
+
+
+		<div id="Menu" class="hidden">
+			<h2>예매내역</h2>
+			<h2>쿠폰</h2>
+			<h2><a href="/suggestion">건의</a></h2>
+		</div>
+  		<script type="text/javascript" src="/javascripts/index.js"></script>
+  </body>
+</html>

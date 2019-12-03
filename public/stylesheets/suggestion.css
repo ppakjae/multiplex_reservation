@@ -1,0 +1,235 @@
+/*---------------------   suggestion   -------------------------------*/
+.suggestion, .suggestion_insert {
+    /*Layout*/
+    position: absolute;
+    top: calc(100vh/4);
+    /*Apperance*/
+    content : ' ';
+    width: 100vw;
+    min-height: calc(100vh/3*2);
+    /*padding : 0 10vw;	*/
+    /*margin : 0 0 10vh;*/
+    overflow : hidden;
+
+    border-top: 2px solid black;
+    background-color: white;
+    box-shadow: 0px 0px 20px 1px rgba(0,0,0,0.2);
+    
+    
+}
+
+.suggestion table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.suggestion tr {
+    border-top : 1px solid rgba(0,0,0,0.5);
+}
+
+.suggestion th {
+    padding: 20px 0;
+}
+
+.suggestion td {
+    padding: 15px 0;
+}
+
+.suggestion tbody td {
+    text-align: center;
+}
+
+.suggestion tbody td:nth-child(2){
+    width: 50%;
+    text-align: center;
+    padding-left: 2%; 
+}
+
+.suggestion tbody td:nth-child(2) a:hover{
+    color: gray;
+}
+
+.suggestion a button {
+    float: right;
+    border: none;
+    width: 10%;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 15px;
+    background: #f0e23c;
+    margin-top: 2%;
+    margin-right: 2%;
+}
+
+/*--------------------- suggestion_insert  -------------------------------*/
+.suggestion_insert{
+    /*Layout*/
+    position: absolute;
+    top: calc(100vh/4);
+    /*Apperance*/
+    content : ' ';
+    width: 100vw;
+    min-height: calc(100vh/3*2);
+    /*padding : 0 10vw;	*/
+    /*margin : 0 0 10vh;*/
+    overflow : hidden;
+}
+
+.suggestion_insert input,
+.suggestion_insert textarea{
+    display: block;
+    border-radius: 5px;
+    border: 1px solid grey;
+    padding-left: 3%;
+    font-size: 15px; 
+    margin: 20px 0;
+}
+
+.suggestion_insert input:first-child{
+    width: 65%;
+    height: 40px;
+}
+
+.suggestion_insert textarea{
+    width: 100%;
+    height: 500px;
+    padding-top: 3%;
+}
+
+.suggestion_insert input:last-child{
+    padding: 0;
+    border: none;
+    width: 10%;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 15px;
+    background: #f0e23c;
+}
+
+/*--------------------- suggestion_id  -------------------------------*/
+.suggestion_id {
+    /*Layout*/
+    position: absolute;
+    top: calc(100vh/4);
+    /*Apperance*/
+    content : ' ';
+    width: 100vw;
+    min-height: calc(100vh/3*2);
+    /*padding : 0 10vw;	*/
+    /*margin : 0 0 10vh;*/
+    overflow : hidden;
+
+    background: white;
+    box-shadow: 0px 0px 20px 1px rgba(0,0,0,0.2);
+}
+
+.suggestion_id h2 {
+    margin: 10px 0 30px 0;
+    margin-left: 3%;
+}
+
+.suggestion_id > p:nth-child(2) {
+    margin-left: 3%;
+    font-weight: bold;
+}
+
+.suggestion_id > p:nth-child(2) span{
+    float: right;
+    margin-right: 3%;
+    color : gray;
+}
+
+.suggestion_id > p:nth-child(3) {
+    clear: right;
+    margin: 0 3%;
+    text-align: justify;
+    margin-top: 30px;
+    min-height: 500px;
+}
+
+.suggestion_id > div {
+    font-size: 15px;
+    border : 1px solid rgba(0, 0, 0, 0.5);
+    margin: 20px auto;
+    padding: 3%;
+    border-radius: 5px; 
+}
+
+.suggestion_id h3 {
+    margin-bottom : 1%;
+}
+
+.suggestion_id .comment {
+    padding: 1%;
+    border-bottom : 1px solid darkgray;
+    width: 100%;
+    overflow: hidden;
+}
+
+.suggestion_id .comment p{
+    margin-bottom: 3px;
+    max-width: 95%;
+    word-wrap: break-word;
+}
+
+.suggestion_id .comment p:first-child{
+    color: lightgray;
+    font-size: 12px;
+}
+
+.suggestion_id .comment p:first-child:first-line{
+    font-weight: bold;
+    color: black;
+    font-size: 17px;
+}
+
+.suggestion_id button {
+    float: right;
+    border: none;
+    width: 5%;
+    height: 25px;
+    border-radius: 5px;
+    font-size: 15px;
+    background: #f0e23c;
+}
+
+.suggestion_id input[type=text]{
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid gray;
+}
+
+.suggestion_id .write_reply{
+    height: 10px;
+    padding: 1%;
+}
+
+.suggestion_id .write_reply:focus{
+    border-bottom: 1px solid blue;
+}
+
+.suggestion_id .write_comment {
+    height: 30px;
+    margin-top: 20px;
+}
+
+.suggestion_id .write_comment:focus{
+    border-bottom: 1px solid blue;
+    padding: 1%;
+}
+
+.suggestion_id input[type=submit]{
+    color: dodgerblue;
+    margin-top : 10px;
+    font-size: 13px;
+    text-align: center;
+    border: none;
+    width: 100%;
+    height: 30px;
+    border-radius: 5px;
+}
+
+.suggestion_id input[type=submit]:hover{
+    background: darkgray;
+    color: white;
+}
