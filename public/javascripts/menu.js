@@ -27,11 +27,31 @@ const reservation_list = [
 }
 ];
 
+
+
+const cuppon_list2 =[	{cuppon_name : "통신사_할인쿠폰",
+	cuppon_discounts : 2000,
+	cuppon_expireDate : "2019-99-99"
+	},
+	{cuppon_name : "무료_할인쿠폰",
+	cuppon_discounts : 3000,
+	cuppon_expireDate : "2019-99-99"
+	},
+	{cuppon_name : "이벤트_할인쿠폰",
+	cuppon_discounts : 1000,
+	cuppon_expireDate : "2019-99-99"
+	}
+]
+
 let reservation_list_load = false;
+let cuppon_list_load = false;
 //element Ref
 const User_Info = document.querySelector("#User_Info");
 const Reservation_list = document.querySelector("#reservation_list");
 const Reservation_list_container = document.querySelector("#reservation_list_container");
+
+const Cuppon_list = document.querySelector("#cuppon_list");
+const Cuppon_list_container = document.querySelector("#cuppon_list_container");
 
 
 const make_reservationList = function(){
@@ -118,7 +138,48 @@ const toggle_reservationList = function(){
 	this.classList.toggle('hidden');
 };
 
-Reservation_list.addEventListener('click',toggle_reservationList.bind(Reservation_list_container));
+const make_cupponList = function(){
+	const Cuppon_List = document.querySelector("#cuppon_list_container");
+	if(cuppon_list2.length == 0){
+		Cuppon_List.appendChild(document.createElement(document.createTextNode("보유하신 쿠폰이 없습니다")));
+	}
+	for(var i=0;i<cuppon_list2.length;i++){
+		const newCuppon = document.createElement("li");
+		const newCuppon_name= document.createElement("h5");
+		const newCuppon_discounts = document.createElement("h5");
+		const newCuppon_expiredate= document.createElement("h5");
 
+		newCuppon.classList.add("cuppon-item");
+		newCuppon_name.classList.add("cuppon-name");
+		newCuppon_discounts.classList.add("cuppon-discounts");
+		newCuppon_expiredate.classList.add("cuppon-expireDate");
+
+		const newCuppon_discountsText = document.createTextNode("쿠폰 금액 : "+cuppon_list2[i].cuppon_discounts);
+		const newCuppon_nameText = document.createTextNode("쿠폰 이름 : "+cuppon_list2[i].cuppon_name);
+		const newCuppon_expiredateText = document.createTextNode("쿠폰 만기일 : "+cuppon_list2[i].cuppon_expireDate);
+
+		newCuppon_name.appendChild(newCuppon_nameText);
+		newCuppon_discounts.appendChild(newCuppon_discountsText);
+		newCuppon_expiredate.appendChild(newCuppon_expiredateText);
+
+		newCuppon.appendChild(newCuppon_name);
+		newCuppon.appendChild(newCuppon_discounts);
+		newCuppon.appendChild(newCuppon_expiredate);
+
+		Cuppon_List.appendChild(newCuppon);
+	};
+}
+
+const toggle_cupponList = function(){
+	if(cuppon_list_load == false){
+		make_cupponList();
+		cuppon_list_load = true;
+	}
+	this.classList.toggle('hidden');
+};
+
+
+Reservation_list.addEventListener('click',toggle_reservationList.bind(Reservation_list_container));
+Cuppon_list.addEventListener('click',toggle_cupponList.bind(Cuppon_list_container));
 
 

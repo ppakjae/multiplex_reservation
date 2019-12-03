@@ -128,7 +128,10 @@ router.get('/payment',function(req,res,next){
 });
 
 router.get('/suggestion',function(req,res,next){
-	res.render('suggestion');
+	res.render('suggestion',{
+		logined : true,
+		username : "admin"
+	});
 });
 
 module.exports = router;

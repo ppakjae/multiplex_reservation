@@ -96,8 +96,41 @@
 }
 
 
+
+
 #reservation_list_container.hidden{
 	width: 0;
 	height: 0;
 	opacity: 0;
+}
+
+
+#cuppon_list_container {
+	list-style: none;
+	opacity: 1;
+}
+
+.cuppon-item{
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	width: 25vw;
+	height: 20vh;
+	margin : 3vh 3vw;
+	padding: 1vh 1vw;
+	box-sizing: border-box;
+	border-bottom:1px solid white;
+	border-top:1px solid white;
+}
+
+.cuppon-item > h5{
+	margin: 0;
+}
+
+#cuppon_list_container.hidden{
+	margin: 0;
+	width:0;
+	height: 0;
+	opacity:0;
 }

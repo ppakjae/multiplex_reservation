@@ -52,7 +52,6 @@ const make_CupponList = function(){
 		const newCuppon = document.createElement("li");
 		const newCuppon_label = document.createElement("label");
 		const newCuppon_input= document.createElement("input");
-		newCuppon_input.setAttribute("type","checkbox");
 		const newCuppon_name= document.createElement("h5");
 		const newCuppon_discounts = document.createElement("h5");
 		const newCuppon_expiredate= document.createElement("h5");
