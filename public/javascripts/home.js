@@ -35,7 +35,7 @@ req.onreadystatechange = function(e){
 req.responseType = "json";
 
 // Ellement ref
-const Movie= document.querySelectorAll('.movie')
+const Movie = document.querySelectorAll('.movie')
 const Movie_filter = document.querySelectorAll('#movie-filter > li')
 const Movie_chart = document.querySelector('#Movie-chart');
 const Content_background = document.querySelector('#Content-background');
@@ -43,6 +43,7 @@ const Content_backgroundImg = document.querySelector('#Content-background-img');
 const Content = document.querySelector('#Content');
 const moreInfo_btn = document.querySelector('#more');
 const goReservation_btn = document.querySelector('#goReservation');
+// const Menu_icon = document.querySelector("#menu_icon");
 
 const make_movieContainer = function(element,index){
 	const Movie_chart = document.querySelector('#Movie-chart');
