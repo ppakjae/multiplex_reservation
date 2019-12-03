@@ -135,6 +135,8 @@ router.get('/register',function(req,res,next){
 
 router.get('/reserv',function(req,res,next){
 	res.render('reservation',{
+        logined : true,
+        username : "admin",
         test : "success",
         test2 : ["string1","string2"],
         test3 : { a : "string", b : 2}
@@ -147,6 +149,7 @@ router.get('/payment',function(req,res,next){
         username : "admin"
     });
 });
+
 
 router.get('/suggestion', function (req, res) {
     var sql = 'SELECT * FROM suggestion';

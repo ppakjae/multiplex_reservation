@@ -12,18 +12,9 @@
 		const test2 = <%- JSON.stringify(test2) %>;
 		const test3 = <%- JSON.stringify(test3) %>;
 	</script>
-	<div id="Nav">
-		<h1 id="logo">Cinema</h1>
-		<div id="login">
-          <div id="user_container">   
-            <img src="https://www.booksie.com/files/profiles/22/mr-anonymous_230x230.png" /> 
-            <h4 id="user_name"> <%= test %> </h4> 
-          </div> 
-      </div> 
-      <div id="menu_icon"> 
-            <h4>menu</h4>
-		</div>
-	</div>
+
+	
+	<% include nav %>
 
 	<div id="Content">
 		<div id="movie-container">
