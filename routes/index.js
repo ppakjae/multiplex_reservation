@@ -6,24 +6,24 @@ var AWS = require('aws-sdk');
 AWS.config.region= 'ap-northeast-2';
 var ec2 = new AWS.EC2()
 
-var connection = mysql.createConnection({
-    post:3306,
-    host:"cenema.cpnxmgyidpor.ap-northeast-2.rds.amazonaws.com",
-    user : "admin",
-    password:"11111111",
-    database: 'cenema',
-    multipleStatements: true
-});
-
 // var connection = mysql.createConnection({
-//     multipleStatements: true,
-//     host: 'localhost',
-//     user: 'root',
-//     post: 3000,
-//     password: '',
+//     post:3306,
+//     host:"cenema.cpnxmgyidpor.ap-northeast-2.rds.amazonaws.com",
+//     user : "admin",
+//     password:"11111111",
 //     database: 'cenema',
 //     multipleStatements: true
 // });
+
+var connection = mysql.createConnection({
+    multipleStatements: true,
+    host: 'localhost',
+    user: 'root',
+    post: 3000,
+    password: '',
+    database: 'cenema',
+    multipleStatements: true
+});
 
 // connection.connect(function (err) {
 //     if (err) {
