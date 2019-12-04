@@ -6,32 +6,32 @@ var AWS = require('aws-sdk');
 AWS.config.region= 'ap-northeast-2';
 var ec2 = new AWS.EC2()
 
-// var connection = mysql.createConnection({
-//     post:3306,
-//     host:"cenema.cpnxmgyidpor.ap-northeast-2.rds.amazonaws.com",
-//     user : "admin",
-//     password:"11111111",
-//     database: 'cenema',
-//     multipleStatements: true
-// });
-
 var connection = mysql.createConnection({
-    multipleStatements: true,
-    host: 'localhost',
-    user: 'root',
-    post: 3000,
-    password: '',
+    post:3306,
+    host:"cenema.cpnxmgyidpor.ap-northeast-2.rds.amazonaws.com",
+    user : "admin",
+    password:"11111111",
     database: 'cenema',
     multipleStatements: true
 });
 
-// connection.connect(function (err) {
-//     if (err) {
-//         console.error('error connecting: ' + err.stack);
-//         return;
-//     }
-//     console.log('Success DB connection');
+// var connection = mysql.createConnection({
+//     multipleStatements: true,
+//     host: 'localhost',
+//     user: 'root',
+//     post: 3000,
+//     password: '',
+//     database: 'cenema',
+//     multipleStatements: true
 // });
+
+connection.connect(function (err) {
+    if (err) {
+        console.error('error connecting: ' + err.stack);
+        return;
+    }
+    console.log('Success DB connection');
+});
 
 
 //session
@@ -255,7 +255,25 @@ router.post('/', function(req, res){
 
                 res.render('index', {
                     logined: req.session.user.logined,
-                    username: req.session.user.username
+                    username: req.session.user.username,
+                    movie : [ 
+                        ["Jocker", "Parasite", "Shrek", "HarryPotter", "Walkingdead"],
+                        ["Parisite","HarryPotter","Jocker","Walkingdead","Shrek"]
+                    ],
+                    movie_selected : {
+                        genre : "Horror/ Comedy",
+                        ratio : 4,
+                        releaseDate : "2019.99.99",
+                        country :  "Korea",
+                        running_time : 130,
+                        movie_director : "Son HeungMin",
+                        actors : ["Park SeongSoo", "Park JaeSeon", "Oh HyeongSeo", "Woo HyeongSeok", "Jeon JongHa","Kim DeokYoung"],
+                        agency : "CJEnt",
+                        translator : "",
+                        age_limit : 15,
+                        number_of_spectators : 123456789, 
+                        reservation_rates : 15
+            }
                 });
             }
             else {
