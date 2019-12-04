@@ -7,8 +7,9 @@
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
-<link href="\stylesheets\default.css" rel="stylesheet" type="text/css" media="all" />
-<link href="\stylesheets\fonts.css" rel="stylesheet" type="text/css" media="all" />
+<link href="/stylesheets/default.css" rel="stylesheet" type="text/css" media="all" />
+<link href="/stylesheets/fonts.css" rel="stylesheet" type="text/css" media="all" />
+
 
 <style type="text/css"> /* tg1 위 작은 표 tg 아래 큰 표 */
 .tg1  {border-collapse:collapse;border-spacing:0;border-color:#ccc;}
@@ -29,14 +30,16 @@
 <div id="header-wrapper">
   <div id="header" class="container">
     <div id="logo">
-      <h1><a href="">직원 관리 시스템</a></h1>
+      <h1><a href="/admin">직원 관리 시스템</a></h1>
+
       <span>By <a href="#">CENEMA</a></span>
     </div>
     <div id="menu">
       <ul>
         <li><a href="/admin/info" accesskey="1" title="">사원정보</a></li>
         <li><a href="/admin/sales" accesskey="2" title="">매 출</a></li>
-        <li><a href="/admin/salary" accesskey="3" title="">급 여</a></li>
+        <li class="current_page_item"><a href="/admin/salary" accesskey="3" title="">급 여</a></li>
+
         <li><a href="/admin/rewards" accesskey="4" title="">근 태</a></li>
         <li><a href="/admin/vacation" accesskey="5" title="">휴 가</a></li>
       </ul>
@@ -61,6 +64,19 @@
   </tr>
 </table>
 </div>
+
+
+<form>
+  <h1 style="color:white;font-size:15px">
+  <input type="radio" name="check" value="ID" checked>
+  ID
+  <input type="radio" name="check" value="성명">
+  이름
+  <input type="text" name="inputbar" size="12">
+  <input type="submit" value="조회">
+</h1>
+</form>
+
 
 <div style="margin-top:15px;">
 <table class="tg" width="90%" style="table-layout:fixed" align="center">
