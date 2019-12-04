@@ -705,7 +705,8 @@ ul.contact li a.icon-rss:before
 	#header-featured
 	{
 		height: 30em;
-		background-image: url(/images/banner.jpeg);
+
+		background-image: url(images/banner.jpeg);
 		background-position: center;
 		background-size: cover;
 	}
