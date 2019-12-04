@@ -8,29 +8,12 @@
 
   <body>
     <script type="text/javascript">
-       console.log(JSON.stringify(logined));
-       let movie = JSON.stringify(movie);
-       let movie_selected = JSON.stringify(movie_selected);
+       console.log(<%- JSON.stringify(logined) %>);
+       let movie = <%- JSON.stringify(movie) %>;
+       let movie_selected = <%- JSON.stringify(movie_selected) %>;
     </script>
     
-  		<div id="Nav">
-  			<h1 id="logo">Cinema</h1>
-  			<div id="login">
-          <div id="user_container">   
-            <img src="https://www.booksie.com/files/profiles/22/mr-anonymous_230x230.png" /> 
-          <% if(logined) { %>
-              <h4 id="user_name"> <%=username%> </h4> 
-          <% } else { %>
-            <h4 id="user_name"> SIGN IN </h4> 
-          <% } %>            
-          </div> 
-          </div> 
-          <% if(logined) { %>
-            <div id="menu_icon"> 
-              <h4>menu</h4>
-            </div>
-          <% } %>
-  		</div>
+    <% include nav %>
 
       <div id="Content-background">
         <div id="Content-background-img">

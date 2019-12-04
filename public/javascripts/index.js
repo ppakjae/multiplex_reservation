@@ -14,7 +14,7 @@ const toggle_menu = function(event) {
 	const Login = document.querySelector('#login');
 	const Content = document.querySelector('#Content');
 	const login = document.querySelector("#login");
-
+	const User_Info = document.querySelector("#User_Info");
 
 	if (Menu.classList.contains("hidden")){
 		setTimeout(()=>{
@@ -23,6 +23,9 @@ const toggle_menu = function(event) {
 			Content.classList.add("menuOn");
 			Nav.classList.add("menuOn");
 			Menu.style.height= body.scrollHeight+"px";
+			setTimeout(()=>{
+				User_Info.classList.remove("hidden");
+			},300);
 		},300);
 	} else{
 		setTimeout(()=>{
