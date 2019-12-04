@@ -120,8 +120,28 @@ router.get('/movie',function(req,res){
     })
 });
 
-router.get('/adminIndex',function(req,res,next){
+router.get('/admin',function(req,res,next){
 	res.render('adminIndex');
+});
+
+router.get('/admin/info',function(req,res,next){
+	res.render('info');
+});
+
+router.get('/admin/sales',function(req,res,next){
+	res.render('sales');
+});
+
+router.get('/admin/salary',function(req,res,next){
+	res.render('salary');
+});
+
+router.get('/admin/rewards',function(req,res,next){
+	res.render('rewards');
+});
+
+router.get('/admin/vacation',function(req,res,next){
+	res.render('vacation');
 });
 
 
