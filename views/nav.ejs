@@ -1,0 +1,20 @@
+<html>
+<div id="Nav">
+        <h1 id="logo">Cinema</h1>
+        <div id="login">
+          <div id="user_container">   
+            <img src="/images/anonymous.png" /> 
+          <% if(logined) { %>
+              <h4 id="user_name"> <%=username%> </h4> 
+          <% } else { %>
+            <h4 id="user_name"> SIGN IN </h4> 
+          <% } %>            
+          </div> 
+          </div> 
+          <% if(logined) { %>
+            <div id="menu_icon"> 
+              <h4>menu</h4>
+            </div>
+          <% } %>
+</div>
+</html>

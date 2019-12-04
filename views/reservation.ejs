@@ -12,18 +12,9 @@
 		const test2 = <%- JSON.stringify(test2) %>;
 		const test3 = <%- JSON.stringify(test3) %>;
 	</script>
-	<div id="Nav">
-		<h1 id="logo">Cinema</h1>
-		<div id="login">
-          <div id="user_container">   
-            <img src="https://www.booksie.com/files/profiles/22/mr-anonymous_230x230.png" /> 
-            <h4 id="user_name"> user_name </h4> 
-          </div> 
-      </div> 
-      <div id="menu_icon"> 
-            <h4>menu</h4>
-		</div>
-	</div>
+
+	
+	<% include nav %>
 
 	<div id="Content">
 		<div id="movie-container">
@@ -52,7 +43,17 @@
 			</div>
 			<div id="seat_before">
 				<h4>인원선택</h4>
-				<div> <p>일반 : </p><span>1</span> </div>
+				<<div>
+					<p>일반 : </p><span>
+						<span><button id="1" name="1" value="1">1<span>명</span></button></span>
+						<span><button id="2" name="2" value="2">2<span>명</span></button></span>
+						<span><button id="3" name="3" value="3">3<span>명</span></button></span>
+						<span><button id="4" name="4" value="4">4<span>명</span></button></span>
+						<span><button id="5" name="5" value="5">5<span>명</span></button></span>
+						<span><button id="6" name="6" value="6">6<span>명</span></button></span>
+						<span><button id="7" name="7" value="7">7<span>명</span></button></span>
+						<span><button id="8" name="8" value="8">8<span>명</span></button></span></span>
+				</div>
 				<div> <p>청소년 : </p><span>0</span> </div>
 				<div> <p>우대 :</p> <span>0</span> </div>
 			</div>
@@ -66,15 +67,11 @@
 				<div><p>cost:</p></div>
 			</div>
 		</div>
-
+		<div id="goPayment">Payment</div>
 	</div>
 
-
-	<div id="Menu" class="hidden">
-			<h2>예매내역</h2>
-			<h2>쿠폰</h2>
-			<h2>건의</h2>
-	</div>
+	<% include menu %>
+	
 	<script type="text/javascript" src="/javascripts/index.js"></script>
 	<script type="text/javascript" src="/javascripts/reservation.js"></script>
 </body>

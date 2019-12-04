@@ -77,6 +77,7 @@
 	height: calc(100vh/3);
 	min-height: calc(100vh/3);
 	background-color: rgba(0,0,0,0.2);
+	padding: 2vh 0 0vh;
 	/*Animation*/
 	transition-property: min-height;
 	transition-duration: 0.1s;
@@ -86,20 +87,53 @@
 #Movie-chart.in-detail{
 	overflow-x: hidden;
 	min-height: calc(100vh/3*2); 
+	padding-top: 0vh;
 }
 
-button{
-	position: absolute;
-	top:0;
-	left:50%;
+#more{
+	position: relative;
+	content : ' ';
+	width: 2.5vw;
+	height: 100%;
+	min-width: 2.5vw;
+	min-height: 100%;
+	background : url("/images/more.svg");
+	background-size : 50%;
+	background-position: center;
+	background-repeat: no-repeat;
+	mix-blend-mode: screen;
 	z-index: 5;
+	opacity: 0.2;
+	order:0;
 }
 
+#more:hover{
+	opacity: 0.5;
+}
+
+#more.in-detail{
+	position: absolute;
+	right :0;
+	-webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+}
+
+#more:hover{
+	background-color: rgba(255,255,255,0.1);
+
+}
+
+#more.changing{
+	width: 0;
+	opacity: 0;
+	order :5;
+}
 .movie{
 	/*Layout*/
 	position:relative;
 	display: flex;
 	flex-direction: row;
+	justify-content: space-between;
 	align-items: center;
 	/*Apperance*/
 	min-width: 15vw;
@@ -107,66 +141,132 @@ button{
 	transition-property: min-width;
 	transition-duration: 0.3s;
 	transition-timing-function: ease-in;
-
+	order : 1;
 }
 .movie.selected{
 	min-width: 50vw;
 	order:-1;
 }
 .movie.selected.in-detail{
-	min-width: 85vw;
+	min-width: 80vw;
 }
 
 
 .movie-image{
-	position: absolute;
-	left:0;
+/*	position: absolute;
+	left:0;*/
 	width: calc(100vh/3*5/7);
 	height : calc(100vh/3);
 	background-color: rgba(255,255,1,0.2);
 	box-shadow: 0 0 5vw rgba(0,0,0,0.5);	
+	margin-right: 5vw;
 
 }
+
 .movie.selected.in-detail .movie-image{
 	width: calc(100vh/3*2*5/7);
-	height: calc(100vh/3*2)
+	height: calc(100vh/3*2);
 }
 
+.movie.selected .Info_container{
+	width: 35vw;
+}
+
+.movie.selected.in-detail .Info_container{
+	width: 50vw;
+}
+
+.rank{
+	position: absolute;
+	left: 0;
+	top: 0;
+	margin:0 0.5rem;
+	font-size: 1rem;
+	color: rgba(255,255,255,0.7);
+	text-shadow: 0 0 1rem rgba(0,0,0,1);
+}
+
+.in-detail .rank {
+	opacity: 0;
+}
 
 .movie_name{
 	position: absolute;
-	left: 50%;
+	left: 0.5rem;
 	bottom: 0;
+	text-shadow: 0 0 1rem rgba(0,0,0,1);
 }
-.movie .movie_name{
-	left:0;
-}
+
 
 .movie.selected .movie_name {
-	top:0;
-	bottom: none;
-	left: calc(100vh/3*5/7 + 5vw);
-	font-size : 3rem;
+	position: relative;
+	flex-grow: 2;
+
+	max-width: 30vw;
+	font-size : 2rem;
+	padding-bottom: 0.5rem;
+	margin : 0;
+	border-bottom: 1px solid rgba(255,255,255,0.3);
+	text-shadow: none;
 }
 
-.movie.selected.in-detail .movie_name {
-	left: calc(100vh/3*2*5/7 + 5vw);
+.movie.selected.in-detail .movie_name{
+	font-size: 3rem;
+	border-bottom: 2px solid rgba(255,255,255,0.3);
+	max-width: 45vw;
 }
 
 .Info{
 	/*Layout*/
-	position: absolute;
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	/*Apperance*/
-	left : calc(100vh/3*5/7 + 5vw);
-	bottom: 0;
-
+	padding-top:0.5rem;
 	/*Animation*/	
 }
-.movie.selected.in-detail .Info {
+
+.Info>div,
+.ratio_container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.in-detail .Info_container .Info{
+	display: flex;
+	flex-direction: column;
+	height: 40vh;
+	margin:0;
+}
+.in-detail .Info_container .Info>*{
+	margin: 0.2rem;
+}
+
+.star{
+	position: relative;
+	width:10px;
+	height: 10px;
+	clip-path: url(#star_cllip);
+}
+.starinner{
+	width: 10px;
+	height: 10px;
+	background-color: yellow;
+}
+
+.in-detail .Info {
+	flex-direction: row;
+	flex-wrap: wrap;
 	margin-bottom: 10vh;
-	left : calc(100vh/3*2*5/7 + 5vw);
+	/*left : calc(100vh/3*2*5/7 + 5vw);*/
+}
+
+.selected .Info > *{
+	padding: 0 0.5rem;
+	border-right: 1px solid rgba(255,255,255,0.2);
+}
+.in-detail .Info > *{
+	border : 0;
 }
 
 #Cinema{
@@ -188,6 +288,26 @@ button{
 #goReservation:hover{
 
 	background-color: rgba(20,255,255,0.3);
+}
+
+#Movie-chart::-webkit-scrollbar{
+	height : 1vh;
+	min-height: 10px;
+}
+
+#Movie-chart::-webkit-scrollbar-track{
+	background: radial-gradient(rgba(255,255,255,1),rgba(255,255,255,0),	rgba(255,255,255,0),	rgba(255,255,255,0),	rgba(255,255,255,0));
+}
+
+#Movie-chart::-webkit-scrollbar-thumb{	
+	width: 2vw;
+	background: url("/images/scrollthumb1.svg");
+	background-repeat: no-repeat;
+	background-size: 3%;
+	background-position: center;
+}
+#Movie-chart::-webkit-scrollbar-button{
+	width:5vw;
 }
 
 	/*Layout*/
