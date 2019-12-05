@@ -72,8 +72,8 @@ const make_reservationList = function(){
 		const payment_amount = document.createElement("span");
 		const cancel = document.createElement("div");
 
+		const movie_nameText = document.createTextNode(reservation_list[i].movie_name);
 		const reservation_noText = document.createTextNode("예매번호 :"+reservation_list[i].reservation_no);
-		const movie_nameText = document.createTextNode("name : "+reservation_list[i].movie_name);
 		const cinema_branchText = document.createTextNode("상영지점 :"+reservation_list[i].cinema_branch);
 		const screen_noText = document.createTextNode("상영관 :"+reservation_list[i].screen_no+"관");
 		const dateText = document.createTextNode( "시간 :"+ reservation_list[i].date + " " + reservation_list[i].showing_start_time + "~"+ reservation_list[i].showing_end_time);
@@ -102,8 +102,8 @@ const make_reservationList = function(){
 		newItem.classList.add('reservation_list_item');
 		movie_image.classList.add('movie_image');
 
-		reservation_no.classList.add('reservation_no');
 		movie_name.classList.add('movie_name');
+		reservation_no.classList.add('reservation_no');
 		cinema_branch.classList.add('cinema_branch');
 		screen_no.classList.add('screen_no');
 		date.classList.add('date');
@@ -114,8 +114,8 @@ const make_reservationList = function(){
 		cancel.classList.add('cancel');
 		newItemInfo.classList.add('Info');
 
-		newItemInfo.appendChild(reservation_no);
 		newItemInfo.appendChild(movie_name);
+		newItemInfo.appendChild(reservation_no);
 		newItemInfo.appendChild(cinema_branch);
 		newItemInfo.appendChild(screen_no);
 		newItemInfo.appendChild(date);
