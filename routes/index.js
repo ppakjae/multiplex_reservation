@@ -15,10 +15,11 @@ var connection = mysql.createConnection({
     multipleStatements: true
 });
 
-let login = {
-	logined : false,
-	username : "username"
+var login = {
+    logined : false,
+    username : ""
 }
+
 
 // var connection = mysql.createConnection({
 //     multipleStatements: true,
@@ -51,41 +52,44 @@ router.use(session({
 
 
 router.use(function(req,res,next){
-	console.log(login);
     if (req.session.user) {
-    	console.log("hi!");
-    	console.log(req.session.user);
     	login.logined = req.session.user.logined;
     	login.username = req.session.user.username;
-
     }
 	next();	
 });
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
+        const sql1 = "SELECT distinct movie_id, movie_name, movie_img FROM movie natural join box_office WHERE release_date <= current_timestamp() ORDER BY ratio limit 5;";
+        const sql2 = "SELECT movie_id, movie_name, movie_img FROM movie WHERE release_date > current_timestamp() ORDER BY ratio limit 5;";
+
+        const sql3 = "SELECT distinct * FROM movie natural join box_office natural join actor WHERE release_date <= current_timestamp() ORDER BY ratio limit 1;"
+
+        // function
+
+        connection.query(sql1+sql2+sql3, function(error,results,fields){
+
+            let screening = [];
+            let pre_release = [];
+            let movie_selected = results[2][0];
+
+            results[0].forEach((element)=>{
+                screening.push(element);
+            });
+            results[1].forEach((element)=>{
+                pre_release.push(element);
+            })
+
         res.render('index.ejs', {
             logined: login.logined,
             username: login.username,
             movie : [ 
-                ["Jocker", "Parasite", "Shrek", "HarryPotter", "Walkingdead"],
-                ["Parisite","HarryPotter","Jocker","Walkingdead","Shrek"]
+                screening,pre_release
             ],
-            movie_selected : {
-                genre : "Horror/ Comedy",
-                ratio : 4,
-                releaseDate : "2019.99.99",
-                country :  "Korea",
-                running_time : 130,
-                movie_director : "Son HeungMin",
-                actors : ["Park SeongSoo", "Park JaeSeon", "Oh HyeongSeo", "Woo HyeongSeok", "Jeon JongHa","Kim DeokYoung"],
-                agency : "CJEnt",
-                translator : "",
-                age_limit : 15,
-                number_of_spectators : 123456789, 
-                reservation_rates : 15
-            }
+            movie_selected : movie_selected
         });
+    });
 });
 
 router.get('/ec2',function(rq,res){
@@ -95,21 +99,11 @@ router.get('/ec2',function(rq,res){
 });
 
 router.get('/movie',function(req,res){
-    // res.status = 200;
-    res.json({
-    genre : "changed",
-    ratio : 1,
-    releaseDate : "2019.99.99",
-    country :  "changed",
-    running_time : 130,
-    movie_director : "changde",
-    actors : ["changed"],
-    agency : "changed",
-    translator : "changed",
-    age_limit : 15,
-    number_of_spectators : 123456789, 
-    reservation_rates : 15
-    })
+    const movie_id = req.query.movie_id;
+    const sql = "SELECT * FROM movie natural join actor WHERE movie_id = ?;";
+    connection.query(sql,[movie_id],(error,results,fileds)=>{
+        res.json(results[0])
+    });
 });
 
 router.get('/adminIndex',function(req,res,next){
