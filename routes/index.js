@@ -217,32 +217,9 @@ router.post('/', function(req, res){
                     username: results[0].username
                 }
 
-                res.render('index', {
-                    logined: req.session.user.logined,
-                    username: req.session.user.username,
-                    movie : [ 
-                        ["Jocker", "Parasite", "Shrek", "HarryPotter", "Walkingdead"],
-                        ["Parisite","HarryPotter","Jocker","Walkingdead","Shrek"]
-                    ],
-                    movie_selected : {
-                        genre : "Horror/ Comedy",
-                        ratio : 4,
-                        releaseDate : "2019.99.99",
-                        country :  "Korea",
-                        running_time : 130,
-                        movie_director : "Son HeungMin",
-                        actors : ["Park SeongSoo", "Park JaeSeon", "Oh HyeongSeo", "Woo HyeongSeok", "Jeon JongHa","Kim DeokYoung"],
-                        agency : "CJEnt",
-                        translator : "",
-                        age_limit : 15,
-                        number_of_spectators : 123456789, 
-                        reservation_rates : 15
+        
             }
-                });
-            }
-            else {
-                res.render('login', { alert: true });
-            }
+                res.redirect('/');
         }
     });
 });

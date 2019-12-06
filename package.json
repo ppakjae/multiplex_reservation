@@ -8,6 +8,7 @@
   "dependencies": {
     "aws-sdk": "^2.580.0",
     "cookie-parser": "~1.4.4",
+    "dateformat": "^3.0.3",
     "debug": "~2.6.9",
     "ejs": "~2.6.1",
     "express": "^4.17.1",

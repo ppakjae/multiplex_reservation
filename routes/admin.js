@@ -27,13 +27,8 @@ router.use(session({
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
-  console.log("/");
   if (req.session.user) {
-    res.render('index', {
-      logined: req.session.user.logined,
-      employee_name: req.session.user.employee_name,
-      employee_rank: req.session.user.employee_rank
-    });
+    res.redirect('/');
   } else {
     res.render('adminIndex', {
       logined: false,
