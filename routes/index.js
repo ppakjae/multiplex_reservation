@@ -15,6 +15,11 @@ var connection = mysql.createConnection({
     multipleStatements: true
 });
 
+let login = {
+	logined : false,
+	username : "username"
+}
+
 // var connection = mysql.createConnection({
 //     multipleStatements: true,
 //     host: 'localhost',
@@ -44,36 +49,24 @@ router.use(session({
     }
 }));
 
+
+router.use(function(req,res,next){
+	console.log(login);
+    if (req.session.user) {
+    	console.log("hi!");
+    	console.log(req.session.user);
+    	login.logined = req.session.user.logined;
+    	login.username = req.session.user.username;
+
+    }
+	next();	
+});
+
 /* GET home page. */
 router.get('/', function (req, res, next) {
-    if (req.session.user) {
-        res.render('index', {
-            logined: req.session.user.logined,
-			username: req.session.user.username,
-            moive :[ 
-                ["Jocker", "Parasite", "Shrek", "HarryPotter", "Walkingdead"],
-                ["Parisite","HarryPotter","Jocker","Walkingdead","Shrek"]
-            ],
-            movie_selected : {
-                genre : "Horror/ Comedy",
-                ratio : 4,
-                releaseDate : "2019.99.99",
-                country :  "Korea",
-                running_time : 130,
-                movie_director : "Son HeungMin",
-                actors : ["Park SeongSoo", "Park JaeSeon", "Oh HyeongSeo", "Woo HyeongSeok", "Jeon JongHa","Kim DeokYoung"],
-                agency : "CJEnt",
-                translator : "",
-                age_limit : 15, 
-                number_of_spectators : 123456789, 
-                reservation_rates : 15
-            }
-        });
-    }
-    else {
         res.render('index.ejs', {
-            logined: false,
-            username: " ",
+            logined: login.logined,
+            username: login.username,
             movie : [ 
                 ["Jocker", "Parasite", "Shrek", "HarryPotter", "Walkingdead"],
                 ["Parisite","HarryPotter","Jocker","Walkingdead","Shrek"]
@@ -93,7 +86,6 @@ router.get('/', function (req, res, next) {
                 reservation_rates : 15
             }
         });
-    }
 });
 
 router.get('/ec2',function(rq,res){
@@ -122,27 +114,30 @@ router.get('/movie',function(req,res){
 
 
 router.get('/login',function(req,res,next){
-	res.render('login');
+	res.render('login',{
+		logined : login.logined,
+		username : login.username
+	});
 });
 
 router.get('/register',function(req,res,next){
-	res.render('register');
+	res.render('register',{
+		logined : login.logined,
+		username : login.username
+	});
 });
 
 router.get('/reserv',function(req,res,next){
 	res.render('reservation',{
-        logined : true,
-        username : "admin",
-        test : "success",
-        test2 : ["string1","string2"],
-        test3 : { a : "string", b : 2}
+        logined : login.logined,
+        username : login.username,
     });
 });
 
 router.get('/payment',function(req,res,next){
     res.render('payment',{
-        logined : true,
-        username : "admin"
+        logined : login.logined,
+        username : login.username
     });
 });
 
@@ -159,8 +154,8 @@ router.get('/suggestion', function (req, res) {
         }
         else {
             res.render('suggestion', {
-                logined: false,
-                username: " ",
+                logined: login.logined,
+                username: login.username,
                 results
             });
         }
@@ -209,7 +204,6 @@ router.get('/suggestion/:suggestion_id', function (req, res) {
     })
 });
 
-module.exports = router;
 
 router.post('/', function(req, res){
     var username = req.body.username;
@@ -313,3 +307,5 @@ router.post('/suggestion/:suggestion_id', function(req, res){
         res.render('login.ejs');
     }
 });
+
+module.exports = router;
