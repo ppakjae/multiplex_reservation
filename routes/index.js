@@ -120,30 +120,6 @@ router.get('/movie',function(req,res){
     })
 });
 
-router.get('/admin',function(req,res,next){
-	res.render('adminIndex');
-});
-
-router.get('/admin/info',function(req,res,next){
-	res.render('info');
-});
-
-router.get('/admin/sales',function(req,res,next){
-	res.render('sales');
-});
-
-router.get('/admin/salary',function(req,res,next){
-	res.render('salary');
-});
-
-router.get('/admin/rewards',function(req,res,next){
-	res.render('rewards');
-});
-
-router.get('/admin/vacation',function(req,res,next){
-	res.render('vacation');
-});
-
 
 router.get('/login',function(req,res,next){
 	res.render('login');
@@ -325,11 +301,11 @@ router.post('/suggestion_insert', function (req, res) {
 
 router.post('/suggestion/:suggestion_id', function(req, res){
     if(req.session.user){
-        var notice_id = req.url.split("/")[2];
+        var suggestion_id = req.url.split("/")[2];
         var comment = req.body.comment;
         var writer_name = req.session.user.user_name;
         var sql = `INSERT INTO comment(suggestion_id, comment, writer_name) VALUES (?,?,?) ;`
-        connection.query(sql, [notice_id, comment, writer_name], function(error, results, fields){
+        connection.query(sql, [suggestion_id, comment, writer_name], function(error, results, fields){
             res.redirect(`/suggestion/${suggestion_id}`);
         });
     }
