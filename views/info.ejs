@@ -1,117 +1,165 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title></title>
-<meta name="keywords" content="" />
-<meta name="description" content="" />
-<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
-<link href="/stylesheets/default.css" rel="stylesheet" type="text/css" media="all" />
-<link href="/stylesheets/fonts.css" rel="stylesheet" type="text/css" media="all" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title></title>
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
+  <link href="/stylesheets/default.css" rel="stylesheet" type="text/css" media="all" />
+  <link href="/stylesheets/fonts.css" rel="stylesheet" type="text/css" media="all" />
+  <link href="\stylesheets\admin.css" rel="stylesheet" type="text/css" />
 
-<style type="text/css"> /* 위 아랫 표 동시 적용 */
+  <style type="text/css">
+    /* 위 아랫 표 동시 적용 */
 
-.tg  {border-collapse:collapse;border-spacing:0;border-color:#93a1a1;}
-.tg td{font-family:Arial, sans-serif;font-size:15px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#93a1a1;color:#002b36;background-color:#fdf6e3;}
-.tg th{font-family:Arial, sans-serif;font-size:15px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#93a1a1;color:#fdf6e3;background-color:#657b83;}
-.tg .tg-my2{background-color:#f0f0f0;text-align:left;vertical-align:top}
-.tg .tg-my1{text-align:left;vertical-align:top}
-.tg .tg-you2{background-color:#f0f0f0;text-align:left;vertical-align:top}
-.tg .tg-you1{text-align:left;vertical-align:top}
-</style>
+    .tg {
+      border-collapse: collapse;
+      border-spacing: 0;
+      border-color: #93a1a1;
+    }
+
+    .tg td {
+      font-family: Arial, sans-serif;
+      font-size: 15px;
+      padding: 10px 5px;
+      border-style: solid;
+      border-width: 1px;
+      overflow: hidden;
+      word-break: normal;
+      border-color: #93a1a1;
+      color: #002b36;
+      background-color: #fdf6e3;
+    }
+
+    .tg th {
+      font-family: Arial, sans-serif;
+      font-size: 15px;
+      font-weight: normal;
+      padding: 10px 5px;
+      border-style: solid;
+      border-width: 1px;
+      overflow: hidden;
+      word-break: normal;
+      border-color: #93a1a1;
+      color: #fdf6e3;
+      background-color: #657b83;
+    }
+
+    .tg .tg-my2 {
+      background-color: #f0f0f0;
+      text-align: left;
+      vertical-align: top
+    }
+
+    .tg .tg-my1 {
+      text-align: left;
+      vertical-align: top
+    }
+
+    .tg .tg-you2 {
+      background-color: #f0f0f0;
+      text-align: left;
+      vertical-align: top
+    }
+
+    .tg .tg-you1 {
+      text-align: left;
+      vertical-align: top
+    }
+  </style>
 </head>
 
 <body>
-<div id="header-wrapper">
-  <div id="header" class="container">
-    <div id="logo">
-      <h1><a href="">직원 관리 시스템</a></h1>
-      <span>By <a href="#">CENEMA</a></span>
-    </div>
-    <div id="menu">
-      <ul>
-        <li><a href="/admin/info" accesskey="1" title="">사원정보</a></li>
-        <li><a href="/admin/sales" accesskey="2" title="">매 출</a></li>
-        <li><a href="/admin/salary" accesskey="3" title="">급 여</a></li>
-        <li><a href="/admin/rewards" accesskey="4" title="">근 태</a></li>
-        <li><a href="/admin/vacation" accesskey="5" title="">휴 가</a></li>
-      </ul>
+  <div id="header-wrapper">
+    <div id="header" class="container">
+      <div id="logo">
+        <h1><a href="">직원 관리 시스템</a></h1>
+        <span>By <a href="#">CENEMA</a></span>
+      </div>
+      <div id="menu">
+        <ul>
+          <li><a href="/admin/info" accesskey="1" title="">사원정보</a></li>
+          <li><a href="/admin/sales" accesskey="2" title="">매 출</a></li>
+          <li><a href="/admin/salary" accesskey="3" title="">급 여</a></li>
+          <li><a href="/admin/rewards" accesskey="4" title="">근 태</a></li>
+          <li><a href="/admin/vacation" accesskey="5" title="">휴 가</a></li>
+        </ul>
+      </div>
     </div>
   </div>
-</div>
 
-	<div id="ebox1">
-		<a href="#" class="button">사원정보</a>
-	</div>
+  <div id="ebox1">
+    <a href="#" class="button">사원정보</a>
+  </div>
 
-<table class="tg" width="90%" style="table-layout:fixed" align="center">
-  <tr>
-    <th class="tg-my1">ID</th>
-		<th class="tg-my1"></th>
-    <th class="tg-my1">성명</th>
-		<th class="tg-my1"></th>
-  </tr>
-  <tr>
-    <td class="tg-my2">성별</td>
-    <td class="tg-my2"></td>
-    <td class="tg-my2">생년월일</td>
-    <td class="tg-my2"></td>
-  </tr>
-  <tr>
-    <td class="tg-my2">지점</td>
-    <td class="tg-my2"></td>
-    <td class="tg-my2">직위</td>
-    <td class="tg-my2"></td>
-  </tr>
-  <tr>
-    <td class="tg-my2">업무 이름</td>
-    <td class="tg-my2"></td>
-    <td class="tg-my2">업무 코드</td>
-    <td class="tg-my2"></td>
-  </tr>
-  <tr>
-    <td class="tg-my2">급여</td>
-    <td class="tg-my2"></td>
-    <td class="tg-my2">담당 매니저_ID</td>
-    <td class="tg-my2"></td>
-  </tr>
-</table>
+  <button id="myBtn">직원 추가</button>
 
-<div style="margin-top:10px;">
-<table class="tg" width="90%" style="table-layout:fixed" align="center">
-  <tr>
-		<th class="tg-you1">ID</th>
-		<th class="tg-you1"></th>
-		<th class="tg-you1">성명</th>
-		<th class="tg-you1"></th>
-  </tr>
-  <tr>
-    <td class="tg-you2">성별</td>
-    <td class="tg-you2"></td>
-    <td class="tg-you2">생년월일</td>
-    <td class="tg-you2"></td>
-  </tr>
-  <tr>
-    <td class="tg-you2">지점</td>
-    <td class="tg-you2"></td>
-    <td class="tg-you2">직위</td>
-    <td class="tg-you2"></td>
-  </tr>
-  <tr>
-    <td class="tg-you2">업무 이름</td>
-    <td class="tg-you2"></td>
-    <td class="tg-you2">업무 코드</td>
-    <td class="tg-you2"></td>
-  </tr>
-  <tr>
-    <td class="tg-you2">급여</td>
-    <td class="tg-you2"></td>
-    <td class="tg-you2">담당 매니저_ID</td>
-    <td class="tg-you2"></td>
-  </tr>
-</table>
-</div>
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <form method="post" action="/admin/info">
+        <label for="employee_name"> 성명 </label>
+        <input id="employee_name" type="text" name="employee_name"/>
+        <label for="phone_number"> 전화번호 </label>
+        <input id="phone_number" type="text" name="phone_number" />
+        <label for="join_date"> 입사일 </label>
+        <input id="join_date" type="text" name="join_date" />
+        <label for="cinema_id"> 지점 </label>
+        <input id="cinema_id" type="text" name="cinema_id" />
+        <label for ="employee_rank"> 직위 </label>
+				<input id="employee_rank" type="text" name="employee_rank"/> 
+        <input type="submit" value="저장"/>
+      </form>
+    </div>
+  </div>
+
+
+  <% results.forEach(function(row){ %>
+  <table class="tg" width="90%" style="table-layout:fixed; margin-bottom:30px" align="center">
+    <tr>
+      <th class="tg-my1">ID</th>
+      <th class="tg-my1"><%=row.employee_id%></th>
+      <th class="tg-my1">성명</th>
+      <th class="tg-my1"><%=row.employee_name%></th>
+    </tr>
+    <tr>
+      <td class="tg-my2">전화번호</td>
+      <td class="tg-my2"><%=row.phone_number%></td>
+      <td class="tg-my2">입사일</td>
+      <td class="tg-my2"><%=row.join_date%></td>
+    </tr>
+    <tr>
+      <td class="tg-my2">지점</td>
+      <td class="tg-my2"><%=row.cinema_id%></td>
+      <td class="tg-my2">직위</td>
+      <td class="tg-my2"><%=row.employee_rank%></td>
+    </tr>
+  </table>
+
+  <%});%>
+
 </body>
+
+<script type="text/javascript">
+  var modal = document.getElementById('myModal');
+  var btn = document.getElementById("myBtn");
+  var span = document.getElementsByClassName("close")[0];
+  btn.onclick = function () {
+    modal.style.display = "block";
+  }
+
+  span.onclick = function () {
+    modal.style.display = "none";
+  }
+
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+</script>
 
 </html>
