@@ -1,18 +1,24 @@
 <html>
 <link rel="stylesheet" type="text/css" href="/stylesheets/menu.css">
 <div id="Menu" class="hidden">
+	<ul id="menu_nav">
+		<li><a href="/suggestion">건의</a></li>
+		<li><a href="/admin">직원관리</a></li>
+		<li><span>로그아웃</span></li>
+	</ul>
 	<div id="User_Info" class="hidden">
 		<img src="/images/anonymous.png">
 		<p>Hi <span><%=username %></span>! :)</p>
+		<p></p>
 	</div>
-	<h2 id="reservation_list">예매내역</h2>
+	<h2 id="reservation_list">예매내역 &#9662;</h2>
 	<div id="reservation_list_container" class="hidden">
 	</div>
-	<h2 id="cuppon_list">쿠폰</h2>
+	<h2 id="cuppon_list">쿠폰 &#9662;</h2>
 	<ul id="cuppon_list_container" class="hidden">
 	</ul>
-	<h2><a href="/suggestion">건의</a></h2>
-	<h2><a href="/admin">직원관리페이지</a></h2>
+	<!-- <h2><a href="/suggestion">건의</a></h2> -->
+	<!-- <h2><a href="/admin">직원관리페이지</a></h2> -->
 </div>
 <script type="text/javascript" src="/javascripts/menu.js"></script>
 </html>

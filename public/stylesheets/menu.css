@@ -1,3 +1,22 @@
+#menu_nav {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+
+	list-style: none;
+	margin : 2vh 0 12vh 0;
+	width: calc(100vw/9*2);
+}
+
+#menu_nav > li , #menu_nav  a{
+	color: white;
+	text-decoration: none;
+}
+
+#menu_nav:hover{
+	border-bottom: 
+}
+
 #User_Info{
 	display: flex;
 	flex-direction: column;
@@ -18,6 +37,7 @@
 
 }
 
+
 #reservation_list_container{
 	opacity: 1;
 }
@@ -26,8 +46,8 @@
 	position: relative;
 	display: flex;
 	flex-wrap: wrap;
-	width: 25vw;
-	height: 25vh;
+	width: 30vw;
+	height: 30vh;
 	margin : 3vh 3vw;
 	padding: 1vh 1vw;
 	box-sizing: border-box;
@@ -43,8 +63,8 @@
 	top:0;
 	left: 0;
 	content: ' ';
-	width: calc(25vh/7*5);
-	height:25vh;
+	width: calc(30vh/7*5);
+	height:30vh;
 	background-color: rgba(255,255,255,0.2);
 }
 
@@ -54,15 +74,21 @@
 	top:0;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
-	height: 25vh;
+	justify-content: flex-start;
+	width: 18vw;
+	height: 30vh;
 	font-size: 0.8rem;
 }
 .reservation_no{
 	/*position: absolute;*/
 }
-.movie_name{
-	/*position: absolute;*/
+.reservation_list_item .movie_name{
+	position: relative;
+	padding-left: 0;
+	margin: 0.5rem 0 2vh 0 ;
+	font-weight: bold;
+	font-size: 1rem;
+
 }
 .cinema_branch{
 	/*position: absolute;*/
@@ -85,14 +111,19 @@
 .payment_amount{
 	/*position: absolute;*/
 }
-.cancel{
-/*	position: absolute;
-	bottom: 0;
-	right: 0;
-*/	text-align: center;
+.reservation_list_item div.cancel{
+	position: absolute;
+	bottom: 3vh;
+	right: 9vw;
 	width: 10vw;
 	padding: 0.2rem;
+	text-align: center;
+	transform: translateX(50%);
 	background-color: red;
+}
+
+div.cancel > * {
+	margin: 0 auto;
 }
 
 
