@@ -42,7 +42,9 @@
 	/*margin : 0 0 10vh;*/
 	transform: scale(1.05);
 	background-position : center;
-	filter :blur(10px);
+	/*background: rgb(0,0,0) center;*/
+	/*background-blend-mode: lighten;*/
+	filter :blur(10px) brightness(0.75);
 }
 
 #movie-filter {
