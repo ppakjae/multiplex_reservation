@@ -1,77 +1,143 @@
-
-//Data
-const seats1 = [
-	[0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0],
-	[0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0],
-	[0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0],
-	[1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1],
-	[1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1],
-	[1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1],
-	[0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0]
-];
-
-
-const seats2 = [
-	[0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0],
-	[1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
-	[1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
-	[1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
-	[1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
-	[1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
-	[1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
-	[1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
-	[1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
-	[1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1],
-];
 var screen_time_list;
-if (screen_list != null) {
-	var screen_time_list = Array.from(Array(screen_list.length), () => Array());
-	for (let i = 0; i < screen_list.length; i++) {
-		obj = new Object();
-		obj.box_office_id = screen_list[i][0];
-		start_time = screen_list[i][1].split(':');
-		start_time = start_time[0].concat(':', start_time[1]);
-		obj.show_start_time = start_time;
-		left = 0;
-		tot = 0 ;
-		obj.screen_no = screen_list[i][2];
-		seats = screen_list[i][3];
-		for (let j = 0; j < seats.length; j++) {
-			for (let k = 0 ; k < seats[j].length; k++) {
-					if(seats[j][k]>0) tot++;
-					if(seats[j][k] == 1) left ++;	
+if (typeof screen_list !== "undefined") {
+	if (screen_list != null) {
+		var screen_time_list = Array.from(Array(screen_list.length), () => Array());
+		for (let i = 0; i < screen_list.length; i++) {
+			obj = new Object();
+			obj.box_office_id = screen_list[i][0];
+			start_time = screen_list[i][1].split(':');
+			start_time = start_time[0].concat(':', start_time[1]);
+			obj.show_start_time = start_time;
+			left = 0;
+			tot = 0;
+			obj.screen_no = screen_list[i][2];
+			seats = screen_list[i][3];
+			for (let j = 0; j < seats.length; j++) {
+				for (let k = 0; k < seats[j].length; k++) {
+					if (seats[j][k] > 0) tot++;
+					if (seats[j][k] == 1) left++;
+				}
 			}
+			obj.lefted_seating_capcity = String(left).concat("/", tot);
+			screen_time_list[i] = obj;
 		}
-		obj.lefted_seating_capcity=String(left).concat("/",tot);
-		screen_time_list[i] = obj;
 	}
 }
 
 
 //Element ref
 const goPayment = document.querySelector("#goPayment");
+function check() {
+	if(fr.info_m.value == "") {
+	  alert("인원수 선택하세요");
+	  return false;
+	}else if( seat_list.length!= mem_ayp[0]+mem_ayp[1]+mem_ayp[2]) {
+		alert("인원수만큼 좌석 선택 하세요");
+	return false;
 
-const make_seatChart = function () {
+	}else {return true;}
+  
+  }
+  
+const make_seatChart = function (seats) {
 	const SeatChart = document.querySelector('#SeatChart');
 	for (i = 0; i < seats.length; i++) {
 		let newRow = document.createElement('div');
 		newRow.classList.add('seat-row');
 		SeatChart.appendChild(newRow);
+		let newSeat = document.createElement('div');
+		let newSeatText = document.createTextNode(String.fromCharCode(65 + i));
+		newSeat.appendChild(newSeatText);
+		newSeat.classList.add('empty_seat')
+		newRow.appendChild(newSeat);
 		for (j = 0; j < seats[i].length; j++) {
 			let newSeat = document.createElement('div');
-			let newSeatText = document.createTextNode(" ");
-			newSeat.appendChild(newSeatText);
+			let newSeatText;
 			if (seats[i][j] == 1) {
+				newSeatText = document.createTextNode(j);
 				newSeat.classList.add('seat');
+				newRow.appendChild(newSeat);
+				newSeat.addEventListener('click', function (event) {
+					if (mem_ayp[0] + mem_ayp[1] + mem_ayp[2] >= seat_list.length) {
+						newSeat.classList.toggle("select_seat");
+						var str1 = newSeat.parentNode.children[0].textContent;
+						var str2 = newSeat.textContent;
+						var str = " ".concat("",str1.concat(" - ", str2))
+						var s = 0;
+						for (let k = 0; k < seat_list.length; k++) {
+							if (seat_list[k] == str) {
+								seat_list.splice(seat_list.indexOf(str), 1);
+								s = 1;
+							}
+						}
+						if (s == 0) seat_list.push(str)
+						if (mem_ayp[0] + mem_ayp[1] + mem_ayp[2] < seat_list.length) {
+							newSeat.className = "seat";
+							seat_list.pop();
+						}
+					}
+					text = document.createTextNode(seat_list);
+					seat_list.sort();
+					document.getElementById("seats_info").textContent ="seats: "+ seat_list;
+					document.getElementById("info_s").value = seat_list ;
+					
+
+				});
+
+			}
+			else if (seats[i][j] == 2) {
+				newSeatText = document.createTextNode(j);
+				newSeat.classList.add('seat');
+				newSeat.classList.add('disable');
 				newRow.appendChild(newSeat);
 			}
 			else {
+				newSeatText = document.createTextNode(" ");
 				newSeat.classList.add('empty_seat');
 				newRow.appendChild(newSeat);
 			}
+			newSeat.appendChild(newSeatText);
+		}
+		newSeat = document.createElement('div');
+		newSeatText = document.createTextNode(" ");
+		newSeat.appendChild(newSeatText);
+		newSeat.classList.add('empty_seat')
+		newRow.appendChild(newSeat);
+	}
+}
+
+const make_memset = function () {
+	const mem = document.getElementsByClassName("memset");
+	for (j = 0; j < 3; j++) {
+		for (i = 0; i <= 8; i++) {
+			let newItem = document.createElement('li');
+			let newItem_text = document.createTextNode(i);
+			newItem.appendChild(newItem_text);
+			if (i == 0) {
+				newItem.className = "selected"
+			}
+			newItem.addEventListener('click', function (event) {
+				for (var k = 1; k <= 9; k++) {
+					newItem.parentNode.children[k].className = "";
+				}
+				newItem.className = "selected";
+
+				if (newItem.parentNode.children[0].textContent == "일반") {
+					mem_ayp[0] = parseInt(newItem.textContent);
+				} else if (newItem.parentNode.children[0].textContent == "청소년") {
+					mem_ayp[1] = parseInt(newItem.textContent);
+				} else {
+					mem_ayp[2] = parseInt(newItem.textContent);
+				}
+				document.getElementById("info_m").value = mem_ayp;
+			});
+			mem[j].appendChild(newItem);
 		}
 	}
 }
+
+
+
 
 var date;
 var screen_no;
@@ -82,8 +148,8 @@ const make_reservation_info = function (i, textContent, info) {
 	Info.children[i].children[0].textContent = textContent + ": " + info;
 }
 
-
 const make_regionList = function () {
+	document.getElementById("info").value = reservation_info;
 	const RegionList = document.querySelector("#region-list");
 	for (i = 0; i < region_list.length; i++) {
 		let newItem = document.createElement('li');
@@ -98,6 +164,7 @@ const make_regionList = function () {
 			}
 			newItem.className = "selected";
 			reservation_info[0] = newItem.textContent;
+			reservation_info[6] = '';
 			remove_cinemaList();
 			for (let k = 0; k < RegionList.childElementCount; k++) {
 				if (RegionList.children[k].textContent == reservation_info[0]) {
@@ -124,6 +191,7 @@ const make_cinemaList = function (branch_list) {
 			}
 			newItem.className = "selected";
 			reservation_info[1] = newItem.textContent;
+			reservation_info[6] = '';
 			make_reservation_info(1, "cinema", newItem.textContent);
 			document.getElementById("info").value = reservation_info;
 			document.getElementById("select_form").submit();
@@ -137,7 +205,6 @@ const remove_cinemaList = function () {
 		CinemaList.removeChild(CinemaList.lastChild);
 	}
 }
-
 
 const make_movieList = function () {
 	const MovieList = document.querySelector("#movie-list");
@@ -158,10 +225,10 @@ const make_movieList = function () {
 			}
 			newItem.className = "selected";
 			reservation_info[2] = newItem.textContent;
+			reservation_info[6] = '';
 			document.getElementById("info").value = reservation_info;
 			document.getElementById("select_form").submit();
 			make_reservation_info(2, "movie_name", reservation_info[2]);
-
 		});
 		MovieList.appendChild(newItem);
 	}
@@ -183,6 +250,7 @@ const make_dateList = function () {
 			}
 			newItem.className = "selected";
 			reservation_info[3] = newItem.textContent;
+			reservation_info[6] = '';
 			document.getElementsByClassName("date").value = reservation_info[3];
 			make_reservation_info(3, "date", reservation_info[3]);
 			document.getElementById("info").value = reservation_info;
@@ -255,21 +323,28 @@ const make_screenList = function (screen_time_list) {
 	}
 }
 let k = 1;
-for (let i = 0; i < region_list.length; i++) {
-	if (reservation_info[0] == region_list[i])
-		k = i;
+if (typeof region_list !== "undefined") {
+	for (let i = 0; i < region_list.length; i++) {
+		if (reservation_info[0] == region_list[i])
+			k = i;
+	}
+
+	make_regionList();
+	make_cinemaList(cinema_list[k]);
+	make_movieList();
+	make_dateList();
+
+	make_screenList(screen_time_list);
+} else {
+	document.getElementById("info_b").value = reservation_info[6];
+
+	var seat_list = new Array();
+	var mem_ayp = [0, 0, 0];
+	make_seatChart(reserv_seats);
+	make_memset();
+
+
 }
-
-
-
-make_regionList();
-make_cinemaList(cinema_list[k]);
-make_movieList();
-make_dateList();
-
-make_screenList(screen_time_list);
-//make_seatChart();
-
 // goPayment.addEventListener('click',()=>{
 // 	window.location.href="/payment"
 // });
