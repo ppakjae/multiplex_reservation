@@ -62,7 +62,7 @@ const make_reservationRequest = function(){
 const make_reservationList = function(){
 	beforeHeight = body.scrollHeight;
 	const Reservation_list_container = document.querySelector("#reservation_list_container");
-	if(!reservation_list){
+	if(reservation_list.length == 0){
 		const err = document.createElement("p");
 		const errText = document.createTextNode("예매하신 내역이 없습니다.");
 		err.appendChild(errText);
