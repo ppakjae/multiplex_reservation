@@ -15,27 +15,21 @@
 			<h2>Sign In</h2>
 			<form  id ="Login-form" method="post" action='/'>
 				<label for ="id">ID </label>
-				<input id="id" type="text" name="username" value="manager" /> 
+				<input id="id" type="text" name="username" /> 
 				<label for ="id">Password  </label>
 				<input id = "password" name="password" type ="password" />
 				<input type="submit" value="LOG IN"/>
 			</form>
 			<div id="Login-footer">
 				<ul>
-					<li><a href="/register">회원가입</a></li>
-					<li>아이디찾기</li>
-					<li>비밀번호찾기</li>
+					<li><a href="/login/register">회원가입</a></li>
+					<li><a href="/login/find?query=id">아이디찾기</a></li>
+					<li><a href="/login/find?query=pw">비밀번호찾기</a></li>
 				</ul>
 			</div>
 		</div>
 	</div>
 
-
-	<div id="Menu" class="hidden">
-		<h2>예매내역</h2>
-		<h2>쿠폰</h2>
-		<h2>건의</h2>
-	</div>
 
 	<script type="text/javascript" src="/javascripts/index.js"></script>
 </body>

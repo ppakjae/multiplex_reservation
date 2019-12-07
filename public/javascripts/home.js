@@ -280,7 +280,7 @@ const change_select = function(event){
 };
 
 const change_selected_movie_Info = function(movie_id){
-	req.open("GET","/movie?movie_id="+ encodeURIComponent(movie_id),true);
+	req.open("GET","/api/movie?movie_id="+ encodeURIComponent(movie_id),true);
 	req.send();
 };
 

@@ -66,7 +66,6 @@ router.get('/', function (req, res, next) {
 
         const sql3 = "SELECT distinct * FROM movie natural join box_office natural join actor WHERE release_date <= current_timestamp() ORDER BY ratio limit 1;"
 
-        // function
 
         connection.query(sql1+sql2+sql3, function(error,results,fields){
 
@@ -98,7 +97,7 @@ router.get('/ec2',function(rq,res){
     })
 });
 
-router.get('/movie',function(req,res){
+router.get('/api/movie',function(req,res){
     const movie_id = req.query.movie_id;
     const sql = "SELECT * FROM movie natural join actor WHERE movie_id = ?;";
     connection.query(sql,[movie_id],(error,results,fileds)=>{
@@ -109,17 +108,34 @@ router.get('/movie',function(req,res){
 
 
 router.get('/login',function(req,res,next){
+    if(login.logined){
+        res.redirect('/');
+    }
 	res.render('login',{
 		logined : login.logined,
 		username : login.username
 	});
 });
 
-router.get('/register',function(req,res,next){
+router.get('/login/register',function(req,res,next){
+    if(login.logined){
+        res.redirect('/');
+    }
 	res.render('register',{
 		logined : login.logined,
 		username : login.username
 	});
+});
+
+router.get('/login/find',function(req,res,next){
+    const type = req.query.query;
+    if(login.logined || !type){
+        res.redirect('/');
+    }
+
+    res.render("accountFinder",{
+        type : type    
+    });
 });
 
 
@@ -839,6 +855,18 @@ router.post('/register', function (req, res) {
             }
         });
     }
+});
+
+router.post('/api/find',function(req,res,next){
+    const type = req.query.query;
+    if(!type) {
+        res.redirect('/login');
+    }
+    res.render('accountFinder',{
+        type : "result",
+        query : type,
+        result : "Success"
+    });
 });
 
 router.post('/suggestion_insert', function (req, res) {
