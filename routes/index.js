@@ -102,7 +102,8 @@ router.get('/movie',function(req,res){
     const movie_id = req.query.movie_id;
     const sql = "SELECT * FROM movie natural join actor WHERE movie_id = ?;";
     connection.query(sql,[movie_id],(error,results,fileds)=>{
-        res.json(results[0])
+        results[0].type = "movie_selected";
+        res.json(results[0]) ;
     });
 });
 
@@ -127,6 +128,16 @@ router.get('/reserv',function(req,res,next){
         username : login.username,
     });
 });
+
+router.get('/api/reserv',function(req,res,next){
+    const sql = "SELECT reservation_id, movie_img, movie_name, cinema_name, screen_no, box_office.date,start_time,running_time, amount from reservation natural join box_office natural join movie natural join cinema natural join screen natural join payment;";
+    connection.query(sql,function(err,results,fields){
+        res.json({
+            type : "reservation_list",
+            results
+        });
+    });
+})
 
 router.get('/payment',function(req,res,next){
     res.render('payment',{

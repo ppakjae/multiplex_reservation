@@ -19,23 +19,26 @@
 // 	reservation_rates : 15
 // };
 
-console.log(movie_selected);
+// console.log(movie_selected);
 
-var req = new XMLHttpRequest();
-req.onreadystatechange = function(e){
-	console.log(""+req.readyState + req.status);
-	if( req.readyState == 4) {
-		if( req.status == 200){
-		movie_selected = req.response;
-		setTimeout(()=>{
-			remove_simpleInfo();
-			make_simpleInfo();
-			Content_backgroundImg.style.backgroundImage = `url(${movie_selected.movie_img})`;
-		},800);
-		}
-	}
-};
-req.responseType = "json";
+// var req = new XMLHttpRequest();
+// req.onreadystatechange = function(e){
+// 	console.log(""+req.readyState + req.status);
+// 	if( req.readyState == 4) {
+// 		if( req.status == 200){
+// 			console.log(req.response);
+// 			movie_selected = req.response;
+// 			if (req.response.type = "movie_selected"){
+// 				setTimeout(()=>{
+// 					remove_simpleInfo();
+// 					make_simpleInfo();
+// 					Content_backgroundImg.style.backgroundImage = `url(${movie_selected.movie_img})`;
+// 				},800);
+// 				}
+// 			}
+// 	}
+// };
+// req.responseType = "json";
 
 // Ellement ref
 const Movie = document.querySelectorAll('.movie')

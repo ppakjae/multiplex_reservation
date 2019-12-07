@@ -5,7 +5,7 @@ const Menu_icon = document.querySelector("#menu_icon");
 const body = document.querySelector('body');
 const logo= document.querySelector('#logo');
 const login = document.querySelector("#login");
-const beforeHeight = body.scrollHeight;
+let beforeHeight = body.scrollHeight;
 
 const toggle_menu = function(event) {
 	const body = document.querySelector('body');

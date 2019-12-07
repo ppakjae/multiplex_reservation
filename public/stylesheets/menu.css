@@ -46,10 +46,11 @@
 	position: relative;
 	display: flex;
 	flex-wrap: wrap;
+	justify-content: space-between;
 	width: 30vw;
-	height: 30vh;
+	height: auto;
+	min-height: 30vh;
 	margin : 3vh 3vw;
-	padding: 1vh 1vw;
 	box-sizing: border-box;
 	border-bottom:1px solid white;
 	border-top:1px solid white;
@@ -59,19 +60,14 @@
 	padding: 0.2rem;
 }
 .movie_image{
-	position: absolute;
-	top:0;
-	left: 0;
 	content: ' ';
 	width: calc(30vh/7*5);
-	height:30vh;
+	min-height:100%;
 	background-color: rgba(255,255,255,0.2);
+	background-size: cover;
 }
 
 .reservation_list_item .Info {
-	position: absolute;
-	right: 0;
-	top:0;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
@@ -112,7 +108,7 @@
 	/*position: absolute;*/
 }
 .reservation_list_item div.cancel{
-	position: absolute;
+	/*position: absolute;*/
 	bottom: 3vh;
 	right: 9vw;
 	width: 10vw;
