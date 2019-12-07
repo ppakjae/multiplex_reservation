@@ -676,12 +676,39 @@ router.get('/reserv/:state', function (req, res, next) {
 
 router.get('/reserv_seat/:box_office_id', function (req, res) {
     var box_office_id = req.url.split("/")[2];
+    var sql = ' select cinema_name, movie_name, date,screen_no,start_time, screen_no, seat_state from box_office  natural join movie natural join cinema natural join screen where box_office_id = ?;'
+    connection.query(sql, [parseInt(box_office_id)], function (error, results, field) {
+        var str = String(results[0].date).split("-")[0];
+        str = str.split(" ")
+        var date = new Array() ;
+        for (j = 0; j < 3; j++) {
+            date.push(str[j]);
+        }
+        var seats = results[0].seat_state.split('[');
+        seats.splice(0, 2);
+        for (let j = 0; j < seats.length; j++) {
+            seat = new Array();
+            seats[j] = seats[j].split(']')[0];
+            for (let k = 0, l = 0; k < seats[j].length; k++) {
+                if (seats[j][k] != ',') {
+                    seat[l] = parseInt(seats[j][k]);
+                    l++;
+                }
+            }
+            seats[j] = seat
+        }
+        start_time = results[0].start_time.split(':');
+        start_time = start_time[0].concat(':', start_time[1]);
+       
+        res.render('reservation_seat', {
+            logined: login.logined,
+            username: login.username,
+            reservation_information: ["", results[0].cinema_name, results[0].movie_name, date, String(results[0].screen_no).concat("","관"), start_time, box_office_id],
+            seats,
+            box_office_id
+        });
+    })
 
-    res.render('reservation_seat', {
-        logined: login.logined,
-        username: login.username,
-        box_office_id
-    });
 });
 
 
@@ -794,24 +821,37 @@ router.post('/', function(req, res){
 
 router.post('/reserv/:state', function (req, res) {
     var info = req.body.info.split(',');
-    if (info[6] != '') {
-        res.redirect(`/reserv_seat/${info[6]}`);
+    if (info == 'RE') {
+        res.redirect(`/reserv/0_0_0`);
+    } else {
+        if (info[6] > 0) {
+            res.redirect(`/reserv_seat/${info[6]}`);
+        }
+        else {
+            var str2 = "_";
+            var sql1 = 'SELECT cinema_id FROM cinema WHERE cinema_name = ?;'
+            var sql2 = 'SELECT movie_id FROM movie WHERE movie_name = ?;'
+            connection.query(sql1 + sql2, [info[1], info[2]], function (error, results, field) {
+                if (info[1] == '') { str1 = '0'; } else if (info[1] != '0') { str1 = String(results[0][0].cinema_id); }
+                if (info[2] == '') { str3 = '0'; } else if (info[2] != '0') { str3 = String(results[1][0].movie_id); }
+                if (info[3] == '') { str4 = '0'; } else if (info[3] != '0') { str4 = info[3]; }
+                res.redirect(`/reserv/${str1.concat(str2, str3).concat(str2, str4)}`);
+            })
+        }
     }
-    var str2 = "_";
-    var sql1 = 'SELECT cinema_id FROM cinema WHERE cinema_name = ?;'
-    var sql2 = 'SELECT movie_id FROM movie WHERE movie_name = ?;'
-    connection.query(sql1 + sql2, [info[1], info[2]], function (error, results, field) {
-        if (info[1] == '') { str1 = '0'; } else if (info[1] != '0') { str1 = String(results[0][0].cinema_id); }
-        if (info[2] == '') { str3 = '0'; } else if (info[2] != '0') { str3 = String(results[1][0].movie_id); }
-        if (info[3] == '') { str4 = '0'; } else if (info[3] != '0') { str4 = info[3]; }
-        res.redirect(`/reserv/${str1.concat(str2, str3).concat(str2, str4)}`);
-    })
-
-
 });
 
-router.post('/reserv_seat', function (req, res) {
-    var cinema = req.body.cinema;
+router.post('/reserv_seat/:box_office_id', function (req, res) {
+    var info_m = req.body.info_m;
+    var info_s = req.body.info_s;
+    var info_b = req.body.info_b;
+    console.log(info_m,info_s,info_b);
+    res.render('payment', {
+        logined: login.logined,
+        username: login.username,
+        info_m
+    });
+   
 })
 
 
