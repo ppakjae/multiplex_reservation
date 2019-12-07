@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel='stylesheet' href='/stylesheets/index.css' />
+	<link rel='stylesheet' href='/stylesheets/reservation.css' />
+</head>
+<body>
+	<script type="text/javascript">
+		// javascript로 변수로  넘기려면  JSON.stringify 사용
+		const test = JSON.stringify(test) ;
+		const test2 = JSON.stringify(test2) ;
+		const test3 = JSON.stringify(test3) ;
+	</script>
+	<% include nav %>
+
+
+	<div id="Content">
+		
+
+		<div id="Seats-container">
+			<h4>Seats</h4>
+
+			<div id="Seats">
+				<div id="screen">
+				</div>
+				<div id="SeatChart">
+				</div>	
+			</div>
+
+			<div id="seat_before">
+				<h4>인원선택</h4>
+				<div>
+					<p>일반 : </p><span>
+						<span><button id="1" name="1" value="1">1<span>명</span></button></span>
+						<span><button id="2" name="2" value="2">2<span>명</span></button></span>
+						<span><button id="3" name="3" value="3">3<span>명</span></button></span>
+						<span><button id="4" name="4" value="4">4<span>명</span></button></span>
+						<span><button id="5" name="5" value="5">5<span>명</span></button></span>
+						<span><button id="6" name="6" value="6">6<span>명</span></button></span>
+						<span><button id="7" name="7" value="7">7<span>명</span></button></span>
+						<span><button id="8" name="8" value="8">8<span>명</span></button></span></span>
+				</div>
+				<div> <p>청소년 : </p><span>0</span> </div>
+				<div> <p>우대 :</p> <span>0</span> </div>
+			</div>
+
+			<div id="seat_info">
+				<h4>예매내역</h4>
+				<div><p>movie_name:</p></div>
+				<div><p>cinema:</p></div>
+				<div><p>date:</p></div>
+				<div><p>screen:</p></div>
+				<div><p>seats:</p></div>
+				<div><p>cost:</p></div>
+			</div>
+		</div>
+<div id="goPayment">Payment</div>
+	</div>
+
+
+	<% include menu %>
+
+	<script type="text/javascript" src="/javascripts/index.js"></script>
+	<script type="text/javascript" src="/javascripts/reservation.js"></script>
+</body>
+</html>
