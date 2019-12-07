@@ -331,7 +331,7 @@ if(Menu_icon){
 }
 
 goReservation_btn.addEventListener('click', ()=>{
-	window.location.href="/reserv";
+	window.location.href="/reserv/0_0_0";
 });
 
 

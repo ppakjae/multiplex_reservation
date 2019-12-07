@@ -1,74 +1,86 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title></title>
 	<link rel='stylesheet' href='/stylesheets/index.css' />
 	<link rel='stylesheet' href='/stylesheets/reservation.css' />
 </head>
+
 <body>
 	<script type="text/javascript">
+		const reservation_info = <%- JSON.stringify(reservation_information) %>; //region,cinema,movie_name,date,screen_no,show_start_time,box_office_id
+		const region_list = <%- JSON.stringify(results_region) %>;
+		const cinema_list = <%- JSON.stringify(results_cinema) %>;
+		const movie_list = <%- JSON.stringify(results_movie) %>;//	[0] = movie_name ;	[1] = age_restriction ;	[2] = genre ;	[3] = movie_img ;
+		const date_list = <%- JSON.stringify(results_date) %>;
+		const screen_list =<%- JSON.stringify(results_screen) %>;
 	</script>
 
-	
+
 	<% include nav %>
 
 	<div id="Content">
 		<div id="movie-container">
-				<h4>Cienma</h4>
+			<h4>Region</h4>
+			<ul id="region-list">
+			</ul>
+			<h4>Cinema</h4>
+
 			<ul id="cinema-list">
 			</ul>
-				<h4>Movie</h4>
+			<h4>Movie</h4>
+
 			<ul id="movie-list">
 			</ul>
-				<h4>Date</h4>
+
+			<h4>Date</h4>
 			<ul id="date-list">
 			</ul>
-				<h4>Screen</h4>
+			<h4>Screen</h4>
 			<div id="screen-list">
 			</div>
 		</div>
-
 		<div id="Seats-container">
-			<h4>Seats</h4>
 
-			<div id="Seats">
-				<div id="screen">
-				</div>
-				<div id="SeatChart">
-				</div>	
-			</div>
-			<div id="seat_before">
-				<h4>인원선택</h4>
-				<<div>
-					<p>일반 : </p><span>
-						<span><button id="1" name="1" value="1">1<span>명</span></button></span>
-						<span><button id="2" name="2" value="2">2<span>명</span></button></span>
-						<span><button id="3" name="3" value="3">3<span>명</span></button></span>
-						<span><button id="4" name="4" value="4">4<span>명</span></button></span>
-						<span><button id="5" name="5" value="5">5<span>명</span></button></span>
-						<span><button id="6" name="6" value="6">6<span>명</span></button></span>
-						<span><button id="7" name="7" value="7">7<span>명</span></button></span>
-						<span><button id="8" name="8" value="8">8<span>명</span></button></span></span>
-				</div>
-				<div> <p>청소년 : </p><span>0</span> </div>
-				<div> <p>우대 :</p> <span>0</span> </div>
-			</div>
-			<div id="seat_info">
+			<div id="reservation_info">
 				<h4>예매내역</h4>
-				<div><p>movie_name:</p></div>
-				<div><p>cinema"</p></div>
-				<div><p>date:</p></div>
-				<div><p>screen:</p></div>
-				<div><p>seats:</p></div>
-				<div><p>cost:</p></div>
+				<div>
+					<p>cinema: <%= reservation_information[1] %> </p>
+				</div>
+				<div>
+					<p>movie_name: <%= reservation_information[2] %></p>
+				</div>
+				<div>
+					<p>date: <%= reservation_information[3] %></p>
+				</div>
+				<div>
+					<p>screen_no: <%= reservation_information[4] %></p>
+				</div>
+				<div>
+					<p>show_start_time: <%= reservation_information[5] %></p>
+				</div>
+				<div>
+					<p>seats:</p>
+				</div>
+				<div>
+					<p>cost:</p>
+				</div>
+
+				<form id="select_form" action=<%= `/reserv/${state}` %> method="post">
+					<input type="hidden" id="info" name="info" />
+					<input type="submit" value="좌석선택">
+
+				</form>
 			</div>
 		</div>
-		<div id="goPayment">Payment</div>
+		<!-- <div id="goPayment">Payment</div> -->
 	</div>
 
 	<% include menu %>
-	
+
 	<script type="text/javascript" src="/javascripts/index.js"></script>
 	<script type="text/javascript" src="/javascripts/reservation.js"></script>
 </body>
+
 </html>
