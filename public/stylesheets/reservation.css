@@ -18,7 +18,7 @@ body {
   display: flex;
   flex-direction: column;
   /*justify-content: space-between;*/
-  width: 30vw;
+  width: 45vw;
   margin : 5vh 0;
 }
 
@@ -54,6 +54,15 @@ body {
   background-position: center;
 }
 
+.selected{ 
+  background-color: blueviolet;
+  opacity: 0.7;
+}
+.non{
+  background-color : red;
+}
+
+#region-list > li,
 #cinema-list > li,
 #date-list > li,
 #screen-list >ul >li {
@@ -65,6 +74,10 @@ body {
   border : 1px solid white;
   border-radius: 0.5rem;
   font-size :0.8rem;
+}
+
+#cinema-list > li{
+  width: 5rem;
 }
 
 #screen-list >ul {
@@ -93,9 +106,11 @@ body {
 
 #movie-list > li{
   min-width: 10vw;
+  max-width : 10vw;
   height: 14vw;
   margin-right: 1vw;
   background: linear-gradient(140deg, rgba(245,245,245,1), rgba(125,125,125,1));
+  background-size: 10vw 14vw;
   text-align:center;
   color: black;
 
@@ -138,17 +153,18 @@ body {
 #seat_before > div > *{
   margin: 1vh 0;
 }
-#seat_info {
+#reservation_info {
+  margin-left : 30px;
   width: 30vw;
   background-color: rgba(240,240,240,0.2);
   padding: 2vh 5vw;
   box-sizing: border-box;
 }
-#seat_info > div {
+#reservation_info > div {
   display: flex;
   flex-direction: row;
 }
-#seat_info > div > *{
+#reservation_info > div > *{
   margin: 1vh 0;
 }
 
