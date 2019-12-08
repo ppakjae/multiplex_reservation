@@ -1,127 +1,193 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title></title>
-<meta name="keywords" content="" />
-<meta name="description" content="" />
-<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
-<link href="\stylesheets\default.css" rel="stylesheet" type="text/css" media="all" />
-<link href="\stylesheets\fonts.css" rel="stylesheet" type="text/css" media="all" />
-<link href="\stylesheets\admin.css" rel="stylesheet" type="text/css" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title></title>
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
+  <link href="\stylesheets\default.css" rel="stylesheet" type="text/css" media="all" />
+  <link href="\stylesheets\fonts.css" rel="stylesheet" type="text/css" media="all" />
+  <link href="\stylesheets\admin.css" rel="stylesheet" type="text/css" />
 
 
-<style type="text/css"> /* tg 윗 표, tg1 아랫 표 */
-.tg1  {border-collapse:collapse;border-spacing:0;border-color:#93a1a1;}
-.tg1 td{font-family:Arial, sans-serif;font-size:14px;padding:5px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#93a1a1;color:#002b36;background-color:#fdf6e3;}
-.tg1 th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:5px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#93a1a1;color:#fdf6e3;background-color:#657b83;}
-.tg1 .tg-mvid{text-align:left;vertical-align:top}
-.tg1 .tg-mvif{background-color:white;text-align:left;vertical-align:top}
+  <style type="text/css">
+    /* tg 윗 표, tg1 아랫 표 */
+    .tg1 {
+      border-collapse: collapse;
+      border-spacing: 0;
+      border-color: #93a1a1;
+    }
 
-.tg  {border-collapse:collapse;border-spacing:0;border-color:#ccc;}
-.tg td{font-family:Arial, sans-serif;font-size:10px;padding:5px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-top-width:1px;border-bottom-width:1px;border-color:#ccc;color:#333;background-color:#fff;}
-.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-top-width:1px;border-bottom-width:1px;border-color:#ccc;color:#333;background-color:#f0f0f0;}
+    .tg1 td {
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      padding: 5px 5px;
+      border-style: solid;
+      border-width: 1px;
+      overflow: hidden;
+      word-break: normal;
+      border-color: #93a1a1;
+      color: #002b36;
+      background-color: #fdf6e3;
+    }
 
-.tg .tg-part{border-color:inherit;text-align:center;vertical-align:top}
-.tg .tg-valu{border-color:inherit;text-align:left;vertical-align:top}
-</style>
+    .tg1 th {
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      font-weight: normal;
+      padding: 5px 5px;
+      border-style: solid;
+      border-width: 1px;
+      overflow: hidden;
+      word-break: normal;
+      border-color: #93a1a1;
+      color: #fdf6e3;
+      background-color: #657b83;
+    }
+
+    .tg1 .tg-mvid {
+      text-align: left;
+      vertical-align: top
+    }
+
+    .tg1 .tg-mvif {
+      background-color: white;
+      text-align: left;
+      vertical-align: top
+    }
+
+    .tg {
+      border-collapse: collapse;
+      border-spacing: 0;
+      border-color: #ccc;
+    }
+
+    .tg td {
+      font-family: Arial, sans-serif;
+      font-size: 10px;
+      padding: 5px 5px;
+      border-style: solid;
+      border-width: 0px;
+      overflow: hidden;
+      word-break: normal;
+      border-top-width: 1px;
+      border-bottom-width: 1px;
+      border-color: #ccc;
+      color: #333;
+      background-color: #fff;
+    }
+
+    .tg th {
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      font-weight: normal;
+      padding: 10px 5px;
+      border-style: solid;
+      border-width: 0px;
+      overflow: hidden;
+      word-break: normal;
+      border-top-width: 1px;
+      border-bottom-width: 1px;
+      border-color: #ccc;
+      color: #333;
+      background-color: #f0f0f0;
+    }
+
+    .tg .tg-part {
+      border-color: inherit;
+      text-align: center;
+      vertical-align: top
+    }
+
+    .tg .tg-valu {
+      border-color: inherit;
+      text-align: left;
+      vertical-align: top
+    }
+  </style>
 </head>
 
 <body>
-<div id="header-wrapper">
-  <div id="header" class="container">
-    <div id="logo">
-      <h1><a href="/admin">직원 관리 시스템</a></h1>
+  <div id="header-wrapper">
+    <div id="header" class="container">
+      <div id="logo">
+        <h1><a href="/admin">직원 관리 시스템</a></h1>
 
-      <span>By <a href="#">CENEMA</a></span>
-    </div>
-    <div id="menu">
-      <ul>
-        <li><a href="/admin/info" accesskey="1" title="">사원정보</a></li>
-
-        <li class="current_page_item"><a href="/admin/sales" accesskey="2" title="">매 출</a></li>
-        <li><a href="/admin/salary" accesskey="3" title="">급 여</a></li>
-        <li><a href="/admin/rewards" accesskey="4" title="">근 태</a></li>
-        <li><a href="/admin/vacation" accesskey="5" title="">휴 가</a></li>
-      </ul>
+        <span>By <a href="#">CENEMA</a></span>
+      </div>
+      <div id="menu">
+        <ul>
+          <li><a href="/admin/info" accesskey="1" title="">사원정보</a></li>
+          <li class="current_page_item"><a href="/admin/sales" accesskey="2" title="">매 출</a></li>
+          <li><a href="/admin/salary" accesskey="3" title="">급 여</a></li>
+          <li><a href="/admin/rewards" accesskey="4" title="">근 태</a></li>
+          <li><a href="/admin/vacation" accesskey="5" title="">휴 가</a></li>
+        </ul>
+      </div>
     </div>
   </div>
-</div>
 
-<div id="ebox1">
-	<a href="#" class="button">매 출</a>
-</div>
-<div style="margin-bottom:15px;">
-<table class="tg1" width="90%" style="table-layout:fixed" align="center">
-  <tr>
-    <th class="tg-mvid" colspan="2">영화 ID</th>
-		<th class="tg-mvid" colspan="2"></th>
-  </tr>
-  <tr>
-    <td class="tg-mvif">제목</td>
-    <td class="tg-mvif"></td>
-    <td class="tg-mvif">영문제목</td>
-    <td class="tg-mvif"></td>
-  </tr>
-  <tr>
-    <td class="tg-mvif">개봉일자</td>
-    <td class="tg-mvif"></td>
-    <td class="tg-mvif">장르</td>
-    <td class="tg-mvif"></td>
-  </tr>
-  <tr>
-    <td class="tg-mvif">제작국가</td>
-    <td class="tg-mvif"></td>
-    <td class="tg-mvif">관람등급</td>
-    <td class="tg-mvif"></td>
-  </tr>
-  <tr>
-    <td class="tg-mvif">감독</td>
-    <td class="tg-mvif"></td>
-    <td class="tg-mvif">총관객수</td>
-    <td class="tg-mvif"></td>
-  </tr>
-  <tr>
-    <td class="tg-mvif">예매율</td>
-    <td class="tg-mvif"></td>
-    <td class="tg-mvif">현재상영여부</td>
-    <td class="tg-mvif"></td>
-  </tr>
-</table>
-</div>
+  <div id="ebox1">
+    <a href="#" class="button">매 출</a>
+  </div>
 
+  <% results.forEach(function(row){ 
+        var release_date = JSON.stringify(row.release_date);
+        release_date = release_date.substring(1,11).split("-");
+        var date = JSON.stringify(row.date);
+        date = date.substring(1,11).split("-"); %>
+  <div style="margin-bottom:15px;">
+    <table class="tg1" width="90%" style="table-layout:fixed" align="center">
+      <tr>
+        <th class="tg-mvid" colspan="2">영화 ID : <%=row.movie_id%></th>
+        <th class="tg-mvid" colspan="2"><button id="myBtn"> + </button></th>
+      </tr>
+      <tr>
+        <td class="tg-mvif">제목</td>
+        <td class="tg-mvif"><%=`${row.movie_name}(${row.movie_nameEN})`%></td>
+        <td class="tg-mvif">개봉일자</td>
+        <td class="tg-mvif"><%=`${release_date[0]}/${release_date[1]}/${release_date[2]}`%></td>
+      </tr>
+      <tr>
+        <td class="tg-mvif">예매율</td>
+        <td class="tg-mvif"><%= `${row.reservation_rates}%` %></td>
+        <td class="tg-mvif">총관객수</td>
+        <td class="tg-mvif"><%=row.number_of_spectators%></td>
+      </tr>
+    </table>
+  </div>
 
-<form>
-	<h1 style="color:white;font-size:15px">
-	<input type="radio" name="check" value="ID" checked>
-	ID
-	<input type="radio" name="check" value="성명">
-	이름
-	<input type="text" name="inputbar" size="12">
-	<input type="submit" value="조회">
-</h1>
-</form>
+  <div class="myModal none" style="margin-top:15px">
+    <table class="tg" width="90%" style="table-layout:fixed; margin-bottom: 15px" align="center">
+      <tr>
+        <th class="tg-part">날짜</th>
+        <th class="tg-part">매출액</th>
+      </tr>
+      <tr>
+        <td class="tg-valu"><%=`${date[0]}/${date[1]}/${date[2]}`%></td>
+        <td class="tg-valu"><%=row.sales%></td>
+      </tr>
+    </table>
+  </div>
+  <% }); %>
 
-
-<div style="margin-top:15px;">
-<table class="tg" width="90%" style="table-layout:fixed" align="center">
-  <tr>
-    <th class="tg-part">영화</th>
-    <th class="tg-part">날짜</th>
-    <th class="tg-part">지역</th>
-    <th class="tg-part">지점명</th>
-    <th class="tg-part">매출액</th>
-  </tr>
-  <tr>
-		<td class="tg-valu">0</td>
-    <td class="tg-valu">0</td>
-    <td class="tg-valu">0</td>
-    <td class="tg-valu">0</td>
-    <td class="tg-valu">0</td>
-  </tr>
-</table>
-</div>
 </body>
+
+<script type="text/javascript">
+  var button = document.querySelectorAll("button");
+  var modal = document.getElementsByClassName('myModal');
+  var btn = document.getElementById("myBtn");
+
+  for (let i = 0; i < button.length; i++) {
+    document.querySelectorAll("button")[i].addEventListener("click", function () {
+    modal[i].classList.toggle("none");
+    });
+  }
+
+</script>
+
 
 </html>

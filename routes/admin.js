@@ -27,7 +27,6 @@ router.use(session({
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
-  console.log("/");
   if (req.session.user) {
     res.render('index', {
       logined: req.session.user.logined,
@@ -45,14 +44,13 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/login', function (req, res, next){
-  console.log("/login");
   res.render('adminlogin');
 })
 
 router.get('/info', function (req, res, next) {
-  console.log("info");
-  var sql = 'SELECT * FROM employee';
-  connection.query(sql, function (error, results, fields) {
+  var cinema_id = req.session.user.cinema_id;
+  var sql = 'SELECT * FROM employee where cinema_id = ?';
+  connection.query(sql, [cinema_id], function (error, results, fields) {
     res.render('info', {
       results
     });
@@ -60,9 +58,9 @@ router.get('/info', function (req, res, next) {
 });
 
 router.get('/sales', function (req, res, next) {
-  console.log("sales");
-  var sql = 'SELECT * FROM movie';
+  var sql = 'SELECT * from movie natural join sales';
   connection.query(sql, function (error, results, fields) {
+    console.log(results);
     res.render('sales', {
       results
     });
@@ -70,18 +68,37 @@ router.get('/sales', function (req, res, next) {
 });
 
 router.get('/salary', function (req, res, next) {
-  console.log("salary");
-  res.render('salary');
+  var sql1 = 'SELECT * from schedule; ';
+  var sql2 = 'SELECT * from work';
+  connection.query(sql1 + sql2, function(error, results, fields){
+    console.log(results);
+    res.render('salary',{
+      results1 : results[0],
+      results2 : results[1]
+    });
+  });
 });
 
 router.get('/rewards', function (req, res, next) {
-  console.log("rewards");
-  res.render('rewards');
+  var sql1 = 'SELECT * from schedule; ';
+  var sql2 = 'SELECT * from work';
+  connection.query(sql1 + sql2, function(error, results, fields){
+    
+    res.render('rewards',{
+      results1 : results[0],
+      results2 : results[1]
+    });
+  });
 });
 
 router.get('/vacation', function (req, res, next) {
-  console.log("vacation");
-  res.render('vacation');
+  var sql = 'SELECT * FROM vacation NATURAL JOIN employee';
+  connection.query(sql, function (error, results, fields) {
+    console.log(results);
+    res.render('vacation',{
+      results
+    });
+  });
 });
 
 module.exports = router;
@@ -92,40 +109,25 @@ router.post('/', function (req, res) {
 
   var sql = 'SELECT * FROM employee WHERE employee_name = ?';
   connection.query(sql, [employee_name], function (error, results, fields) {
-    console.log(results);
     if (results.length == 0) {
       res.render('adminIndex');
     } else {
       var db_pwd = results[0].employee_id;
 
       if (password == db_pwd) {
-        console.log("111111");
         req.session.user = {
           logined: true,
           employee_name: results[0].employee_name,
-          employee_rank: results[0].employee_rank
+          employee_rank: results[0].employee_rank,
+          cinema_id : results[0].cinema_id
         }
 
         res.render('adminindex', {
             logined: req.session.user.logined,
             employee_name: req.session.user.employee_name,
-            employee_rank: req.session.user.employee_rank
+            employee_rank: req.session.user.employee_rank,
+            cinema_id : req.session.user.cinema_id
         });
-        // if (req.session.user.employee_rank == 1) {
-        //   console.log("req.seesion.user.employee_rank == 1: ");
-        //   res.render('info', {
-        //     logined: req.session.user.logined,
-        //     employee_name: req.session.user.employee_name,
-        //     employee_rank: req.session.user.employee_rank
-        //   });
-        // } else {
-        //   console.log("req.session.user.employee_rank != 1: ");
-        //   res.render('salary', {
-        //     logined: req.session.user.logined,
-        //     employee_name: req.session.user.employee_name,
-        //     employee_rank: req.session.user.employee_rank
-        //   });
-        // }
       }
       else {
         res.render('adminIndex');
@@ -143,10 +145,17 @@ router.post('/info', function (req, res, next) {
   var employee_rank = req.body.employee_rank;
   // console.log(dateFormat(reuslts.join_date, "yyyymm-----dd"));
 
-  var sql = 'INSERT into employee(employee_name, phone_number, cinema_id, employee_rank) VALUES(?,?,?,?)';
-  connection.query(sql, [employee_name, phone_number, cinema_id, employee_rank], function (error, results, fields) {
+  var sql = 'INSERT into employee(employee_name, phone_number, join_date, cinema_id, employee_rank) VALUES(?,?,?,?,?)';
+  connection.query(sql, [employee_name, phone_number, join_date, cinema_id, employee_rank], function (error, results, fields) {
     res.redirect('info');
-  })
+  });
+});
 
+router.post('/sales', function (req, res, next){
+  
+});
+
+router.post('/vacation', function (req, res, next){
 
 });
+

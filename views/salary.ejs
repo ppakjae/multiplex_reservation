@@ -40,7 +40,6 @@
         <li><a href="/admin/info" accesskey="1" title="">사원정보</a></li>
         <li><a href="/admin/sales" accesskey="2" title="">매 출</a></li>
         <li class="current_page_item"><a href="/admin/salary" accesskey="3" title="">급 여</a></li>
-
         <li><a href="/admin/rewards" accesskey="4" title="">근 태</a></li>
         <li><a href="/admin/vacation" accesskey="5" title="">휴 가</a></li>
       </ul>
@@ -89,78 +88,21 @@
     <th class="tg-part">초과근무시간</th>
 		<th class="tg-part">일 급여액</th>
   </tr>
+
+  <% results1.forEach(function(row){ 
+    var date = JSON.stringify(row.date);
+    date = date.substring(1,11).split("-");
+    var wage = (7 + 1)*9350; 
+    %>
   <tr>
-    <td class="tg-valu">0</td>
-    <td class="tg-valu">0</td>
-    <td class="tg-valu">0</td>
-    <td class="tg-valu">0</td>
-    <td class="tg-valu">0</td>
-		<td class="tg-valu">0</td>
+    <td class="tg-valu"><%=`${date[0]}/${date[1]}/${date[2]}`%></td>
+    <td class="tg-valu"><%=row.time%></td>
+    <td class="tg-valu"><%=row.time%></td>
+    <td class="tg-valu">7</td>
+    <td class="tg-valu">1</td>
+		<td class="tg-valu"><%=wage%></td>
   </tr>
-  <tr>
-    <td class="tg-valu">0</td>
-    <td class="tg-valu">0</td>
-    <td class="tg-valu">0</td>
-    <td class="tg-valu">0</td>
-    <td class="tg-valu">0</td>
-		<td class="tg-valu">0</td>
-  </tr>
-  <tr>
-    <td class="tg-valu">0</td>
-    <td class="tg-valu">0</td>
-    <td class="tg-valu">0</td>
-    <td class="tg-valu">0</td>
-    <td class="tg-valu">0</td>
-		<td class="tg-valu">0</td>
-  </tr>
-  <tr>
-    <td class="tg-valu">0</td>
-    <td class="tg-valu">0</td>
-    <td class="tg-valu">0</td>
-    <td class="tg-valu">0</td>
-    <td class="tg-valu">0</td>
-		<td class="tg-valu">0</td>
-  </tr>
-  <tr>
-    <td class="tg-valu">0</td>
-    <td class="tg-valu">0</td>
-    <td class="tg-valu">0</td>
-    <td class="tg-valu">0</td>
-    <td class="tg-valu">0</td>
-		<td class="tg-valu">0</td>
-  </tr>
-  <tr>
-    <td class="tg-valu">0</td>
-    <td class="tg-valu">0</td>
-    <td class="tg-valu">0</td>
-    <td class="tg-valu">0</td>
-    <td class="tg-valu">0</td>
-		<td class="tg-valu">0</td>
-  </tr>
-  <tr>
-    <td class="tg-valu">0</td>
-    <td class="tg-valu">0</td>
-    <td class="tg-valu">0</td>
-    <td class="tg-valu">0</td>
-    <td class="tg-valu">0</td>
-		<td class="tg-valu">0</td>
-  </tr>
-  <tr>
-    <td class="tg-valu">0</td>
-    <td class="tg-valu">0</td>
-    <td class="tg-valu">0</td>
-    <td class="tg-valu">0</td>
-    <td class="tg-valu">0</td>
-		<td class="tg-valu">0</td>
-  </tr>
-  <tr>
-    <td class="tg-valu">0</td>
-    <td class="tg-valu">0</td>
-    <td class="tg-valu">0</td>
-    <td class="tg-valu">0</td>
-    <td class="tg-valu">0</td>
-		<td class="tg-valu">0</td>
-  </tr>
+  <%});%>
 </table>
 </div>
 </body>
