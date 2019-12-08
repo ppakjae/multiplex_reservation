@@ -133,7 +133,7 @@ router.get('/login/find',function(req,res,next){
         res.redirect('/');
     }
 
-    res.render("accountFinder",{
+    res.render("account_finder",{
         type : type    
     });
 });
@@ -862,7 +862,7 @@ router.post('/api/find',function(req,res,next){
     if(!type) {
         res.redirect('/login');
     }
-    res.render('accountFinder',{
+    res.render('account_finder',{
         type : "result",
         query : type,
         result : "Success"
