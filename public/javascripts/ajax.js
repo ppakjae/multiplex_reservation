@@ -15,10 +15,11 @@ req.onreadystatechange = function(e){
 					Content_backgroundImg.style.backgroundImage = `url(${movie_selected.movie_img})`;
 				},800);
 				} else if(req.response.type == "reservation_list"){
-					console.log(req.response.response);
 					reservation_list =req.response.results;
 					make_reservationList();
 					console.log("?");
+				} else if(req.response.type == "find"){
+					console.log(req.response);
 				}
 			}
 	}

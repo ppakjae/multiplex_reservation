@@ -66,7 +66,6 @@ router.get('/', function (req, res, next) {
 
         const sql3 = "SELECT distinct * FROM movie natural join box_office natural join actor WHERE release_date <= current_timestamp() ORDER BY ratio limit 1;"
 
-        // function
 
         connection.query(sql1+sql2+sql3, function(error,results,fields){
 
@@ -98,7 +97,7 @@ router.get('/ec2',function(rq,res){
     })
 });
 
-router.get('/movie',function(req,res){
+router.get('/api/movie',function(req,res){
     const movie_id = req.query.movie_id;
     const sql = "SELECT * FROM movie natural join actor WHERE movie_id = ?;";
     connection.query(sql,[movie_id],(error,results,fileds)=>{
@@ -109,17 +108,37 @@ router.get('/movie',function(req,res){
 
 
 router.get('/login',function(req,res,next){
+    if(login.logined){
+        res.redirect('/');
+    }
 	res.render('login',{
 		logined : login.logined,
 		username : login.username
 	});
 });
 
-router.get('/register',function(req,res,next){
+router.get('/login/register',function(req,res,next){
+    if(login.logined){
+        res.redirect('/');
+    }
 	res.render('register',{
 		logined : login.logined,
 		username : login.username
 	});
+});
+
+router.get('/login/find',function(req,res,next){
+    const type_category = ["id","pw","pw_reinput"];
+    const type = req.query.query;
+    const err = req.query.error;
+    if(login.logined || !type_category.includes(type)){
+        res.redirect('/');
+    } 
+    console.log(err);
+    res.render("account_finder",{
+        type : type,
+        err : err
+    });
 });
 
 
@@ -879,6 +898,58 @@ router.post('/register', function (req, res) {
             }
         });
     }
+});
+
+router.post('/api/find',function(req,res,next){
+    const type_category = ["id","pw","pw_reinput"];
+    const type = req.query.query;
+    let sql = "";
+    
+    if(!type || !type_category.includes(type)) {
+        res.redirect('/login');
+    }else if(type == "id"){
+        sql="SELECT member_id, username FROM member WHERE ";
+        if (req.body.id_method == "email" && req.body.email){ 
+            sql += `email_address =\"${req.body.email}\"`;
+        }else if(req.body.id_method == "phone_number" && req.body.phone_number){
+            sql += `phone_number =\"${req.body.phone_number}\"`
+        } else {
+            sql = "";
+            res.redirect('/login/find?query=id&err=true')
+        }
+    }else if(type == "pw"){
+        sql="SELECT member_id, username FROM member WHERE ";
+        if (req.body.pw_method == "email" && req.body.email){ 
+            sql += `email_address =\"${req.body.email}\"`;
+        }else if(req.body.pw_method == "phone_number" && req.body.phone_number){
+            sql += `phone_number =\"${req.body.phone_number}\"`
+        } else {
+            sql=""
+            res.redirect('/login/find?query=pw&err=true');
+        }
+    }else{
+        if(req.body.password != req.body.password_check || !req.body.pasword){
+            res.redirect('/login/find?query=pw&err=true');
+        }else{
+            console.log(req.body.password);
+            sql = `UPDATE \`cenema\`.\`member\` SET \`password\` = \'${req.body.password}\' WHERE (\`member_id\` = \'${req.body.member_id}\')`;
+        }
+    }
+
+   if(sql != ""){
+        connection.query(sql,function(err,results,fileds){
+            if(err || !results[0]){
+                res.redirect('/login/find?query='+type+"&err=true");
+            }
+            res.render('account_finder',{
+                type : "result",
+                query : type,
+                result : results
+            });
+        });
+   }
+
+
 });
 
 router.post('/suggestion_insert', function (req, res) {
