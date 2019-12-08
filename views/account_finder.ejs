@@ -15,43 +15,47 @@
 		<div id="Login">
 			<% if(type == "id") { %>
 			<h2>아이디 찾기</h2>
-			<form  class ="Login-form" method="post" action='/api/find?query=id'>
+			<form  class ="Login-form identification" method="post" action='/api/find?query=id'>
 				<div>
 					<h3>인증방법 선택</h3>
-					<label><input type="radio" name="id_method" value="email">
-						<div>
-							<p>이메일번호 입력하기</p>
-							<input type="text" name="email">
-						</div>
-					</label>
-					<label><input type="radio" name="id_method" value = "phone_number">
-						<div>
-							<p>휴대폰 번호 입력하기</p>
-							<input type="text" name="phone_number">
-						</div>
-					</label>
+					<div id="identi_container">
+						<label><input type="radio" name="id_method" value="email">
+							<div  class="radio">
+								<p>이메일번호 입력하기</p>
+								<input type="text" name="email">
+							</div>
+						</label>
+						<label ><input type="radio" name="id_method" value = "phone_number">
+							<div class="radio">
+								<p>휴대폰 번호 입력하기</p>
+								<input type="text" name="phone_number">
+							</div>
+						</label>
+					</div>
 				</div>
 				<input type="submit" />
 			</form>
 			<% } else if(type == "pw") {%>
 			<h2>비밀번호 찾기</h2>
-			<form  class ="Login-form" method="post" action='/api/find?query=pw'>
+			<form  class ="Login-form identification" method="post" action='/api/find?query=pw'>
 				<div>
 					<h3>인증방법 선택</h3>
-					<label><input type="radio" name="pw_method" value="email">
-						<div>
-							<p>이메일번호 입력하기</p>
-							<input type="text" name="email">
-						</div>
-					</label>
-					<label><input type="radio" name="pw_method" value="phone_number">
-						<div>
-							<p>휴대폰 번호 입력하기</p>
-							<input type="text" name="phone_number">
-						</div>
-					</label>
-				</div>
+					<div id="identi_container">
+						<label ><input type="radio" name="pw_method" value="email">
+							<div class="radio">
+								<p>이메일번호 입력하기</p>
+								<input type="text" name="email">
+							</div>
+						</label>
+						<label ><input type="radio" name="pw_method" value="phone_number">
+							<div class="radio">
+								<p>휴대폰 번호 입력하기</p>
+								<input type="text" name="phone_number">
+							</div>
+						</label>
 				<input type="submit" />
+					</div>
+				</div>
 			</form>
 			<%} else if(type == "result") {%>
 				<% if(query == "id"){ %>
