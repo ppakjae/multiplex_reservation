@@ -128,11 +128,11 @@ router.get('/login/register',function(req,res,next){
 });
 
 router.get('/login/find',function(req,res,next){
+    const type_category = ["id","pw","pw_reinput"];
     const type = req.query.query;
-    if(login.logined || !type){
+    if(login.logined || !type_category.includes(type)){
         res.redirect('/');
     }
-
     res.render("account_finder",{
         type : type    
     });
@@ -858,15 +858,50 @@ router.post('/register', function (req, res) {
 });
 
 router.post('/api/find',function(req,res,next){
+    const type_category = ["id","pw","pw_reinput"];
     const type = req.query.query;
-    if(!type) {
+    let sql = "";
+    
+    if(!type || !type_category.includes(type)) {
         res.redirect('/login');
+    }else if(type == "id"){
+        sql="SELECT member_id, username FROM member WHERE ";
+        if (req.body.id_method == "email" && req.body.email){ 
+            sql += `email_address =\"${req.body.email}\"`;
+        }else if(req.body.id_method == "phone_number" && req.body.phone_number){
+            sql += `phone_number =\"${req.body.phone_number}\"`
+        } else {
+            sql = "";
+            res.redirect('/login/find?query=id&err=true')
+        }
+    }else if(type == "pw"){
+        sql="SELECT member_id, username FROM member WHERE ";
+        if (req.body.pw_method == "email" && req.body.email){ 
+            sql += `email_address =\"${req.body.email}\"`;
+        }else if(req.body.pw_method == "phone_number" && req.body.phone_number){
+            sql += `phone_number =\"${req.body.phone_number}\"`
+        } else {
+            sql=""
+            res.redirect('/login/find?query=pw&err=true');
+        }
+    }else{
+        sql = `UPDATE \`cenema\`.\`member\` SET \`password\` = \'${req.body.password}\' WHERE (\`member_id\` = \'${req.body.member_id}\')`;
     }
-    res.render('account_finder',{
-        type : "result",
-        query : type,
-        result : "Success"
-    });
+
+   if(sql != ""){
+        connection.query(sql,function(err,results,fileds){
+            if(err){
+                res.redirect('/login');
+            }
+            res.render('account_finder',{
+                type : "result",
+                query : type,
+                result : results
+            });
+        });
+   }
+
+
 });
 
 router.post('/suggestion_insert', function (req, res) {

@@ -15,16 +15,16 @@
 		<div id="Login">
 			<% if(type == "id") { %>
 			<h2>아이디 찾기</h2>
-			<form  id ="Login-form" method="post" action='/api/find?query=id'>
+			<form  class ="Login-form" method="post" action='/api/find?query=id'>
 				<div>
 					<h3>인증방법 선택</h3>
-					<label><input type="radio" name="id_method">
+					<label><input type="radio" name="id_method" value="email">
 						<div>
 							<p>이메일번호 입력하기</p>
 							<input type="text" name="email">
 						</div>
 					</label>
-					<label><input type="radio" name="id_method">
+					<label><input type="radio" name="id_method" value = "phone_number">
 						<div>
 							<p>휴대폰 번호 입력하기</p>
 							<input type="text" name="phone_number">
@@ -35,16 +35,16 @@
 			</form>
 			<% } else if(type == "pw") {%>
 			<h2>비밀번호 찾기</h2>
-			<form  id ="Login-form" method="post" action='/api/find?query=pw'>
+			<form  class ="Login-form" method="post" action='/api/find?query=pw'>
 				<div>
 					<h3>인증방법 선택</h3>
-					<label><input type="radio" name="id_method">
+					<label><input type="radio" name="pw_method" value="email">
 						<div>
 							<p>이메일번호 입력하기</p>
 							<input type="text" name="email">
 						</div>
 					</label>
-					<label><input type="radio" name="id_method">
+					<label><input type="radio" name="pw_method" value="phone_number">
 						<div>
 							<p>휴대폰 번호 입력하기</p>
 							<input type="text" name="phone_number">
@@ -56,18 +56,19 @@
 			<%} else if(type == "result") {%>
 				<% if(query == "id"){ %>
 			<div>
-				<h2>고객님의  아이디는 <span><%= result %></span> 입니다.</h2>			
+				<h2>고객님의  아이디는 <span><%= result[0].username %></span> 입니다.</h2>			
 				<div>
 					<a href="/login"><p>되돌아가기</p></a>
 				</div>
 			</div>			
 				<% } else if( query == "pw"){ %>
 			<h2>비밀번호 재설정</h2>
-			<form  id ="Login-form" method="post" action='/api/find?query=pw_reinput'>
-				<label for ="id">Password </label>
-				<input id="id" type="text" name="password"  /> 
-				<label for ="id">Password_check  </label>
-				<input id = "password" name="password" type ="password" />
+			<form  class="Login-form" method="post" action='/api/find?query=pw_reinput'>
+				<input type="hidden" name="member_id" value="<%= result[0].member_id%>" />
+				<label for ="pw">Password </label>
+				<input id="pw" type="text" name="password"  /> 
+				<label for ="password">Password_check  </label>
+				<input id = "password" name="password_check" type ="password" />
 				<input type="submit" />
 			</form>
 				<% } else if( query == "pw_reinput") { %>
@@ -78,7 +79,9 @@
 				</div>
 			</div>			
 
-				<% } %>
+				<% } else { %>
+					<h2>비정상적 접근입니다.</h2>
+				<%} %>
 			<%} else { %>
 			<h2>비정상적 접근입니다.</h2>
 			<% }%>

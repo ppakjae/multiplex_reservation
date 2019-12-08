@@ -23,7 +23,7 @@ body {
   z-index: 3;
 }
 
-#Login-form {
+.Login-form {
   /*Layout*/
   display: flex;
   flex-direction: column;
@@ -34,7 +34,7 @@ body {
   margin : 0 auto; 
 }
 
-#Login-form > *{
+.Login-form > *{
 
 }
 
