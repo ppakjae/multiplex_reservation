@@ -105,8 +105,10 @@ a {
 }
 
 input[type="radio"]{
-  width: 0;
-  height: 0;
+   visibility:hidden;
+ }
+}input[type="radio"]:checked{
+   visibility:hidden;
 }
 
 /*login.ejs*/
