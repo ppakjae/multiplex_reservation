@@ -16,7 +16,6 @@
 		const date_list = <%- JSON.stringify(results_date) %>;
 		const screen_list =<%- JSON.stringify(results_screen) %>;
 	</script>
-	<script type="text/javascript" src="/javascripts/ajax.js"></script>
 
 
 	<% include nav %>
@@ -67,6 +66,10 @@
 				<div>
 					<p>cost:</p>
 				</div>
+				<form id="RE" action=<%= `/reserv/${state}` %> method="post">
+					<input type="hidden" name="info" value="RE" />
+					<input type="submit" value="RE">
+				</form>
 
 				<form id="select_form" action=<%= `/reserv/${state}` %> method="post">
 					<input type="hidden" id="info" name="info" />
