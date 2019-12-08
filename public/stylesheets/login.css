@@ -19,22 +19,27 @@ body {
 /*Apperance*/
   width: 90vw;
   min-height: calc(100vh/3*2); 
+  box-sizing: border-box;
+  padding: 10vh 10vw;
   background-color: #3f3f3f;
+  color:white;
+  text-shadow: 0 0 0.2rem rgba(0,0,0,0.1);
   z-index: 3;
 }
 
-#Login-form {
+.Login-form {
   /*Layout*/
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  align-items: flex-start;
+  align-items: center;
   /*Apperance*/
   min-height: 40vh;
-  margin : 0 auto; 
+  box-sizing: border-box;
+  margin : 0 auto 10vh; 
 }
 
-#Login-form > *{
+.Login-form > *{
 
 }
 
@@ -46,7 +51,7 @@ body {
   /*Apperance*/
   margin: 0;
   padding: 0;
-  font-size: 0.5rem;
+  font-size: 0.8rem;
   color: white;
   list-style: none;
 }
@@ -54,6 +59,83 @@ body {
 #Login-footer li {
   padding: 0.5rem;
   margin-left: 0.5rem;
-  border : 1px solid white; 
+  /*border : 1px solid rgba(255,255,255,0.4); */
+  /*border-radius: 0.5rem;*/
+  /*background-color: rgba(255,255,255,0.2);*/
+}
+
+input{
+  width: 15vw;
+  border : none;
+  background-color : rgba(255,255,255,0.3);
+  box-shadow: 0 0 3vw rgba(0,0,0,0.1);
+  padding: 0.3rem;
+}
+input:in-valid{
+  background-color:  purple;  
+}
+/*input:valid{
+  background-color: red;
+}*/
+input:focus{
+  background-color : rgba(255,255,255,0.6);
+  box-shadow: 0 0 3vw rgba(0,0,0,0.3);
+}
+input:required{
+  background-color: green;
+}
+input:checked{
+  background-color: orange;
+}
+
+input[type="submit"]{
+  width: 10vw;
+  box-sizing: border-box;
+  padding: 0.5rem;
+  margin: 5vh 0 0 0 ;
   border-radius: 0.5rem;
+  text-align: center;
+  background-color: red;
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+input[type="radio"]{
+   visibility:hidden;
+ }
+}input[type="radio"]:checked{
+   visibility:hidden;
+}
+
+/*login.ejs*/
+.Login-form label{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.Login-form label span {
+  padding:0.5rem 0;
+  color : rgba(255,255,255,0.8);
+}
+
+/*account_finder.ejs*/
+
+.Login-form.identification #identi_container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  width : 40vw;
+}
+
+#identi_container .radio{
+
+}
+#identi_container .radio.checked{
+  background-color : rgba(0,0,0,0.5);
 }

@@ -19,20 +19,26 @@
 // 	reservation_rates : 15
 // };
 
-var req = new XMLHttpRequest();
-req.onreadystatechange = function(e){
-	console.log(""+req.readyState + req.status);
-	if( req.readyState == 4) {
-		if( req.status == 200){
-		movie_selected = req.response;
-		setTimeout(()=>{
-			remove_simpleInfo();
-			make_simpleInfo();
-		},800);
-		}
-	}
-};
-req.responseType = "json";
+// console.log(movie_selected);
+
+// var req = new XMLHttpRequest();
+// req.onreadystatechange = function(e){
+// 	console.log(""+req.readyState + req.status);
+// 	if( req.readyState == 4) {
+// 		if( req.status == 200){
+// 			console.log(req.response);
+// 			movie_selected = req.response;
+// 			if (req.response.type = "movie_selected"){
+// 				setTimeout(()=>{
+// 					remove_simpleInfo();
+// 					make_simpleInfo();
+// 					Content_backgroundImg.style.backgroundImage = `url(${movie_selected.movie_img})`;
+// 				},800);
+// 				}
+// 			}
+// 	}
+// };
+// req.responseType = "json";
 
 // Ellement ref
 const Movie = document.querySelectorAll('.movie')
@@ -50,13 +56,15 @@ const make_movieContainer = function(element,index){
 	
 	const container = document.createElement('div');
 	container.classList.add('movie');
+	container.value = element.movie_id;
 	const image = document.createElement('div');
 	image.classList.add('movie-image');
+	image.style.backgroundImage = `url(${element.movie_img})`;
 	const Info_container = document.createElement('div');
 	Info_container.classList.add('Info_container');
 	const name = document.createElement('h3');
 	name.classList.add('movie_name');
-	const nameText=document.createTextNode(element);
+	const nameText=document.createTextNode(element.movie_name);
 	const rank= document.createElement("h3");
 	rank.classList.add('rank');
 	const rankText= document.createTextNode(index+1);
@@ -84,12 +92,28 @@ const make_movieChart = function(){
 		Movie_filter.forEach((element,index)=>{
 			element.addEventListener('click',()=>{
 				const Movie = document.querySelectorAll('.movie');
+				const Movie_img = document.querySelectorAll('.movie .movie-image');
 				const Movie_name = document.querySelectorAll(".movie_name");
+				const Movie_selected = document.querySelector(".movie.selected");
 				const Movie_chart = document.querySelector("#Movie-chart");
 
 				setTimeout(()=>{
+					Movie.forEach((element,j)=>{
+						if(j<movie[index].length){
+						element.value = movie[index][j].movie_id;
+						}						
+					});
 					Movie_name.forEach((element,j)=>{
-						element.innerHTML = movie[index][j];
+						if(j<movie[index].length){
+						element.innerHTML = movie[index][j].movie_name;
+						}
+					});
+					Movie_img.forEach((element,j)=>{
+						if(j<movie[index].length){
+						element.style.backgroundImage = `url(${movie[index][j].movie_img})`;
+						}
+						change_selected_movie_Info(movie[index][0].movie_id);
+					})
 					})},500);
 		
 				remove_simpleInfo();
@@ -98,7 +122,6 @@ const make_movieChart = function(){
 				make_simpleInfo();
 				Movie_chart.scrollLeft= 0;
 			});
-		});
 };
 
 const make_simpleInfo = function(event){
@@ -110,7 +133,7 @@ const make_simpleInfo = function(event){
 	const genre = document.createElement("span");
 	const releaseDate = document.createElement("span");
 	const genreText =document.createTextNode(movie_selected.genre);
-	const releaseDateText = document.createTextNode(movie_selected.releaseDate);
+	const releaseDateText = document.createTextNode(new Date(movie_selected.release_date).toLocaleDateString());
 
 	const ratio = document.createElement("div");
 	let k = movie_selected.ratio;
@@ -158,13 +181,13 @@ const make_detailedInfo = function(event){
 
 	const genreText =document.createTextNode("Genre : "+movie_selected.genre);
 	const ratioText = document.createTextNode("Ratio :   ");
-	const releaseDateText = document.createTextNode("Release Date :"+movie_selected.releaseDate);
-	const running_timeText = document.createTextNode("Running Time :"+movie_selected.running_timeText);
+	const releaseDateText = document.createTextNode("Release Date :"+new Date(movie_selected.release_date).toLocaleDateString());
+	const running_timeText = document.createTextNode("Running Time :"+movie_selected.running_time+ "분");
 	const countryText = document.createTextNode("Country : "+movie_selected.country);
-	const movie_directorText = document.createTextNode("Movie Director : "+movie_selected.movie_director);
+	const movie_directorText = document.createTextNode("Movie Director : "+movie_selected.director);
 	const agencyText = document.createTextNode("Agency : "+movie_selected.agency);
 	const translatorText = document.createTextNode("Translator :"+movie_selected.translator);
-	const age_limitText = document.createTextNode("Age limit :"+movie_selected.age_limit);
+	const age_limitText = document.createTextNode("Age limit :"+movie_selected.age_restriction);
 	const number_of_spectatorsText = document.createTextNode("Number of spectators :"+movie_selected.number_of_spectators);
 	const reservation_ratesText = document.createTextNode("Reservation rates :"+movie_selected.reservation_rates);
 
@@ -197,9 +220,14 @@ const make_detailedInfo = function(event){
 	reservation_rates.appendChild(reservation_ratesText);
 
 
-	for(let i =0 ; i<movie_selected.actors.length;i++){
+	const actors_string = movie_selected.main_actor;
+
+	const  actor_list = actors_string.split(",")
+
+
+	for(let i =0 ; i<actor_list.length;i++){
 		const actor = document.createElement("li");
-		const actorText = document.createTextNode("Actor :"+movie_selected.actors[i]);
+		const actorText = document.createTextNode("Actor : " + actor_list[i]);
 
 		actor.appendChild(actorText);
 		actors.appendChild(actor);
@@ -240,19 +268,20 @@ const change_select = function(event){
 	const more = document.querySelector("#more");
 	remove_simpleInfo();
 	document.querySelector('.movie.selected').classList.remove('selected');
-	change_selected_movie_Info();	
+	change_selected_movie_Info(this.value);	
 	more.classList.add('changing');
 	setTimeout(()=>{
 		this.classList.add('selected');
 		more.classList.remove('changing');
 		make_simpleInfo();
 		Movie_chart.scrollLeft = 0;
+		// Content_backgroundImg.style.backgroundImage = `url(${movie_selected.movie_img})`;
 	},700);
 };
 
-const change_selected_movie_Info = function(){
-	req.open("GET","/movie",true);
-	req.send(null);
+const change_selected_movie_Info = function(movie_id){
+	req.open("GET","/api/movie?movie_id="+ encodeURIComponent(movie_id),true);
+	req.send();
 };
 
 const handle_more = function(){
@@ -289,6 +318,8 @@ const handle_more = function(){
 
 make_movieChart();
 
+Content_backgroundImg.style.backgroundImage = `url(${movie_selected.movie_img})`;
+
 moreInfo_btn.addEventListener('click', handle_more);
 
 if(Menu_icon){
@@ -303,7 +334,7 @@ if(Menu_icon){
 }
 
 goReservation_btn.addEventListener('click', ()=>{
-	window.location.href="/reserv";
+	window.location.href="/reserv/0_0_0";
 });
 
 

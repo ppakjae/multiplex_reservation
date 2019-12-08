@@ -9,39 +9,40 @@
 
 <body>
 	<script type="text/javascript">
+
 		const reservation_info = <%- JSON.stringify(reservation_information) %>; //region,cinema,movie_name,date,screen_no,show_start_time,box_office_id
-		const region_list = <%- JSON.stringify(results_region) %>;
-		const cinema_list = <%- JSON.stringify(results_cinema) %>;
-		const movie_list = <%- JSON.stringify(results_movie) %>;//	[0] = movie_name ;	[1] = age_restriction ;	[2] = genre ;	[3] = movie_img ;
-		const date_list = <%- JSON.stringify(results_date) %>;
-		const screen_list =<%- JSON.stringify(results_screen) %>;
+		const reserv_seats = <%- JSON.stringify(seats) %>;
 	</script>
 
 
 	<% include nav %>
-
 	<div id="Content">
-		<div id="movie-container">
-			<h4>Region</h4>
-			<ul id="region-list">
-			</ul>
-			<h4>Cinema</h4>
 
-			<ul id="cinema-list">
-			</ul>
-			<h4>Movie</h4>
-
-			<ul id="movie-list">
-			</ul>
-
-			<h4>Date</h4>
-			<ul id="date-list">
-			</ul>
-			<h4>Screen</h4>
-			<div id="screen-list">
-			</div>
-		</div>
 		<div id="Seats-container">
+			<h4>Seats</h4>
+
+			<div id="Seats">
+				<div id="screen">
+				</div>
+				<div id="SeatChart">
+				</div>
+			</div>
+
+			<div id="seat_before">
+				<h4>인원선택</h4>
+				<ul class="memset">
+					<p>일반</p>
+				</ul>
+				<ul class="memset">
+					<p>청소년</p>
+				</ul>
+				<ul class="memset">
+					<p>우대</p>
+				</ul>
+
+
+			</div>
+
 
 			<div id="reservation_info">
 				<h4>예매내역</h4>
@@ -61,24 +62,23 @@
 					<p>show_start_time: <%= reservation_information[5] %></p>
 				</div>
 				<div>
-					<p>seats:</p>
+					<p id="seats_info">seats:</p>
 				</div>
 				<div>
 					<p>cost:</p>
 				</div>
-				<form id="RE" action=<%= `/reserv/${state}` %> method="post">
-					<input type="hidden" name="info" value="RE" />
-					<input type="submit" value="RE">
-				</form>
 
-				<form id="select_form" action=<%= `/reserv/${state}` %> method="post">
-					<input type="hidden" id="info" name="info" />
-					<input type="submit" value="좌석선택">
-
-				</form>
 			</div>
 		</div>
-		<!-- <div id="goPayment">Payment</div> -->
+		<form name = "fr" onsubmit="return check()" action=<%= `/reserv_seat/${box_office_id}` %> method="post">
+			<input type="submit" id="goPayment" value="Payment">
+			<input type="hidden" id="info_s" name="info_s" value = ""/>
+			<input type="hidden" id="info_m" name="info_m" value = ""/>
+			<input type="hidden" id="info_b" name="info_b" value = ""/>
+
+
+		</form>
+
 	</div>
 
 	<% include menu %>

@@ -7,7 +7,7 @@ body {
 	padding: 0;
 	margin : 0;
 	width: 100vw;
-	height: 100vh;
+	height: auto;
 	overflow-x: hidden;
 	background-color: #1f1f1f;
 	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -111,7 +111,6 @@ img {
 
 	/*Appearance*/
 	margin : 0;
-	padding-top: 20vh;
 	width: calc(100vw/3);
 	height: 100vh;
 	/*background-color: black;*/
