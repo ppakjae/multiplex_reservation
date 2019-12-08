@@ -8,6 +8,7 @@ const handle_radiobtn = function(index){
 	radio_container.forEach((element)=>{
 		element.classList.remove("checked");
 	})
+	
 	radio_container[index].classList.add("checked");
 }
 
