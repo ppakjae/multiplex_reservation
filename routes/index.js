@@ -130,11 +130,14 @@ router.get('/login/register',function(req,res,next){
 router.get('/login/find',function(req,res,next){
     const type_category = ["id","pw","pw_reinput"];
     const type = req.query.query;
+    const err = req.query.error;
     if(login.logined || !type_category.includes(type)){
         res.redirect('/');
-    }
+    } 
+    console.log(err);
     res.render("account_finder",{
-        type : type    
+        type : type,
+        err : err
     });
 });
 
@@ -925,13 +928,18 @@ router.post('/api/find',function(req,res,next){
             res.redirect('/login/find?query=pw&err=true');
         }
     }else{
-        sql = `UPDATE \`cenema\`.\`member\` SET \`password\` = \'${req.body.password}\' WHERE (\`member_id\` = \'${req.body.member_id}\')`;
+        if(req.body.password != req.body.password_check || !req.body.pasword){
+            res.redirect('/login/find?query=pw&err=true');
+        }else{
+            console.log(req.body.password);
+            sql = `UPDATE \`cenema\`.\`member\` SET \`password\` = \'${req.body.password}\' WHERE (\`member_id\` = \'${req.body.member_id}\')`;
+        }
     }
 
    if(sql != ""){
         connection.query(sql,function(err,results,fileds){
-            if(err){
-                res.redirect('/login');
+            if(err || !results[0]){
+                res.redirect('/login/find?query='+type+"&err=true");
             }
             res.render('account_finder',{
                 type : "result",
