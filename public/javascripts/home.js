@@ -326,8 +326,8 @@ if(Menu_icon){
 	Menu_icon.addEventListener('click',()=>{
 		const Content = document.querySelector('#Content');
 			setTimeout(()=>{
-				Content_background.style.width =  Content.getBoundingClientRect().width+'px';
-				Content_backgroundImg.style.width =  Content.getBoundingClientRect().width+'px';
+				// Content_background.style.width =  Content.getBoundingClientRect().width+'px';
+				// Content_backgroundImg.style.width =  Content.getBoundingClientRect().width+'px';
 				console.log( Content.getBoundingClientRect().width);
 			},500);
 	});
