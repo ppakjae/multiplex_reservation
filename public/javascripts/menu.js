@@ -174,6 +174,11 @@ const toggle_reservationList = function(){
 	}
 };
 
+const make_cupponRequest = function(){
+	req.open("GET","/api/coupon",true);
+	req.send(null);
+}
+
 const make_cupponList = function(){
 	const Cuppon_List = document.querySelector("#cuppon_list_container");
 	if(cuppon_list2.length == 0){
