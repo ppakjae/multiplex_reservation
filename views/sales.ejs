@@ -134,28 +134,29 @@
     <a href="#" class="button">매 출</a>
   </div>
 
-  <% results.forEach(function(row){ 
-        var release_date = JSON.stringify(row.release_date);
+  <% for(var i = 0; i < results1.length; i++) { 
+        var movie_id = results1[i].movie_id;
+        var release_date = JSON.stringify(results1[i].release_date);
         release_date = release_date.substring(1,11).split("-");
-        var date = JSON.stringify(row.date);
+        var date = JSON.stringify(results1[i].date);
         date = date.substring(1,11).split("-"); %>
   <div style="margin-bottom:15px;">
     <table class="tg1" width="90%" style="table-layout:fixed" align="center">
       <tr>
-        <th class="tg-mvid" colspan="2">영화 ID : <%=row.movie_id%></th>
+        <th class="tg-mvid" colspan="2">영화 ID : <%=results1[i].movie_id%></th>
         <th class="tg-mvid" colspan="2"><button id="myBtn"> + </button></th>
       </tr>
       <tr>
         <td class="tg-mvif">제목</td>
-        <td class="tg-mvif"><%=`${row.movie_name}(${row.movie_nameEN})`%></td>
+        <td class="tg-mvif"><%=`${results1[i].movie_name}(${results1[i].movie_nameEN})`%></td>
         <td class="tg-mvif">개봉일자</td>
         <td class="tg-mvif"><%=`${release_date[0]}/${release_date[1]}/${release_date[2]}`%></td>
       </tr>
       <tr>
         <td class="tg-mvif">예매율</td>
-        <td class="tg-mvif"><%= `${row.reservation_rates}%` %></td>
+        <td class="tg-mvif"><%= `${results1[i].reservation_rates}%` %></td>
         <td class="tg-mvif">총관객수</td>
-        <td class="tg-mvif"><%=row.number_of_spectators%></td>
+        <td class="tg-mvif"><%=results1[i].number_of_spectators%></td>
       </tr>
     </table>
   </div>
@@ -166,13 +167,19 @@
         <th class="tg-part">날짜</th>
         <th class="tg-part">매출액</th>
       </tr>
+      <% for(var j = 0; j < results2.length; j++) {
+        if(movie_id == results2[j].movie_id){ 
+        var date = JSON.stringify(results2[j].date);
+        date = date.substring(1,11).split("-");%>
       <tr>
         <td class="tg-valu"><%=`${date[0]}/${date[1]}/${date[2]}`%></td>
-        <td class="tg-valu"><%=row.sales%></td>
+        <td class="tg-valu"><%=results2[j].sales%></td>
       </tr>
+      <%}%>
+      <%}%>
     </table>
   </div>
-  <% }); %>
+  <%}%>
 
 </body>
 
