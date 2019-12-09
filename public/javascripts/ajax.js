@@ -22,9 +22,11 @@ req.onreadystatechange = function(e){
 				}else if(req.response.type == "logout"){
 					location.reload();
 				}else if(req.response.type == "reservation_cancel"){
-					// remove_reservationList();
+					if(req.response.reservation_id){
+						remove_reservationList(req.response.reservation_id);
+					}
 					// make_reservationRequest();
-					location.reload();
+					// location.reload();
 				}
 			}
 	}

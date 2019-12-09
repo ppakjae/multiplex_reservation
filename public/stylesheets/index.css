@@ -151,25 +151,8 @@ transition-timing-function: ease-in;
 }
 
 
-#Content.menuOn > div{
-	width: 100vw;
-
-	transition-property: width;
-	transition-duration: 0.5s;
-	transition-timing-function:ease-in;
-}
-
-
-#Content.menuOn, #Content.menuOn > div{
-	width: calc(100vw/3*2 - 10vw);
-}
-
 body::-webkit-scrollbar {
   width:0;
   height: 0;
 }
 
-/*#content.menuOn > *{
-	width: calc(100vw/3*2);
-}
-*/

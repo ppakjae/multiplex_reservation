@@ -753,7 +753,8 @@ router.delete('/api/reserv', function(req,res,next){
             }
             else {
                 res.json({
-                    type : "reservation_cancel"
+                    type : "reservation_cancel",
+                    reservation_id : reservation_id
                 });
             }
         });

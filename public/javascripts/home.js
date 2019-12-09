@@ -274,7 +274,6 @@ const change_select = function(event){
 		this.classList.add('selected');
 		more.classList.remove('changing');
 		make_simpleInfo();
-		Movie_chart.scrollLeft = 0;
 		// Content_backgroundImg.style.backgroundImage = `url(${movie_selected.movie_img})`;
 	},700);
 };
@@ -322,16 +321,6 @@ Content_backgroundImg.style.backgroundImage = `url(${movie_selected.movie_img})`
 
 moreInfo_btn.addEventListener('click', handle_more);
 
-if(Menu_icon){
-	Menu_icon.addEventListener('click',()=>{
-		const Content = document.querySelector('#Content');
-			setTimeout(()=>{
-				// Content_background.style.width =  Content.getBoundingClientRect().width+'px';
-				// Content_backgroundImg.style.width =  Content.getBoundingClientRect().width+'px';
-				console.log( Content.getBoundingClientRect().width);
-			},500);
-	});
-}
 
 goReservation_btn.addEventListener('click', ()=>{
 	window.location.href="/reserv/0_0_0";
