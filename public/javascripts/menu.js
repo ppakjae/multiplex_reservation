@@ -107,6 +107,9 @@ const make_reservationList = function(){
 		payment_amount.appendChild(payment_amountText);
 		cancel.appendChild(cancelText);
 
+		newItem.value = reservation_list[i].reservation_id;
+		cancel.value = reservation_list[i].reservation_id;
+
 		newItem.classList.add('reservation_list_item');
 		movie_image.classList.add('movie_image');
 
@@ -136,7 +139,28 @@ const make_reservationList = function(){
 		Reservation_list_container.appendChild(newItem);
 	}
 	Menu.style.height= body.scrollHeight+"px";
+
+	document.querySelectorAll(".cancel").forEach((element)=>{
+		element.addEventListener('click',cancel_Reservation.bind(element));
+		element.addEventListener('DOMNodeRemoved',remove_item.bind(element));
+	});
 }
+
+const remove_item = function (){
+	console.log("success");
+}
+
+const remove_reservationList = function(reservation_id){
+	const Reservation_list_container = document.querySelector("#reservation_list_container");
+	const items = document.querySelectorAll(".reservation_list_item");
+
+	items.forEach((element)=>{
+		if(element.value == reservation_id){
+		Reservation_list_container.removeChild(element);
+		console.log("rmv")
+		}
+	})
+};
 
 const toggle_reservationList = function(){
 	if(reservation_list_load == false){
@@ -198,7 +222,24 @@ const toggle_cupponList = function(){
 	}
 };
 
+const logout = function(){
+	req.open("POST", "/");
+	req.send(null);
+}
+
+const cancel_Reservation = function(){
+	const reservation_id = this.value;
+	console.log(this.value);
+	req.open("DELETE","/api/reserv");
+	req.setRequestHeader("content-type","application/json");
+	req.send(JSON.stringify({
+		reservation_id : reservation_id
+	}));
+	console.log("sent");
+};
+
 
 Reservation_list.addEventListener('click',toggle_reservationList.bind(Reservation_list_container));
 Cuppon_list.addEventListener('click',toggle_cupponList.bind(Cuppon_list_container));
 
+document.querySelector("#logout").addEventListener('click',logout);

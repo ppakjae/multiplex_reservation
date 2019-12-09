@@ -21,7 +21,8 @@ body {
   min-height: calc(100vh/3*2); 
   box-sizing: border-box;
   padding: 10vh 10vw;
-  background-color: #3f3f3f;
+  /*background-color: #3f3f3f;*/
+  background-color: rgba(0,0,0,0.6);
   color:white;
   text-shadow: 0 0 0.2rem rgba(0,0,0,0.1);
   z-index: 3;
@@ -105,10 +106,12 @@ a {
 }
 
 input[type="radio"]{
-   visibility:hidden;
+   /*visibility:hidden;*/
+   opacity : 0;
  }
 }input[type="radio"]:checked{
-   visibility:hidden;
+   /*visibility:hidden;*/
+   opacity : 0;
 }
 
 /*login.ejs*/
@@ -124,18 +127,70 @@ input[type="radio"]{
 }
 
 /*account_finder.ejs*/
+.identification > div{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top : 5vh;
+}
 
 .Login-form.identification #identi_container{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 
-  width : 40vw;
+  width : 50vw;
 }
 
-#identi_container .radio{
-
+#identi_container > label > .radio{
+	padding : 3rem;
 }
-#identi_container .radio.checked{
-  background-color : rgba(0,0,0,0.5);
+#identi_container > label > .radio.checked{
+	border-radius: 3rem;
+	border : 2px solid rgba(255,255,255,0.5);
+}
+
+
+/*register.ejs*/
+
+.Login-form.sign-up> div{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	margin-top : 6vh;
+	width: 35vw;
+	height: 60vh;
+}
+
+.sign-up > div > label {
+	height: 10vh;
+	color : rgba(255,255,255,0.8);
+}
+
+.sign-up > div > label > input{
+	margin : 1rem 0;
+}
+
+.sign-up  label{
+	width: 15vw;
+}
+
+.sign-up label.radio{
+	display: flex;
+	flex-direction: row;
+	width: 5vw;
+}
+
+.sign-up input[type="radio"] {
+	opacity: 1;
+	width: 1vw;
+}
+.sign-up label div {
+	display: flex;
+	width: 100%;
+	height: 100%;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
 }

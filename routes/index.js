@@ -17,7 +17,8 @@ var connection = mysql.createConnection({
 
 var login = {
     logined : false,
-    username : ""
+    username : "",
+    member_id : -1
 }
 
 
@@ -55,6 +56,7 @@ router.use(function(req,res,next){
     if (req.session.user) {
     	login.logined = req.session.user.logined;
     	login.username = req.session.user.username;
+        login.member_id = req.session.user.member_id;
     }
 	next();	
 });
@@ -732,7 +734,7 @@ router.get('/reserv_seat/:box_office_id', function (req, res) {
 
 
 router.get('/api/reserv',function(req,res,next){
-    const sql = "SELECT reservation_id, movie_img, movie_name, cinema_name, screen_no, box_office.date,start_time,running_time, amount from reservation natural join box_office natural join movie natural join cinema natural join screen natural join payment WHERE member_id = (SELECT member_id FROM member WHERE username = ?) ;";
+    const sql = "SELECT reservation_id, movie_img, movie_name, cinema_name, screen_no, box_office.date,start_time,running_time, amount from reservation natural join box_office natural join movie natural join cinema natural join screen natural join payment WHERE member_id = (SELECT member_id FROM member WHERE username = ?) and reservatioN_status = 'R' ;";
     connection.query(sql,[login.username],function(err,results,fields){
         res.json({
             type : "reservation_list",
@@ -740,6 +742,27 @@ router.get('/api/reserv',function(req,res,next){
         });
     });
 })
+
+router.delete('/api/reserv', function(req,res,next){
+    const reservation_id = req.body.reservation_id;
+    if(reservation_id){  
+        const sql = `UPDATE \`cenema\`.\`reservation\` SET \`reservation_status\` = 'C' WHERE (\`reservation_id\` = \'${reservation_id}\');`
+        connection.query(sql,function(err,results,fields){
+            if(err){
+                res.json({
+                    type : "reservation_cancel"
+                });
+            }
+            else {
+                res.json({
+                    type : "reservation_cancel",
+                    reservation_id : reservation_id
+                });
+            }
+        });
+    }
+
+});
 
 
 router.get('/payment',function(req,res,next){
@@ -751,12 +774,12 @@ router.get('/payment',function(req,res,next){
 
 
 router.get('/suggestion', function (req, res) {
-    var sql = 'SELECT * FROM suggestion';
+    var sql = 'SELECT * FROM suggestion natural join member;';
     connection.query(sql, function (error, results, fields) {
         if (req.session.user) {
             res.render('suggestion', {
                 logined: req.session.user.logined,
-                username: req.session.user.user_name,
+                username: req.session.user.username,
                 results
             });
         }
@@ -774,7 +797,7 @@ router.get('/suggestion_insert', function (req, res) {
     if (req.session.user) {
         res.render('suggestion_insert', {
             logined: req.session.user.logined,
-            username: req.session.user.user_name
+            username: req.session.user.username
         });
     }
     else {
@@ -784,8 +807,8 @@ router.get('/suggestion_insert', function (req, res) {
 
 router.get('/suggestion/:suggestion_id', function (req, res) {
     var suggestion_id = req.url.split("/")[2];
-    var sql1 = 'SELECT * FROM suggestion WHERE suggestion_id = ?; ';
-    var sql2 = 'SELECT * FROM comment WHERE suggestion_id = ?; ';
+    var sql1 = 'SELECT * FROM suggestion natural join member WHERE suggestion_id = ?; ';
+    var sql2 = 'SELECT * FROM comment natural join member WHERE suggestion_id = ?; ';
 
     connection.query('UPDATE suggestion SET view = view + 1 WHERE suggestion_id = ?', [suggestion_id]);
     connection.query(sql1 + sql2, [suggestion_id, suggestion_id], function(error, results, fields){
@@ -814,28 +837,41 @@ router.get('/suggestion/:suggestion_id', function (req, res) {
 
 
 router.post('/', function(req, res){
-    var username = req.body.username;
-    var password = req.body.password;
+    console.log(login.logined);  
+    if(login.logined== false){
+        var username = req.body.username;
+        var password = req.body.password;
 
-    var sql = 'SELECT * FROM member WHERE username = ?';
-    connection.query(sql, [username], function (error, results, fields) {
-        if (results.length == 0) {
-            res.render('login', { alert: true });
-        } else {
-            var db_pwd = results[0].password;
+        var sql = 'SELECT * FROM member WHERE username = ?';
+        connection.query(sql, [username], function (error, results, fields) {
+            if (results.length == 0) {
+                res.render('login', { alert: true });
+            } else {
+                var db_pwd = results[0].password;
 
-            if (password == db_pwd) {
-                //session
-                req.session.user = {
-                    logined: true,
-                    username: results[0].username
+                if (password == db_pwd) {
+                    //session
+                    req.session.user = {
+                        logined: true,
+                        username: results[0].username,
+                        member_id:results[0].member_id
+                    }
                 }
-
-        
+                    res.redirect('/');
             }
-                res.redirect('/');
+        });
+    }else {
+
+        req.session.user = {
+            logined : false,
+            username : "",
+            member_id : -1
         }
-    });
+
+        res.json({
+            type: "logout"
+        })
+    }
 });
 
 router.post('/reserv/:state', function (req, res) {
@@ -875,12 +911,15 @@ router.post('/reserv_seat/:box_office_id', function (req, res) {
 
 
 router.post('/register', function (req, res) {
+    console.log(req.body);
     var username = req.body.username;
     var password = req.body.password;
 	var pwdconf = req.body.pwdconf;
 	var birth = req.body.birth;
 	var sex = req.body.sex;
 	var address = req.body.address;
+    var phone_number = req.body.phone_number;
+    var email_address = req.body.email;
 
     if (password !== pwdconf) {
         res.redirect('register');
@@ -889,7 +928,10 @@ router.post('/register', function (req, res) {
         var sql = 'SELECT * FROM member WHERE username = ?';
         connection.query(sql, [username], function (error, results, fields) {
             if (results.length == 0) {
-                connection.query("INSERT INTO member(username, password, birth, sex, address) VALUES(?,?,?,?,?)", [username, password, birth, sex, address], function () {
+                connection.query(`INSERT INTO \`cenema\`.\`member\` ( \`username\`, \`password\`, \`birth\`, \`sex\`,\ \`address\`, \`phone_number\`, \`email_address\`) VALUES ( \'${username}\', \'${password}\', \'${birth}\', \'${sex}\', \'${address}\', \'${phone_number}\', \'${email_address}\');`,function (err){
+                    if(err){
+                        console.log("error");
+                    }
                     res.redirect('login');
                 });
             }
@@ -960,8 +1002,8 @@ router.post('/suggestion_insert', function (req, res) {
     
     console.log(req.body);
 
-    var sql = 'INSERT INTO suggestion(title, content, writer_name) VALUES (?,?,?)';
-    connection.query(sql, [title, content, writer_name], function (error, results, fields) {
+    var sql = `INSERT INTO \`cenema\`.\`suggestion\` ( \`title\`, \`content\`, \`member_id\`) VALUES ( \'${title}\', \'${content}\', \'${login.member_id}\')`;
+    connection.query(sql, function(error, results, fields) {
         res.redirect('/suggestion');
     });
 });
@@ -970,7 +1012,7 @@ router.post('/suggestion/:suggestion_id', function(req, res){
     if(req.session.user){
         var suggestion_id = req.url.split("/")[2];
         var comment = req.body.comment;
-        var writer_name = req.session.user.user_name;
+        var writer_name = req.session.user.username;
         var sql = `INSERT INTO comment(suggestion_id, comment, writer_name) VALUES (?,?,?) ;`
         connection.query(sql, [suggestion_id, comment, writer_name], function(error, results, fields){
             res.redirect(`/suggestion/${suggestion_id}`);

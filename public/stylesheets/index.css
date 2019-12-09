@@ -9,7 +9,10 @@ body {
 	width: 100vw;
 	height: auto;
 	overflow-x: hidden;
+	background: url("/images/background.svg");
 	background-color: #1f1f1f;
+	background-size: cover;
+	background-repeat: repeat-y;
 	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -31,7 +34,7 @@ a {
 	width: 100vw;
 	height: calc(100vh/3);
 	box-sizing: border-box;
-	background-color: #1f1f1f;
+	/*background-color: #1f1f1f;*/
 	padding:  0 10vw;
 
 	/*Animation*/
@@ -148,25 +151,8 @@ transition-timing-function: ease-in;
 }
 
 
-#Content.menuOn > div{
-	width: 100vw;
-
-	transition-property: width;
-	transition-duration: 0.5s;
-	transition-timing-function:ease-in;
-}
-
-
-#Content.menuOn, #Content.menuOn > div{
-	width: calc(100vw/3*2 - 10vw);
-}
-
 body::-webkit-scrollbar {
   width:0;
   height: 0;
 }
 
-/*#content.menuOn > *{
-	width: calc(100vw/3*2);
-}
-*/

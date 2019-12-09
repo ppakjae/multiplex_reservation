@@ -2,12 +2,16 @@
 .suggestion, .suggestion_insert {
     /*Layout*/
     position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     top: calc(100vh/4);
     /*Apperance*/
     content : ' ';
     width: 100vw;
     min-height: calc(100vh/3*2);
-    /*padding : 0 10vw;	*/
+    padding : 5vh 0;	
     /*margin : 0 0 10vh;*/
     overflow : hidden;
 
@@ -19,8 +23,11 @@
 }
 
 .suggestion table {
-    width: 100%;
+    width: 80vw;
     border-collapse: collapse;
+    border-top : 2px solid black;
+    border-bottom : 2px solid black;
+    margin: 5vh 0;
 }
 
 .suggestion tr {
@@ -52,7 +59,7 @@
 .suggestion a button {
     float: right;
     border: none;
-    width: 10%;
+    width: 10vw;
     height: 40px;
     border-radius: 5px;
     font-size: 15px;
@@ -64,15 +71,26 @@
 /*--------------------- suggestion_insert  -------------------------------*/
 .suggestion_insert{
     /*Layout*/
+
     position: absolute;
     top: calc(100vh/4);
     /*Apperance*/
     content : ' ';
     width: 100vw;
+    /*padding: 10vh 10vw;*/
     min-height: calc(100vh/3*2);
     /*padding : 0 10vw;	*/
     /*margin : 0 0 10vh;*/
     overflow : hidden;
+}
+
+.suggestion_insert form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-top : 2px solid black;
+    box-sizing: border-box;
+    padding-top : 5vh;
 }
 
 .suggestion_insert input,
@@ -82,24 +100,25 @@
     border: 1px solid grey;
     padding-left: 3%;
     font-size: 15px; 
-    margin: 20px 0;
+    box-sizing: border-box;
+    margin: 4vh 0;
 }
 
 .suggestion_insert input:first-child{
-    width: 65%;
+    width: 65vw;
     height: 40px;
 }
 
 .suggestion_insert textarea{
     width: 100%;
-    height: 500px;
+    height: 20vh;
     padding-top: 3%;
 }
 
 .suggestion_insert input:last-child{
     padding: 0;
     border: none;
-    width: 10%;
+    width: 10vw;
     height: 40px;
     border-radius: 5px;
     font-size: 15px;
@@ -113,7 +132,8 @@
     top: calc(100vh/4);
     /*Apperance*/
     content : ' ';
-    width: 100vw;
+    width: 80vw;
+    padding: 10vh 10vw;
     min-height: calc(100vh/3*2);
     /*padding : 0 10vw;	*/
     /*margin : 0 0 10vh;*/
@@ -124,34 +144,55 @@
 }
 
 .suggestion_id h2 {
-    margin: 10px 0 30px 0;
-    margin-left: 3%;
+    margin: 0.5rem 0 1rem 0;
+    /*margin-left: 3%;*/
+    font-size : 1.5rem;
+    border-top: 2px solid black;
+    padding-top: 1rem;
 }
 
-.suggestion_id > p:nth-child(2) {
-    margin-left: 3%;
-    font-weight: bold;
+.suggestion_id h2 span {
+    padding-left: 0.5rem;
+    padding-right: 1.5rem;
+    color : #333333;
 }
 
-.suggestion_id > p:nth-child(2) span{
-    float: right;
-    margin-right: 3%;
-    color : gray;
+.suggestion_id #header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+   border : none;
+   list-style: none; 
+   text-decoration: none;
+   margin: 0;
+   padding: 0 1rem;
 }
 
 .suggestion_id > p:nth-child(3) {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-weight: bold;
+
+    padding: 0 0.5rem 0.5rem;
+    border-bottom:  1px solid black;
+}
+
+
+.suggestion_id > p:nth-child(4) {
     clear: right;
     margin: 0 3%;
     text-align: justify;
     margin-top: 30px;
-    min-height: 500px;
+    min-height: 20vh;
 }
 
 .suggestion_id > div {
     font-size: 15px;
     border : 1px solid rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
     margin: 20px auto;
-    padding: 3%;
+    padding: 3vh;
     border-radius: 5px; 
 }
 
@@ -160,6 +201,7 @@
 }
 
 .suggestion_id .comment {
+    box-sizing: border-box;
     padding: 1%;
     border-bottom : 1px solid darkgray;
     width: 100%;
@@ -220,16 +262,17 @@
 
 .suggestion_id input[type=submit]{
     color: dodgerblue;
+    background-color: #f0e23c;
     margin-top : 10px;
-    font-size: 13px;
+    font-size: 1rem;
     text-align: center;
     border: none;
-    width: 100%;
-    height: 30px;
+    width: 20vw;
+    height:5vh;
     border-radius: 5px;
 }
 
 .suggestion_id input[type=submit]:hover{
-    background: darkgray;
+    background: #f0e23c;
     color: white;
 }
