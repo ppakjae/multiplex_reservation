@@ -102,17 +102,39 @@
     <div class="modal-content">
       <span class="close">&times;</span>
       <form method="post" action="/admin/info">
-        <label for="employee_name"> 성명 </label>
-        <input id="employee_name" type="text" name="employee_name" />
-        <label for="phone_number"> 전화번호 </label>
-        <input id="phone_number" type="text" name="phone_number" placeholder="000-0000-0000" />
-        <label for="join_date"> 입사일 </label>
-        <input id="join_date" type="text" name="join_date" placeholder="YYYY-MM-DD" />
-        <label for="cinema_id"> 지점 </label>
-        <input id="cinema_id" type="text" name="cinema_id" />
-        <label for="employee_rank"> 직위 </label>
-        <input id="employee_rank" type="text" name="employee_rank" />
-        <input type="submit" value="저장" />
+        <div>
+          <label for="employee_name"> 성명 </label>
+          <div id="employee_name">
+              <input id="employee_name" type="text" name="employee_name" />
+          </div>
+        </div>
+        <div>
+            <label for="phone_number"> 전화번호 </label>
+            <div id="phone_number">
+            <input id="phone_number" type="text" name="phone_number" placeholder="000-0000-0000" />
+            </div>
+        </div>
+        <div id="join_date">
+          <label for="join_date"> 입사일 </label>
+          <div id="join_date">
+            <input id="join_date" type="text" name="join_date" placeholder="YYYY-MM-DD" />
+          </div>
+        </div>
+        <div>
+            <label for="cinema_id"> 지점 </label>
+            <div id="cinema_id">
+              <input id="cinema_id" type="text" name="cinema_id" />
+           </div>
+        </div>
+        <div>
+            <label for="employee_rank"> 직위 </label>
+            <div id="employee_rank">
+              <input id="employee_rank" type="text" name="employee_rank" />
+            </div>
+        </div>
+        <div id="save">
+          <input type="submit" value="저장" />
+        </div>
       </form>
     </div>
   </div>

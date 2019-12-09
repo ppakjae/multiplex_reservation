@@ -80,6 +80,90 @@
   color: #e6e9eea9;
 }
 
+#myModal > input[type=submit] {
+    background: none;
+    border: 1px solid ;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 0.6em;
+    font-weight: bold;
+    margin-top: 0.6em;
+    margin-bottom: 0.6em;
+    padding: 0.6em 1em;
+}
+
+#employee_name > input[type=text] {
+    background: none;
+    border: 1px solid #002b36;
+    border-radius: 5px;
+    color: #002b36;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-top: 0.6em;
+    margin-bottom: 0.6em;
+    padding: 0.6em 1em;
+}
+
+#phone_number > input[type=text] {
+    background: none;
+    border: 1px solid #002b36;
+    border-radius: 5px;
+    color: #002b36;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-top: 0.6em;
+    margin-bottom: 0.6em;
+    padding: 0.6em 1em;
+}
+
+#join_date > input[type=text] {
+    background: none;
+    border: 1px solid #002b36;
+    border-radius: 5px;
+    color: #002b36;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-top: 0.6em;
+    margin-bottom: 0.6em;
+    padding: 0.6em 1em;
+}
+
+#cinema_id > input[type=text] {
+    background: none;
+    border: 1px solid #002b36;
+    border-radius: 5px;
+    color: #002b36;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-top: 0.6em;
+    margin-bottom: 0.6em;
+    padding: 0.6em 1em;
+}
+
+#employee_rank > input[type=text] {
+    background: none;
+    border: 1px solid #002b36;
+    border-radius: 5px;
+    color: #002b36;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-top: 0.6em;
+    margin-bottom: 0.6em;
+    padding: 0.6em 1em;
+}
+
+#save > input[type=submit]{
+    background: none;
+    border: 1px solid #002b36;
+    border-radius: 5px;
+    color: #002b36;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-top: 0.6em;
+    margin-bottom: 0.6em;
+    padding: 0.6em 1em;
+}
+
 /* -------------------------- info ---------------------------- */
 
 /* The Modal (background) */
@@ -94,15 +178,16 @@
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    color: #002b36;
 }
 
 /* Modal Content/Box */
 .modal-content {
-    background-color: #fefefe;
+    background-color: white;
     margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
-    width: 50%; /* Could be more or less, depending on screen size */                          
+    width: 20%; /* Could be more or less, depending on screen size */                          
 }
 /* The Close Button */
 .close {
@@ -126,14 +211,19 @@
     display: block;
     font-size: 0.1em;
     font-weight: bold;
-    margin: 0.05em auto;
+    margin: 0.05em;
     padding: 0.5em 1em;
-    position: relative;
+    right: 5%;
   }
 
 .tg-mvid > button:hover {
     color: #002b36;
     background-color: #93a1a1;
+}
+
+.tg-valu{
+    margin: auto;
+    text-align: center;
 }
 
 /* -------------------------- sales ---------------------------- */
