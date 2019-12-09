@@ -17,9 +17,14 @@ req.onreadystatechange = function(e){
 				} else if(req.response.type == "reservation_list"){
 					reservation_list =req.response.results;
 					make_reservationList();
-					console.log("?");
 				} else if(req.response.type == "find"){
 					console.log(req.response);
+				}else if(req.response.type == "logout"){
+					location.reload();
+				}else if(req.response.type == "reservation_cancel"){
+					// remove_reservationList();
+					// make_reservationRequest();
+					location.reload();
 				}
 			}
 	}

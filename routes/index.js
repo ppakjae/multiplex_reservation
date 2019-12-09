@@ -732,7 +732,7 @@ router.get('/reserv_seat/:box_office_id', function (req, res) {
 
 
 router.get('/api/reserv',function(req,res,next){
-    const sql = "SELECT reservation_id, movie_img, movie_name, cinema_name, screen_no, box_office.date,start_time,running_time, amount from reservation natural join box_office natural join movie natural join cinema natural join screen natural join payment WHERE member_id = (SELECT member_id FROM member WHERE username = ?) ;";
+    const sql = "SELECT reservation_id, movie_img, movie_name, cinema_name, screen_no, box_office.date,start_time,running_time, amount from reservation natural join box_office natural join movie natural join cinema natural join screen natural join payment WHERE member_id = (SELECT member_id FROM member WHERE username = ?) and reservatioN_status = 'R' ;";
     connection.query(sql,[login.username],function(err,results,fields){
         res.json({
             type : "reservation_list",
@@ -740,6 +740,26 @@ router.get('/api/reserv',function(req,res,next){
         });
     });
 })
+
+router.delete('/api/reserv', function(req,res,next){
+    const reservation_id = req.body.reservation_id;
+    if(reservation_id){  
+        const sql = `UPDATE \`cenema\`.\`reservation\` SET \`reservation_status\` = 'C' WHERE (\`reservation_id\` = \'${reservation_id}\');`
+        connection.query(sql,function(err,results,fields){
+            if(err){
+                res.json({
+                    type : "reservation_cancel"
+                });
+            }
+            else {
+                res.json({
+                    type : "reservation_cancel"
+                });
+            }
+        });
+    }
+
+});
 
 
 router.get('/payment',function(req,res,next){
@@ -814,28 +834,39 @@ router.get('/suggestion/:suggestion_id', function (req, res) {
 
 
 router.post('/', function(req, res){
-    var username = req.body.username;
-    var password = req.body.password;
+    console.log(login.logined);  
+    if(login.logined== false){
+        var username = req.body.username;
+        var password = req.body.password;
 
-    var sql = 'SELECT * FROM member WHERE username = ?';
-    connection.query(sql, [username], function (error, results, fields) {
-        if (results.length == 0) {
-            res.render('login', { alert: true });
-        } else {
-            var db_pwd = results[0].password;
+        var sql = 'SELECT * FROM member WHERE username = ?';
+        connection.query(sql, [username], function (error, results, fields) {
+            if (results.length == 0) {
+                res.render('login', { alert: true });
+            } else {
+                var db_pwd = results[0].password;
 
-            if (password == db_pwd) {
-                //session
-                req.session.user = {
-                    logined: true,
-                    username: results[0].username
+                if (password == db_pwd) {
+                    //session
+                    req.session.user = {
+                        logined: true,
+                        username: results[0].username
+                    }
                 }
-
-        
+                    res.redirect('/');
             }
-                res.redirect('/');
+        });
+    }else {
+
+        req.session.user = {
+            logined : false,
+            username : ""
         }
-    });
+
+        res.json({
+            type: "logout"
+        })
+    }
 });
 
 router.post('/reserv/:state', function (req, res) {
