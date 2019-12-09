@@ -17,7 +17,8 @@ var connection = mysql.createConnection({
 
 var login = {
     logined : false,
-    username : ""
+    username : "",
+    member_id : -1
 }
 
 
@@ -55,6 +56,7 @@ router.use(function(req,res,next){
     if (req.session.user) {
     	login.logined = req.session.user.logined;
     	login.username = req.session.user.username;
+        login.member_id = req.session.user.member_id;
     }
 	next();	
 });
@@ -851,7 +853,8 @@ router.post('/', function(req, res){
                     //session
                     req.session.user = {
                         logined: true,
-                        username: results[0].username
+                        username: results[0].username,
+                        member_id:results[0].member_id
                     }
                 }
                     res.redirect('/');
@@ -861,7 +864,8 @@ router.post('/', function(req, res){
 
         req.session.user = {
             logined : false,
-            username : ""
+            username : "",
+            member_id : -1
         }
 
         res.json({
@@ -992,8 +996,8 @@ router.post('/suggestion_insert', function (req, res) {
     
     console.log(req.body);
 
-    var sql = 'INSERT INTO suggestion(title, content, writer_name) VALUES (?,?,?)';
-    connection.query(sql, [title, content, writer_name], function (error, results, fields) {
+    var sql = `INSERT INTO \`cenema\`.\`suggestion\` ( \`title\`, \`content\`, \`member_id\`) VALUES ( \'${title}\', \'${content}\', \'${login.member_id}\')`;
+    connection.query(sql, function(error, results, fields) {
         res.redirect('/suggestion');
     });
 });

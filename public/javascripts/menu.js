@@ -147,7 +147,6 @@ const make_reservationList = function(){
 }
 
 const remove_item = function (){
-	this.classList.add('removed');
 	console.log("success");
 }
 
