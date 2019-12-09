@@ -13,25 +13,36 @@
 	<div id="Content">
 		<div id="Login">
 			<h2>Sign Up</h2>
-			<form  class ="Login-form"method="post" action='/register'>
-				<label for ="id">ID 
-				<input id="id" type="text" name="username"/> 
-				</label>
-				<label for ="password">Password 
-				<input id = "password" name="password" type ="password"/>
-				</label>
-				<label for ="pwdcon">Password Confirm 
-				<input id = "pwdconf" name="pwdconf" type ="password"/>
-				</label>
-				<label for ="birth">BIRTH 
-				<input id="birth" type="text" name="birth"/> 
-				</label>
-				<label for ="sex">SEX 
-				<input id = "sex" name="sex"/>
-				</label>
-				<label for ="id">ADDRESS 
-				<input id="address" type="text" name="address"/> 
-				</label>
+			<form  class ="Login-form sign-up"method="post" action='/register'>
+				<div>
+					<label for ="id">ID 
+					<input id="id" type="text" name="username"/> 
+					</label>
+					<label >Sex
+					<div>
+						<label class="radio"><input  type="radio" class = "sex" name="sex" value="M" />M</label>
+						<label class="radio"><input  type="radio" class = "sex" name="sex" value="W" />W</label>
+					</div>
+					</label>
+					<label for ="password">Password 
+					<input id = "password" name="password" type ="password"/>
+					</label>
+					<label for ="pwdcon">Password Confirm 
+					<input id = "pwdconf" name="pwdconf" type ="password"/>
+					</label>
+					<label for ="birth">Birth Date 
+					<input id="birth" type="text" name="birth"/> 
+					</label>
+					<label for ="id">Address 
+					<input id="address" type="text" name="address"/> 
+					</label>
+					<label for ="id">Phone number 
+					<input id="phone_number" type="text" name="phone_number"/> 
+					</label>
+					<label for ="id">Email address
+					<input id="email" type="text" name="email"/> 
+					</label>
+				</div>
 				<input type="submit" value="SIGN UP"/>
 			</form>
 		</div>

@@ -50,31 +50,32 @@
 	<a href="#" class="button">급 여</a>
 </div>
 
+<%if(results.length!=0){
+  var birth = JSON.stringify(results[0].birth);
+    birth = birth.substring(1,11).split("-");%>
 <div style="margin-left:5em;">
 	<table class="tg1" width="30%" style="table-layout:fixed">
 	  <tr>
 	    <th class="tg-name">이름</th>
-	    <th class="tg-name"></th>
+	    <th class="tg-name"><%=results[0].employee_name%></th>
 	    <th class="tg-time" rowspan="2">근무시간</th>
 	    <th class="tg-time" rowspan="2"></th>
 	  </tr>
 	  <tr>
 	    <th class="tg-name">생년월일</td>
-	    <th class="tg-name"></td>
+	    <th class="tg-name"><%=`${birth[0]}/${birth[1]}/${birth[2]}`%></td>
   </tr>
 </table>
 </div>
+<%}%>
 
 
-<form>
+<form method="POST" action="/admin/salary">
   <h1 style="color:white;font-size:15px">
-  <input type="radio" name="check" value="ID" checked>
-  ID
-  <input type="radio" name="check" value="성명">
-  이름
-  <input type="text" name="inputbar" size="12">
-  <input type="submit" value="조회">
-</h1>
+    <label for="employee_id"> 직원 ID </label>
+    <input id="employee_id" type="text" name="employee_id" />
+    <input type="submit" value="조회">
+  </h1>
 </form>
 
 
@@ -89,20 +90,24 @@
 		<th class="tg-part">일 급여액</th>
   </tr>
 
-  <% results1.forEach(function(row){ 
+  <% 
+  if(results.length!=0){
+    results.forEach(function(row){ 
     var date = JSON.stringify(row.date);
     date = date.substring(1,11).split("-");
     var wage = (7 + 1)*9350; 
     %>
   <tr>
     <td class="tg-valu"><%=`${date[0]}/${date[1]}/${date[2]}`%></td>
-    <td class="tg-valu"><%=row.time%></td>
-    <td class="tg-valu"><%=row.time%></td>
+    <td class="tg-valu"><%=row.atime%></td>
+    <td class="tg-valu"><%=row.qtime%></td>
     <td class="tg-valu">7</td>
     <td class="tg-valu">1</td>
 		<td class="tg-valu"><%=wage%></td>
   </tr>
-  <%});%>
+  
+<%});%>
+<%}%>
 </table>
 </div>
 </body>

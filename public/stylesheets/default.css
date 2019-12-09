@@ -473,8 +473,8 @@ ul.contact li a.icon-rss:before
 	#banner-wrapper
 {
 	overflow: hidden;
-	padding: 3em 0em;
-	background: white;
+	padding: 10em 0em;
+	background: #2C383B;
 }
 
 #banner
@@ -705,10 +705,10 @@ ul.contact li a.icon-rss:before
 	#header-featured
 	{
 		height: 30em;
-
-		background-image: url(images/banner.jpeg);
+		background-image: url(../images/banner.jpeg);
 		background-position: center;
 		background-size: cover;
+		margin-top: 10%;
 	}
 
 

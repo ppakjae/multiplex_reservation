@@ -114,32 +114,38 @@
         }
     </style>
     <div style="margin-left:5em;">
-        <table class="tg" width="30%" style="table-layout:fixed">
-            <tr>
-                <th class="tg-name">이름</th>
-                <th class="tg-name"></th>
-                <th class="tg-time" rowspan="2">근무시간</th>
-                <th class="tg-time" rowspan="2"></th>
-            </tr>
-            <tr>
-                <th class="tg-name">생년월일</td>
-                <th class="tg-name">
-                    </td>
-            </tr>
-        </table>
+        <button id="myBtn">스케쥴 등록</button>
 
-        <form>
-            <h1 style="color:white;font-size:15px">
-                <input type="radio" name="check" value="ID" checked>
-                ID
-                <input type="radio" name="check" value="성명">
-                이름
-                <input type="text" name="inputbar" size="12">
-                <input type="submit" value="조회">
-            </h1>
-        </form>
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <form method="post" action="/admin/info">
+                    <label for="employee_name"> 성명 </label>
+                    <input id="employee_name" type="text" name="employee_name" />
+                    <label for="phone_number"> 전화번호 </label>
+                    <input id="phone_number" type="text" name="phone_number" placeholder="000-0000-0000" />
+                    <label for="join_date"> 입사일 </label>
+                    <input id="join_date" type="text" name="join_date" placeholder="YYYY-MM-DD" />
+                    <label for="cinema_id"> 지점 </label>
+                    <input id="cinema_id" type="text" name="cinema_id" />
+                    <label for="employee_rank"> 직위 </label>
+                    <input id="employee_rank" type="text" name="employee_rank" />
+                    <input type="submit" value="저장" />
+                </form>
+            </div>
+        </div>
+
 
     </div>
+
+    <div id="scheduleModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            afdsklj;afj;
+        </div>
+    </div>
+
+
     <!-- 달력 -->
     <div class="cal_top">
         <a href="#" id="movePrevMonth" style="color:white"><span id="prevMonth" class="cal_tit"
@@ -151,6 +157,28 @@
     </div>
     <div id="cal_tab" class="cal">
     </div>
+
+    <script type="text/javascript">
+        var modal = document.getElementById('myModal');
+        var schedulemodal = document.getElementById('scheduleModal');
+        var btn = document.getElementById("myBtn");
+        var span = document.getElementsByClassName("close")[0];
+        btn.onclick = function () {
+          modal.style.display = "block";
+        }
+      
+        span.onclick = function () {
+          modal.style.display = "none";
+        }
+      
+        window.onclick = function (event) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+          } else if(event.target == schedulemodal){
+            schedulemodal.style.display = "none";
+          }
+        }
+      </script>
 
     <script type="text/javascript">
 
@@ -169,8 +197,21 @@
             drawSche();
             $("#movePrevMonth").on("click", function () { movePrevMonth(); });
             $("#moveNextMonth").on("click", function () { moveNextMonth(); });
+            $(".cal-day-td").on("click", function () { 
+                var i = $(this).index();    
+                console.log(i);
+                insertSchedule(); 
+            });
 
         });
+
+
+
+        function insertSchedule() {
+            var schedulemodal = document.getElementById('scheduleModal');
+            
+            schedulemodal.style.display = "block";
+        }
 
         //Calendar 그리기
         function drawCalendar() {
@@ -180,7 +221,7 @@
             for (var i = 0; i < 6; i++) {
                 setTableHTML += '<tr height="70">';
                 for (var j = 0; j < 7; j++) {
-                    setTableHTML += '<td style="text-overflow:ellipsis;overflow:hidden;white-space:nowrap">';
+                    setTableHTML += '<td class="cal-day-td" style="text-overflow:ellipsis;overflow:hidden;white-space:nowrap">';
                     setTableHTML += '    <div class="cal-day"></div>';
                     setTableHTML += '    <div class="cal-schedule"></div>';
                     setTableHTML += '</td>';
@@ -278,6 +319,7 @@
                 }
         }
 
+
         // results.forEach(function (row) {
         //     var date = JSON.stringify(row.join_date);
         //     date = date.substring(1, 11).split("-");
@@ -308,6 +350,8 @@
                 }
             }
         }
+
+
 
     </script>
 

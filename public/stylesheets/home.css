@@ -55,13 +55,22 @@
 	/*Apperance*/
 	margin-left: 40vw;
 	padding-left :0;
-	width : 30vw;
+	width : 22.5vw;
 	transform : translate(-50%,0);
 	list-style: none;
 	text-decoration: none;
 	font-weight: bold;
+
 }
 
+
+#movie-filter > li {
+	transition-property: color;
+	transition-duration : 0.3s;
+	transition-timing-function: ease-in;
+	cursor :pointer;
+	color : rgba(255,255,255,0.8);
+}
 #movie-filter > li:hover {
 	color: red;
 }

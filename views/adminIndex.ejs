@@ -8,9 +8,9 @@
 	<meta name="keywords" content="" />
 	<meta name="description" content="" />
 	<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
-	<link href="\stylesheets\default.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="\stylesheets\fonts.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="\stylesheets\admin.css" rel="stylesheet" type="text/css" />
+	<link href="/stylesheets/default.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="/stylesheets/fonts.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="/stylesheets/admin.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -19,24 +19,27 @@
 			<div id="logo">
 				<h1><a href="/admin">직원 관리 시스템</a></h1>
 				<span>By CENEMA</span>
+				<%if(logined == false){%>
+				<button style="float: right;"><a href="/admin/login">SIGN IN</a></button>
+				<%}%>
 			</div>
+		
+	<%if(logined){%>
+		<div id="menu">
+			<ul>
+				<li><a href="/admin/info" accesskey="1" title="">사원정보</a></li>
+				<li><a href="/admin/sales" accesskey="2" title="">매 출</a></li>
+				<li><a href="/admin/salary" accesskey="3" title="">급 여</a></li>
+				<li><a href="/admin/rewards" accesskey="4" title="">근 태</a></li>
+				<li><a href="/admin/vacation" accesskey="5" title="">휴 가</a></li>
+			</ul>
 		</div>
-	</div>
-
-	<div id="menu">
-		<ul>
-			<li><a href="/admin/info" accesskey="1" title="">사원정보</a></li>
-			<li><a href="/admin/sales" accesskey="2" title="">매 출</a></li>
-			<li><a href="/admin/salary" accesskey="3" title="">급 여</a></li>
-			<li><a href="/admin/rewards" accesskey="4" title="">근 태</a></li>
-			<li><a href="/admin/vacation" accesskey="5" title="">휴 가</a></li>
-		</ul>
-	</div>
-	</div>
-	</div>
-
+	<%}%>
+</div>
+</div>
+		
 	<div id="header-featured"> </div>
-	<div id="banner-wrapper">
+	<div id="banner-wrapper"> </div>
 </body>
 
 </html>
