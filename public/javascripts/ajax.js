@@ -20,6 +20,8 @@ req.onreadystatechange = function(e){
 					console.log("?");
 				} else if(req.response.type == "find"){
 					console.log(req.response);
+				}else if(req.response.type == "logout"){
+					location.reload();
 				}
 			}
 	}

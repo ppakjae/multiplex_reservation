@@ -198,7 +198,13 @@ const toggle_cupponList = function(){
 	}
 };
 
+const logout = function(){
+	req.open("POST", "/");
+	req.send(null);
+}
+
 
 Reservation_list.addEventListener('click',toggle_reservationList.bind(Reservation_list_container));
 Cuppon_list.addEventListener('click',toggle_cupponList.bind(Cuppon_list_container));
 
+document.querySelector("#logout").addEventListener('click',logout);

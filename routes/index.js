@@ -814,28 +814,39 @@ router.get('/suggestion/:suggestion_id', function (req, res) {
 
 
 router.post('/', function(req, res){
-    var username = req.body.username;
-    var password = req.body.password;
+    console.log(login.logined);  
+    if(login.logined== false){
+        var username = req.body.username;
+        var password = req.body.password;
 
-    var sql = 'SELECT * FROM member WHERE username = ?';
-    connection.query(sql, [username], function (error, results, fields) {
-        if (results.length == 0) {
-            res.render('login', { alert: true });
-        } else {
-            var db_pwd = results[0].password;
+        var sql = 'SELECT * FROM member WHERE username = ?';
+        connection.query(sql, [username], function (error, results, fields) {
+            if (results.length == 0) {
+                res.render('login', { alert: true });
+            } else {
+                var db_pwd = results[0].password;
 
-            if (password == db_pwd) {
-                //session
-                req.session.user = {
-                    logined: true,
-                    username: results[0].username
+                if (password == db_pwd) {
+                    //session
+                    req.session.user = {
+                        logined: true,
+                        username: results[0].username
+                    }
                 }
-
-        
+                    res.redirect('/');
             }
-                res.redirect('/');
+        });
+    }else {
+
+        req.session.user = {
+            logined : false,
+            username : ""
         }
-    });
+
+        res.json({
+            type: "logout"
+        })
+    }
 });
 
 router.post('/reserv/:state', function (req, res) {
