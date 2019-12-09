@@ -779,7 +779,7 @@ router.get('/suggestion', function (req, res) {
         if (req.session.user) {
             res.render('suggestion', {
                 logined: req.session.user.logined,
-                username: req.session.user.user_name,
+                username: req.session.user.username,
                 results
             });
         }
@@ -797,7 +797,7 @@ router.get('/suggestion_insert', function (req, res) {
     if (req.session.user) {
         res.render('suggestion_insert', {
             logined: req.session.user.logined,
-            username: req.session.user.user_name
+            username: req.session.user.username
         });
     }
     else {
@@ -1006,7 +1006,7 @@ router.post('/suggestion/:suggestion_id', function(req, res){
     if(req.session.user){
         var suggestion_id = req.url.split("/")[2];
         var comment = req.body.comment;
-        var writer_name = req.session.user.user_name;
+        var writer_name = req.session.user.username;
         var sql = `INSERT INTO comment(suggestion_id, comment, writer_name) VALUES (?,?,?) ;`
         connection.query(sql, [suggestion_id, comment, writer_name], function(error, results, fields){
             res.redirect(`/suggestion/${suggestion_id}`);
