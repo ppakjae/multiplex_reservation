@@ -7,27 +7,11 @@
   </head>
 
   <body>
-  		<div id="Nav">
-  			<h1 id="logo">Cinema</h1>
-  			<div id="login">
-          <div id="user_container">   
-            <img src="https://www.booksie.com/files/profiles/22/mr-anonymous_230x230.png" /> 
-          <% if(logined) { %>
-              <h4 id="user_name"> <%=username%> </h4> 
-          <% } else { %>
-            <h4 id="user_name"> SIGN IN </h4> 
-          <% } %>            
-          </div> 
-          </div> 
-          <% if(logined) { %>
-            <div id="menu_icon"> 
-              <h4>menu</h4>
-            </div>
-          <% } %>
-      </div>
+          <% include nav %>
       
   
-      <section class="suggestion">
+      <section  class="suggestion">
+        <h2>건의사항 게시판</h2>
         <table>
             <thead>
                 <tr>
@@ -46,7 +30,7 @@
                 <tr>
                     <td><%= row.suggestion_id %></td>
                     <td><a href="suggestion/<%= row.suggestion_id %>"><%= row.title %></a></td>
-                    <td><%= row.writer_name %></td>
+                    <td><%= row.username %></td>
                     <td><%= `${date[0]}/${date[1]}/${date[2]}` %></td>
                     <td><%= row.view %></td>
                 </tr>
@@ -59,11 +43,8 @@
   		</div>
 
 
-		<div id="Menu" class="hidden">
-			<h2>예매내역</h2>
-			<h2>쿠폰</h2>
-			<h2><a href="/suggestion">건의</a></h2>
-		</div>
+      <% include menu %>
+      
   		<script type="text/javascript" src="/javascripts/index.js"></script>
   </body>
 </html>

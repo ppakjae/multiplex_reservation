@@ -107,6 +107,7 @@ const make_reservationList = function(){
 		payment_amount.appendChild(payment_amountText);
 		cancel.appendChild(cancelText);
 
+		newItem.value = reservation_list[i].reservation_id;
 		cancel.value = reservation_list[i].reservation_id;
 
 		newItem.classList.add('reservation_list_item');
@@ -140,16 +141,24 @@ const make_reservationList = function(){
 	Menu.style.height= body.scrollHeight+"px";
 
 	document.querySelectorAll(".cancel").forEach((element)=>{
-	element.addEventListener('click',cancel_Reservation.bind(element));
+		element.addEventListener('click',cancel_Reservation.bind(element));
+		element.addEventListener('DOMNodeRemoved',remove_item.bind(element));
 	});
 }
 
-const remove_reservationList = function(){
+const remove_item = function (){
+	console.log("success");
+}
+
+const remove_reservationList = function(reservation_id){
 	const Reservation_list_container = document.querySelector("#reservation_list_container");
 	const items = document.querySelectorAll(".reservation_list_item");
 
 	items.forEach((element)=>{
+		if(element.value == reservation_id){
 		Reservation_list_container.removeChild(element);
+		console.log("rmv")
+		}
 	})
 };
 

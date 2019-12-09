@@ -116,6 +116,7 @@
 	text-align: center;
 	transform: translateX(50%);
 	background-color: red;
+	cursor: pointer;
 }
 
 div.cancel > * {
@@ -160,4 +161,8 @@ div.cancel > * {
 	width:0;
 	height: 0;
 	opacity:0;
+}
+
+#logout {
+	cursor: pointer;
 }

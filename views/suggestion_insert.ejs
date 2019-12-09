@@ -7,26 +7,9 @@
   </head>
 
   <body>
-  		<div id="Nav">
-  			<h1 id="logo">Cinema</h1>
-  			<div id="login">
-          <div id="user_container">   
-            <img src="https://www.booksie.com/files/profiles/22/mr-anonymous_230x230.png" /> 
-          <% if(logined) { %>
-              <h4 id="user_name"> <%=username%> </h4> 
-          <% } else { %>
-            <h4 id="user_name"> SIGN IN </h4> 
-          <% } %>            
-          </div> 
-          </div> 
-          <% if(logined) { %>
-            <div id="menu_icon"> 
-              <h4>menu</h4>
-            </div>
-          <% } %>
-  		</div>
-      
+        <% include nav %> 
         <section class="suggestion_insert">
+          <h2>게시글 쓰기</h2>
           <form action="/suggestion_insert" method="post">
               <input type="text" name="title" placeholder="Title">
               <textarea name="content" placeholder="Write content"></textarea>
@@ -36,11 +19,8 @@
   		
   		</div>
 
-		<div id="Menu" class="hidden">
-			<h2>예매내역</h2>
-			<h2>쿠폰</h2>
-			<h2><a href="/suggestion">건의</a></h2>
-		</div>
+      <% include menu %>
+
   		<script type="text/javascript" src="/javascripts/index.js"></script>
   </body>
 </html>
