@@ -774,7 +774,7 @@ router.get('/payment',function(req,res,next){
 
 
 router.get('/suggestion', function (req, res) {
-    var sql = 'SELECT * FROM suggestion';
+    var sql = 'SELECT * FROM suggestion natural join member;';
     connection.query(sql, function (error, results, fields) {
         if (req.session.user) {
             res.render('suggestion', {
@@ -807,8 +807,8 @@ router.get('/suggestion_insert', function (req, res) {
 
 router.get('/suggestion/:suggestion_id', function (req, res) {
     var suggestion_id = req.url.split("/")[2];
-    var sql1 = 'SELECT * FROM suggestion WHERE suggestion_id = ?; ';
-    var sql2 = 'SELECT * FROM comment WHERE suggestion_id = ?; ';
+    var sql1 = 'SELECT * FROM suggestion natural join member WHERE suggestion_id = ?; ';
+    var sql2 = 'SELECT * FROM comment natural join member WHERE suggestion_id = ?; ';
 
     connection.query('UPDATE suggestion SET view = view + 1 WHERE suggestion_id = ?', [suggestion_id]);
     connection.query(sql1 + sql2, [suggestion_id, suggestion_id], function(error, results, fields){
@@ -911,12 +911,15 @@ router.post('/reserv_seat/:box_office_id', function (req, res) {
 
 
 router.post('/register', function (req, res) {
+    console.log(req.body);
     var username = req.body.username;
     var password = req.body.password;
 	var pwdconf = req.body.pwdconf;
 	var birth = req.body.birth;
 	var sex = req.body.sex;
 	var address = req.body.address;
+    var phone_number = req.body.phone_number;
+    var email_address = req.body.email;
 
     if (password !== pwdconf) {
         res.redirect('register');
@@ -925,7 +928,10 @@ router.post('/register', function (req, res) {
         var sql = 'SELECT * FROM member WHERE username = ?';
         connection.query(sql, [username], function (error, results, fields) {
             if (results.length == 0) {
-                connection.query("INSERT INTO member(username, password, birth, sex, address) VALUES(?,?,?,?,?)", [username, password, birth, sex, address], function () {
+                connection.query(`INSERT INTO \`cenema\`.\`member\` ( \`username\`, \`password\`, \`birth\`, \`sex\`,\ \`address\`, \`phone_number\`, \`email_address\`) VALUES ( \'${username}\', \'${password}\', \'${birth}\', \'${sex}\', \'${address}\', \'${phone_number}\', \'${email_address}\');`,function (err){
+                    if(err){
+                        console.log("error");
+                    }
                     res.redirect('login');
                 });
             }

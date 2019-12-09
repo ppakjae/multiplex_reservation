@@ -17,18 +17,18 @@
 			<h2>아이디 찾기</h2>
 			<form  class ="Login-form identification" method="post" action='/api/find?query=id'>
 				<div>
-					<h3>인증방법 선택</h3>
+					<h3>본인확인을 위한 인증방법을 선택해주세요.</h3>
 					<div id="identi_container">
 						<label><input type="radio" name="id_method" value="email">
 							<div  class="radio">
 								<p>이메일번호 입력하기</p>
-								<input type="text" name="email">
+								<input class= "radio" type="text" name="email">
 							</div>
 						</label>
 						<label ><input type="radio" name="id_method" value = "phone_number">
 							<div class="radio">
 								<p>휴대폰 번호 입력하기</p>
-								<input type="text" name="phone_number">
+								<input class="radio" type="text" name="phone_number">
 							</div>
 						</label>
 					</div>
@@ -39,18 +39,18 @@
 			<h2>비밀번호 찾기</h2>
 			<form  class ="Login-form identification" method="post" action='/api/find?query=pw'>
 				<div>
-					<h3>인증방법 선택</h3>
+				<h3>본인확인을 위한 인증방법을 선택해주세요.</h3>
 					<div id="identi_container">
 						<label ><input type="radio" name="pw_method" value="email">
 							<div class="radio">
 								<p>이메일번호 입력하기</p>
-								<input type="text" name="email">
+								<input calss="radio" type="text" name="email">
 							</div>
 						</label>
 						<label ><input type="radio" name="pw_method" value="phone_number">
 							<div class="radio">
 								<p>휴대폰 번호 입력하기</p>
-								<input type="text" name="phone_number">
+								<input class="radio" type="text" name="phone_number">
 							</div>
 						</label>
 					</div>

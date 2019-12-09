@@ -10,7 +10,8 @@
           <% include nav %>
       
   
-      <section class="suggestion">
+      <section  class="suggestion">
+        <h2>건의사항 게시판</h2>
         <table>
             <thead>
                 <tr>
@@ -29,7 +30,7 @@
                 <tr>
                     <td><%= row.suggestion_id %></td>
                     <td><a href="suggestion/<%= row.suggestion_id %>"><%= row.title %></a></td>
-                    <td><%= row.writer_name %></td>
+                    <td><%= row.username %></td>
                     <td><%= `${date[0]}/${date[1]}/${date[2]}` %></td>
                     <td><%= row.view %></td>
                 </tr>

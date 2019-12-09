@@ -13,9 +13,16 @@
         <% var date = JSON.stringify(results1[0].date);
            date = date.substring(1,11).split("-"); 
           %> 
-       <h2><%= results1[0].title %></h2>
+        <ul id="header"><li>
+          <a href="/suggestion/<%= suggestion_id-1 %>"><</a>
+        </li><li>
+          <a href="/suggestion">목록으로</a>
+        </li><li>
+          <a href="/suggestion/<%= suggestion_id+1 %>">></a>
+        </li></ul>
+       <h2><span>[<%= suggestion_id %>]</span><%= results1[0].title %></h2>
        <p>
-           <%= results1[0].writer_name %>
+           <span><%= results1[0].username %></span>
             <span><%= `${date[0]}/${date[1]}/${date[2]}` %></span> 
        </p>
 
@@ -23,7 +30,7 @@
            <%= results1[0].content %>
        </p>
        <div>
-           <form action=<%=`/suggestion/${suggestion_id}`%> method="post">
+           <form action="/suggestion/<%=suggestion_id %>" method="post">
                <h3>댓글</h3>
                <%  var id = 0;
                    results2.forEach(function(row){
@@ -42,14 +49,14 @@
                        <input id = "<%=id%>"" class="submit none" type="submit" value="Submit" onclick="javascript: from.action='<%=`/notice/${suggestion_id}/reply/${id}`%>'"> -->
                    </div>
                
-               <% id++;
+<!--                <% id++;
                    }) %>
                <input class="write_comment" name="comment" type="text" placeholder="write a comment">
                <input class="comment_writing" type="submit" value="Submit" >
 
            </form>
        </div>
-      </section>
+      </section> -->
       
       <% include menu %>
 
