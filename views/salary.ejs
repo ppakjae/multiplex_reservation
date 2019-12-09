@@ -47,13 +47,13 @@
   </div>
 </div>
 <div id="ebox1">
-	<a href="#" class="button">급 여</a>
+	<a href="#" class="button" id="pay">급 여</a>
 </div>
 
 <%if(results.length!=0){
   var birth = JSON.stringify(results[0].birth);
     birth = birth.substring(1,11).split("-");%>
-<div style="margin-left:5em;">
+<div style="margin-left:5em;" id = "lookupResult">
 	<table class="tg1" width="30%" style="table-layout:fixed">
 	  <tr>
 	    <th class="tg-name">이름</th>
@@ -70,11 +70,13 @@
 <%}%>
 
 
-<form method="POST" action="/admin/salary">
+<form method="POST" action="/admin/salary" id = "search">
   <h1 style="color:white;font-size:15px">
-    <label for="employee_id"> 직원 ID </label>
-    <input id="employee_id" type="text" name="employee_id" />
-    <input type="submit" value="조회">
+    <div id = "lookup">
+      <label for="employee_id"> 직원 ID </label>
+      <input id="employee_id" type="text" name="employee_id" />
+      <input type="submit" value="조회">
+    </div>
   </h1>
 </form>
 
