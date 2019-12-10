@@ -29,19 +29,19 @@
 
 
 
-const cuppon_list2 =[	{cuppon_name : "통신사_할인쿠폰",
-	cuppon_discounts : 2000,
-	cuppon_expireDate : "2019-99-99"
-	},
-	{cuppon_name : "무료_할인쿠폰",
-	cuppon_discounts : 3000,
-	cuppon_expireDate : "2019-99-99"
-	},
-	{cuppon_name : "이벤트_할인쿠폰",
-	cuppon_discounts : 1000,
-	cuppon_expireDate : "2019-99-99"
-	}
-]
+// const cuppon_list2 =[	{cuppon_name : "통신사_할인쿠폰",
+// 	cuppon_discounts : 2000,
+// 	cuppon_expireDate : "2019-99-99"
+// 	},
+// 	{cuppon_name : "무료_할인쿠폰",
+// 	cuppon_discounts : 3000,
+// 	cuppon_expireDate : "2019-99-99"
+// 	},
+// 	{cuppon_name : "이벤트_할인쿠폰",
+// 	cuppon_discounts : 1000,
+// 	cuppon_expireDate : "2019-99-99"
+// 	}
+// ]
 
 let reservation_list_load = false;
 let cuppon_list_load = false;
@@ -195,9 +195,9 @@ const make_cupponList = function(){
 		newCuppon_discounts.classList.add("cuppon-discounts");
 		newCuppon_expiredate.classList.add("cuppon-expireDate");
 
-		const newCuppon_discountsText = document.createTextNode("쿠폰 금액 : "+cuppon_list2[i].cuppon_discounts);
-		const newCuppon_nameText = document.createTextNode("쿠폰 이름 : "+cuppon_list2[i].cuppon_name);
-		const newCuppon_expiredateText = document.createTextNode("쿠폰 만기일 : "+cuppon_list2[i].cuppon_expireDate);
+		const newCuppon_nameText = document.createTextNode("쿠폰 번호 : "+cuppon_list2[i][0].coupon_id);
+		const newCuppon_discountsText = document.createTextNode("쿠폰 내용 : "+cuppon_list2[i][0].extent+" "+cuppon_list2[i][0].type +" discount");
+		const newCuppon_expiredateText = document.createTextNode("쿠폰 만기일 : "+new Date(cuppon_list2[i][0].end_date).toLocaleDateString	());
 
 		newCuppon_name.appendChild(newCuppon_nameText);
 		newCuppon_discounts.appendChild(newCuppon_discountsText);
@@ -216,7 +216,7 @@ const toggle_cupponList = function(){
 	const Menu = document.querySelector("#Menu");
 
 	if(cuppon_list_load == false){
-		make_cupponList();
+		make_cupponRequest();
 		cuppon_list_load = true;
 	}
 	this.classList.toggle('hidden');

@@ -30,6 +30,7 @@ req.onreadystatechange = function(e){
 					// location.reload();
 				}else if(req.response.type == "coupon"){
 					cuppon_list2 = req.response.coupon_list;
+					make_cupponList();
 				}
 			}
 	}

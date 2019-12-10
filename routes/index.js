@@ -778,15 +778,19 @@ router.get('/api/coupon',function(req,res,next){
         else{
             let sql_default = "SELECT * FROM coupon WHERE coupon_id ="
             let sql_result=""
-            const cuppon_list = results[0].coupon_able.split('/').forEach(
-                (item)=>{
-                    item = parseInt(item);
-                    sql_result += sql_result+sql_default+item+";";
-                });
+            const cuppon_list = results[0].coupon_able.split(',');
+            for(i=0; i<cuppon_list.length;i++){
+                    let item = parseInt(cuppon_list[i]);
+                    sql_result += sql_default+item+";";
+            }
+                
+
+            console.log(sql_result);
 
             connection.query(sql_result,function(err,results,fields){
+                console.log(results);
                 res.json({
-                    type: "cupon",
+                    type: "coupon",
                     count: 0,
                     coupon_list : results
                 });
