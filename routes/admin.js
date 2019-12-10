@@ -28,7 +28,7 @@ router.use(session({
 /* GET users listing. */
 router.get('/', function (req, res, next) {
   if (req.session.user) {
-    res.render('adminindex', {
+    res.render('adminIndex', {
       logined: req.session.user.logined,
       employee_name: req.session.user.employee_name,
       employee_rank: req.session.user.employee_rank
