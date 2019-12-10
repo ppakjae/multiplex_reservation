@@ -1,6 +1,7 @@
 var req = new XMLHttpRequest();
 
 let reservation_list= [];
+let cuppon_list2 = [];
 
 req.onreadystatechange = function(e){
 	console.log(""+req.readyState + req.status);
@@ -27,6 +28,9 @@ req.onreadystatechange = function(e){
 					}
 					// make_reservationRequest();
 					// location.reload();
+				}else if(req.response.type == "coupon"){
+					cuppon_list2 = req.response.coupon_list;
+					make_cupponList();
 				}
 			}
 	}

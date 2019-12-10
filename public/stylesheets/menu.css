@@ -38,7 +38,9 @@
 }
 
 
-#reservation_list_container{
+ul#reservation_list_container{
+	margin-left :0;
+	padding-left: 0 !important;
 	opacity: 1;
 }
 
@@ -51,6 +53,7 @@
 	height: auto;
 	min-height: 30vh;
 	margin : 3vh 3vw;
+	padding:0;
 	box-sizing: border-box;
 	border-bottom:1px solid white;
 	border-top:1px solid white;
@@ -134,6 +137,7 @@ div.cancel > * {
 
 
 #cuppon_list_container {
+	align-self: center;
 	list-style: none;
 	opacity: 1;
 }
@@ -143,7 +147,8 @@ div.cancel > * {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
-	width: 25vw;
+	/*align-items: center;*/
+	width: 30vw;
 	height: 20vh;
 	margin : 3vh 3vw;
 	padding: 1vh 1vw;
