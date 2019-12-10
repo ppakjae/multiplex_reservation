@@ -19,8 +19,7 @@
 	<div id="Content">
 
 		<div id="Seats-container">
-			<h4>Seats</h4>
-
+			<h4 id="Seats_screen">Seats</h4>
 			<div id="Seats">
 				<div id="screen">
 				</div>
@@ -39,11 +38,9 @@
 				<ul class="memset">
 					<p>우대</p>
 				</ul>
-
-
 			</div>
 
-
+			<div class = reservation_result>
 			<div id="reservation_info">
 				<h4>예매내역</h4>
 				<div>
@@ -69,6 +66,7 @@
 				</div>
 
 			</div>
+		</div>
 		</div>
 		<form name = "fr" onsubmit="return check()" action=<%= `/reserv_seat/${box_office_id}` %> method="post">
 			<input type="submit" id="goPayment" value="Payment">

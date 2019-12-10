@@ -27,7 +27,7 @@ router.use(session({
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
-  if (req.session.user.logined) {
+  if (req.session.user) {
     res.render('adminindex', {
       logined: req.session.user.logined,
       employee_name: req.session.user.employee_name,
@@ -41,7 +41,7 @@ router.get('/', function (req, res, next) {
   }
 });
 
-router.get('/login', function (req, res, next){
+router.get('/login', function (req, res, next) {
   res.render('adminlogin');
 })
 
@@ -56,11 +56,13 @@ router.get('/info', function (req, res, next) {
 });
 
 router.get('/sales', function (req, res, next) {
-  var sql = 'SELECT * from movie natural join sales';
-  connection.query(sql, function (error, results, fields) {
-    console.log(results);
+  var sql1 = 'SELECT * from movie natural join sales group by movie_name order by movie_id; ';
+  var sql2 = 'SELECT date, movie_name, movie_id, sales from movie natural join sales order by movie_id, date';
+  connection.query(sql1 + sql2, function (error, results, fields) {
+    console.log(results[1][0]);
     res.render('sales', {
-      results
+      results1: results[0],
+      results2: results[1]
     });
   });
 });
@@ -68,11 +70,12 @@ router.get('/sales', function (req, res, next) {
 router.get('/salary', function (req, res, next) {
   var sql1 = 'SELECT * from schedule; ';
   var sql2 = 'SELECT * from work';
-  connection.query(sql1 + sql2, function(error, results, fields){
+  connection.query(sql2, function (error, results, fields) {
     console.log(results);
-    res.render('salary',{
-      results1 : results[0],
-      results2 : results[1]
+    res.render('salary', {
+      // results1 : results[0],
+      // results2 : results[1]
+      results
     });
   });
 });
@@ -80,21 +83,26 @@ router.get('/salary', function (req, res, next) {
 router.get('/rewards', function (req, res, next) {
   var sql1 = 'SELECT * from schedule; ';
   var sql2 = 'SELECT * from work';
-  connection.query(sql1 + sql2, function(error, results, fields){
-    
-    res.render('rewards',{
-      results1 : results[0],
-      results2 : results[1]
+  connection.query(sql1 + sql2, function (error, results, fields) {
+
+    res.render('rewards', {
+      results1: results[0],
+      results2: results[1]
     });
   });
 });
 
 router.get('/vacation', function (req, res, next) {
-  var sql = 'SELECT * FROM vacation NATURAL JOIN employee';
-  connection.query(sql, function (error, results, fields) {
-    console.log(results);
-    res.render('vacation',{
-      results
+  var cinema_id = req.session.user.cinema_id;
+  var sql1 = 'SELECT * FROM vacation NATURAL JOIN employee where cinema_id = ?; ';
+  var sql2 = 'SELECT * FROM vacation_log';
+  
+  connection.query(sql1 + sql2, [cinema_id], function (error, results, fields) {
+    var sdate = String(results[1][0].sdate).split('-');
+    res.render('vacation', {
+      results1: results[0],
+      results2: results[1]
+      
     });
   });
 });
@@ -117,14 +125,14 @@ router.post('/', function (req, res) {
           logined: true,
           employee_name: results[0].employee_name,
           employee_rank: results[0].employee_rank,
-          cinema_id : results[0].cinema_id
+          cinema_id: results[0].cinema_id
         }
 
         res.render('adminindex', {
-            logined: req.session.user.logined,
-            employee_name: req.session.user.employee_name,
-            employee_rank: req.session.user.employee_rank,
-            cinema_id : req.session.user.cinema_id
+          logined: req.session.user.logined,
+          employee_name: req.session.user.employee_name,
+          employee_rank: req.session.user.employee_rank,
+          cinema_id: req.session.user.cinema_id
         });
       }
       else {
@@ -149,11 +157,31 @@ router.post('/info', function (req, res, next) {
   });
 });
 
-router.post('/sales', function (req, res, next){
-  
+router.post('/sales', function (req, res, next) {
+
 });
 
-router.post('/vacation', function (req, res, next){
+router.post('/salary', function (req, res, next) {
+  var employee_id = req.body.employee_id;
+  console.log(employee_id);
 
+  var sql = 'SELECT * from work_log natural join employee where employee_id = ?'
+  connection.query(sql, [employee_id], function (error, results, fields) {
+    console.log(results);
+    res.render('salary', {
+      results
+    });
+  });
+});
+
+router.post('/vacation', function (req, res, next) {
+  var employee_id = req.body.employee_id;
+  var sdate = req.body.sdate;
+  var edate = req.body.edate;
+
+  var sql = 'INSERT into vacation_log(employee_id, sdate, edate) VALUES(?,?,?)';
+  connection.query(sql, [employee_id, sdate, edate], function (error, results, fields) {
+    res.redirect('vacation');
+  });
 });
 

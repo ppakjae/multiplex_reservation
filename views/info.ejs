@@ -10,7 +10,7 @@
   <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
   <link href="/stylesheets/default.css" rel="stylesheet" type="text/css" media="all" />
   <link href="/stylesheets/fonts.css" rel="stylesheet" type="text/css" media="all" />
-  <link href="\stylesheets\admin.css" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/admin.css" rel="stylesheet" type="text/css" />
 
   <style type="text/css">
     /* 위 아랫 표 동시 적용 */
@@ -95,28 +95,49 @@
     <a href="#" class="button">사원정보</a>
   </div>
 
-  <button id="myBtn">직원 추가</button>
-
+  <div id="addEmployee">
+    <button id="myBtn">직원 추가</button>
+  </div>
   <div id="myModal" class="modal">
     <div class="modal-content">
       <span class="close">&times;</span>
       <form method="post" action="/admin/info">
-        <label for="employee_name"> 성명 </label>
-        <input id="employee_name" type="text" name="employee_name" />
-        <label for="phone_number"> 전화번호 </label>
-        <input id="phone_number" type="text" name="phone_number" placeholder="000-0000-0000" />
-        <label for="join_date"> 입사일 </label>
-        <input id="join_date" type="text" name="join_date" placeholder="YYYY-MM-DD" />
-        <label for="cinema_id"> 지점 </label>
-        <input id="cinema_id" type="text" name="cinema_id" />
-        <label for="employee_rank"> 직위 </label>
-        <input id="employee_rank" type="text" name="employee_rank" />
-        <input type="submit" value="저장" />
+        <div>
+          <label for="employee_name"> 성명 </label>
+          <div id="employee_name">
+              <input id="employee_name" type="text" name="employee_name" />
+          </div>
+        </div>
+        <div>
+            <label for="phone_number"> 전화번호 </label>
+            <div id="phone_number">
+            <input id="phone_number" type="text" name="phone_number" placeholder="000-0000-0000" />
+            </div>
+        </div>
+        <div id="join_date">
+          <label for="join_date"> 입사일 </label>
+          <div id="join_date">
+            <input id="join_date" type="text" name="join_date" placeholder="YYYY-MM-DD" />
+          </div>
+        </div>
+        <div>
+            <label for="cinema_id"> 지점 </label>
+            <div id="cinema_id">
+              <input id="cinema_id" type="text" name="cinema_id" />
+           </div>
+        </div>
+        <div>
+            <label for="employee_rank"> 직위 </label>
+            <div id="employee_rank">
+              <input id="employee_rank" type="text" name="employee_rank" />
+            </div>
+        </div>
+        <div id="save">
+          <input type="submit" value="저장" />
+        </div>
       </form>
     </div>
   </div>
-
-  </form>
 
   <% results.forEach(function(row){ 
     var date = JSON.stringify(row.join_date);

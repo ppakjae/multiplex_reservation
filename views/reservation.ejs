@@ -36,6 +36,7 @@
 			</ul>
 
 			<h4>Date</h4>
+			<div id="month-list"></div>
 			<ul id="date-list">
 			</ul>
 			<h4>Screen</h4>
@@ -67,9 +68,10 @@
 				<div>
 					<p>cost:</p>
 				</div>
+				<div>
 				<form id="RE" action=<%= `/reserv/${state}` %> method="post">
-					<input type="hidden" name="info" value="RE" />
-					<input type="submit" value="RE">
+					<input type="hidden" name="info" value="다시하기" />
+					<input type="submit" value="다시하기">
 				</form>
 
 				<form id="select_form" action=<%= `/reserv/${state}` %> method="post">
@@ -77,6 +79,7 @@
 					<input type="submit" value="좌석선택">
 
 				</form>
+			</div>
 			</div>
 		</div>
 		<!-- <div id="goPayment">Payment</div> -->

@@ -206,6 +206,11 @@ const remove_cinemaList = function () {
 	}
 }
 
+// const make_reservation_info = function (i, textContent, info) {
+// 	const Info = document.querySelector("#reservation_info");
+// 	Info.children[i].children[0].textContent = textContent + ": " + info;
+// }
+
 const make_movieList = function () {
 	const MovieList = document.querySelector("#movie-list");
 	for (i = 0; i < movie_list.length; i++) {
@@ -215,16 +220,16 @@ const make_movieList = function () {
 		var str3 = ")";
 		newItem.setAttribute("style", str1.concat(str2, str3));
 		let newItem_text = document.createTextNode(movie_list[i][0]);
-		newItem.appendChild(newItem_text);
 		if (movie_list[i] == reservation_info[2]) {
 			newItem.className = "selected";
 		}
+
 		newItem.addEventListener('click', function (event) {
 			for (var k = 0; k < MovieList.childElementCount; k++) {
 				MovieList.children[k].className = "";
 			}
 			newItem.className = "selected";
-			reservation_info[2] = newItem.textContent;
+			reservation_info[2] = newItem_text.textContent;
 			reservation_info[6] = '';
 			document.getElementById("info").value = reservation_info;
 			document.getElementById("select_form").submit();
@@ -240,6 +245,7 @@ const make_dateList = function () {
 	for (i = 0; i < date_list.length; i++) {
 		let newItem = document.createElement('li');
 		let newItem_text = document.createTextNode(date_list[i][2]);
+		// let result = newItem_text.concat("," + date_list[i][0]);
 		newItem.appendChild(newItem_text);
 		if (date_list[i][2] == reservation_info[3]) {
 			newItem.className = "selected";
@@ -292,6 +298,7 @@ const make_screenList = function (screen_time_list) {
 		let newItem = document.createElement("li");
 		let startTime = document.createElement("h6");
 		let leftedCapcity = document.createElement("h6");
+		leftedCapcity.classList.add('left');
 		let startTime_text = document.createTextNode(screen_time_list[i].show_start_time);
 		let leftedCapcity_text = document.createTextNode(screen_time_list[i].lefted_seating_capcity);
 		startTime.appendChild(startTime_text);
@@ -322,6 +329,94 @@ const make_screenList = function (screen_time_list) {
 		}
 	}
 }
+
+const make_dayList = function () {
+	const MonthList = document.querySelector("#day-list");
+	for (i = 0; i < date_list.length; i++) {
+		let newItem = document.createElement('li');
+		let newItem_text = document.createTextNode(date_list[i][0]);
+		newItem.appendChild(newItem_text);
+		if (date_list[i][2] == reservation_info[3]) {
+			newItem.className = "selected";
+		}
+		newItem.addEventListener('click', function (event) {
+			for (var k = 0; k < DateList.childElementCount; k++) {
+				DateList.children[k].className = "";
+			}
+			newItem.className = "selected";
+			reservation_info[3] = newItem.textContent;
+			reservation_info[6] = '';
+			document.getElementsByClassName("date").value = reservation_info[3];
+			make_reservation_info(3, "date", reservation_info[3]);
+			document.getElementById("info").value = reservation_info;
+			document.getElementById("select_form").submit();
+
+		});
+		DateList.appendChild(newItem);
+	}
+}
+// const make_monthList = function (month_list) {
+// 	const ScreenList = document.querySelector("#month-list");
+
+// 	let newgroup = document.createElement("ul");
+// 	let newgroup_name = document.createElement("h4");
+// 	let newgroup_name_text = document.createTextNode(date_list);
+
+// 	newgroup_name.appendChild(newgroup_name_text);
+// 	newgroup.appendChild(newgroup_name);
+// 	ScreenList.appendChild(newgroup);
+
+// 	for (let i = 0; i < screen_time_list.length; i++) {
+
+// 		if (i < screen_time_list.length - 1 && screen_time_list[i].screen_no != screen_time_list[i + 1].screen_no) {
+// 			let newgroup = document.createElement("ul");
+// 			let newgroup_name = document.createElement("h5");
+// 			let newgroup_name_text = document.createTextNode(screen_time_list[i + 1].screen_no);
+
+// 			newgroup_name.appendChild(newgroup_name_text);
+// 			newgroup.appendChild(newgroup_name);
+// 			ScreenList.appendChild(newgroup);
+// 		}
+// 	}
+
+// 	for (let i = 0, k = 0; i < screen_time_list.length; i++) {
+// 		const ScreenList = document.querySelectorAll("#screen-list > ul");
+// 		let newgroup = ScreenList[k];
+
+// 		let newItem = document.createElement("li");
+// 		let startTime = document.createElement("h6");
+// 		let leftedCapcity = document.createElement("h6");
+// 		leftedCapcity.classList.add('left');
+// 		let startTime_text = document.createTextNode(screen_time_list[i].show_start_time);
+// 		let leftedCapcity_text = document.createTextNode(screen_time_list[i].lefted_seating_capcity);
+// 		startTime.appendChild(startTime_text);
+// 		leftedCapcity.appendChild(leftedCapcity_text);
+// 		newItem.appendChild(startTime);
+// 		newItem.appendChild(leftedCapcity);
+
+// 		newItem.addEventListener('click', function (event) {
+// 			for (var l = 1, s = 0; s < ScreenList.length; l++) {
+// 				ScreenList[s].children[l].className = "";
+// 				if (l == ScreenList[s].childElementCount - 1) { s++; l = 0; }
+// 			}
+// 			newItem.className = "selected";
+// 			reservation_info[4] = screen_time_list[i].screen_no + "관";
+// 			reservation_info[5] = newItem.children[0].textContent;
+// 			reservation_info[6] = screen_time_list[i].box_office_id;
+// 			document.getElementsByClassName("screen_no").value = reservation_info[4];
+// 			document.getElementsByClassName("show_start_time").value = reservation_info[5];
+// 			make_reservation_info(4, "screen_no", reservation_info[4]);
+// 			make_reservation_info(5, "show_start_time", reservation_info[5]);
+// 			document.getElementById("info").value = reservation_info;
+// 		});
+
+// 		newgroup.appendChild(newItem);
+// 		if (i < screen_time_list.length - 1 && screen_time_list[i].screen_no != screen_time_list[i + 1].screen_no
+// 		) {
+// 			k++
+// 		}
+// 	}
+// }
 let k = 1;
 if (typeof region_list !== "undefined") {
 	for (let i = 0; i < region_list.length; i++) {

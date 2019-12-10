@@ -911,7 +911,7 @@ router.post('/', function(req, res){
 
 router.post('/reserv/:state', function (req, res) {
     var info = req.body.info.split(',');
-    if (info == 'RE') {
+    if (info == '다시하기') {
         res.redirect(`/reserv/0_0_0`);
     } else {
         if (info[6] > 0) {
