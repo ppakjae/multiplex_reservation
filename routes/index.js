@@ -764,6 +764,41 @@ router.delete('/api/reserv', function(req,res,next){
 
 });
 
+router.get('/api/coupon',function(req,res,next){
+    const sql = `SELECT * FROM member WHERE member_id= ${login.member_id};`;
+
+    connection.query(sql,function(err,results,fields){
+        console.log(results);
+        if(!results || results.length == 0) {
+            res.json({
+                type : "cuppon",
+                count : "0"
+            });
+        }
+        else{
+            let sql_default = "SELECT * FROM coupon WHERE coupon_id ="
+            let sql_result=""
+            const cuppon_list = results[0].coupon_able.split(',');
+            for(i=0; i<cuppon_list.length;i++){
+                    let item = parseInt(cuppon_list[i]);
+                    sql_result += sql_default+item+";";
+            }
+                
+
+            console.log(sql_result);
+
+            connection.query(sql_result,function(err,results,fields){
+                console.log(results);
+                res.json({
+                    type: "coupon",
+                    count: 0,
+                    coupon_list : results
+                });
+            })
+        }
+    })
+});
+
 
 router.get('/payment',function(req,res,next){
     res.render('payment',{
