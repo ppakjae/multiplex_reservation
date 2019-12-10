@@ -1,6 +1,22 @@
 .none {
     display: none;
 }
+#logo > button{
+    background: none;
+    border: 1px solid #002b36;
+    border-radius: 5px;
+    color: #002b36;
+    font-size: 0.9em;
+    font-weight: bold;
+    padding: 0.5em 1em;
+    right: 5%;
+    margin-top:1%;
+}
+
+#logo > button:hover {
+    color: black;
+    background: none;
+}
 /* -------------------------- adminIndex ---------------------------- */
 
 #Login {
@@ -221,10 +237,6 @@
     background-color: #93a1a1;
 }
 
-.tg-valu{
-    margin: auto;
-    text-align: center;
-}
 
 /* -------------------------- sales ---------------------------- */
 #pay{
@@ -326,5 +338,53 @@
 .tg-myid > button:hover {
     color: #002b36;
     background-color: #93a1a1;
+}
+
+#employee_id > input[type=text] {
+    background: none;
+    border: 1px solid #002b36;
+    border-radius: 5px;
+    color: #002b36;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-top: 0.6em;
+    margin-bottom: 0.6em;
+    padding: 0.6em 1em;
+}
+
+#sdate > input[type=text] {
+    background: none;
+    border: 1px solid #002b36;
+    border-radius: 5px;
+    color: #002b36;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-top: 0.6em;
+    margin-bottom: 0.6em;
+    padding: 0.6em 1em;
+}
+
+#edate> input[type=text] {
+    background: none;
+    border: 1px solid #002b36;
+    border-radius: 5px;
+    color: #002b36;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-top: 0.6em;
+    margin-bottom: 0.6em;
+    padding: 0.6em 1em;
+}
+
+#enter > input[type=submit]{
+    background: none;
+    border: 1px solid #002b36;
+    border-radius: 5px;
+    color: #002b36;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-top: 0.6em;
+    margin-bottom: 0.6em;
+    padding: 0.6em 1em;
 }
 /* -------------------------- vacation ---------------------------- */

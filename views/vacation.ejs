@@ -142,13 +142,28 @@
     <div class="modal-content">
       <span class="close">&times;</span>
       <form method="POST" action="/admin/vacation">
-        <label for="employee_id"> 직원ID </label>
-        <input type="text" name="employee_id" size="10" style="margin-left:20px;margin-right:20px">
-        <label for="sdate"> 휴가시작일자 </label>
-        <input type="text" name="sdate" size="10" style="margin-left:20px;margin-right:20px">
-        <label for="edate"> 휴가종료일자 </label>
-        <input type="text" name="edate" size="10" style="margin-left:20px;margin-right:20px">
-        <input type="submit" value="입력" style="letter-spacing:1px;margin-left:20px;padding-left:5px;padding-right:5px">
+        <div>
+          <label for="employee_id"> 직원ID </label>
+          <div id="employee_id">
+            <input type="text" name="employee_id" size="10" style="margin-left:20px;margin-right:20px">
+          </div>
+        </div>
+        <div>
+          <label for="sdate"> 휴가시작일자 </label>
+          <div id="sdate">
+            <input type="text" name="sdate" size="10" style="margin-left:20px;margin-right:20px">
+          </div>
+        </div>
+        <div>
+          <label for="edate"> 휴가종료일자 </label>
+          <div id="edate">
+            <input type="text" name="edate" size="10" style="margin-left:20px;margin-right:20px">
+          </div>
+        </div>
+        <div id="enter">
+          <input type="submit" value="입력"
+            style="letter-spacing:1px;margin-left:20px;padding-left:5px;padding-right:5px">
+        </div>
       </form>
     </div>
   </div>
@@ -186,9 +201,9 @@
         <th class="tg-part">휴가승인여부</th>
         <th class="tg-part">사용 휴가일 수</th>
       </tr>
-      
-      
-<% if(results2.length != 0){
+
+
+      <% if(results2.length != 0){
   for(var j = 0; j < results2.length; j++) {
       if(employee_id == results2[j].employee_id){ 
         var sdate = String(results2[j].sdate).split(' ');
@@ -225,8 +240,8 @@
   var vacationmodal = document.getElementsByClassName("vacationModal");
   var btn = document.getElementById("vacationBtn");
 
-  for (let i = 0; i < button.length-1; i++) {
-    document.querySelectorAll("button")[i+1].addEventListener("click", function () {
+  for (let i = 0; i < button.length - 1; i++) {
+    document.querySelectorAll("button")[i + 1].addEventListener("click", function () {
       vacationmodal[i].classList.toggle("none");
     });
   }
