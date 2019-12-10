@@ -54,15 +54,14 @@ const make_seatChart = function (seats) {
 			let newSeat = document.createElement('div');
 			let newSeatText;
 			if (seats[i][j] == 1) {
-				newSeatText = document.createTextNode(j);
+				newSeatText = document.createTextNode(j+1);
 				newSeat.classList.add('seat');
 				newRow.appendChild(newSeat);
 				newSeat.addEventListener('click', function (event) {
-					if (mem_ayp[0] + mem_ayp[1] + mem_ayp[2] >= seat_list.length) {
 						newSeat.classList.toggle("select_seat");
 						var str1 = newSeat.parentNode.children[0].textContent;
 						var str2 = newSeat.textContent;
-						var str = " ".concat("",str1.concat(" - ", str2))
+						var str = "".concat("",str1.concat("-", str2))
 						var s = 0;
 						for (let k = 0; k < seat_list.length; k++) {
 							if (seat_list[k] == str) {
@@ -75,7 +74,7 @@ const make_seatChart = function (seats) {
 							newSeat.className = "seat";
 							seat_list.pop();
 						}
-					}
+					
 					text = document.createTextNode(seat_list);
 					seat_list.sort();
 					document.getElementById("seats_info").textContent ="seats: "+ seat_list;
