@@ -800,11 +800,75 @@ router.get('/api/coupon',function(req,res,next){
 });
 
 
-router.get('/payment',function(req,res,next){
-    res.render('payment',{
-        logined : login.logined,
-        username : login.username
-    });
+
+
+router.get('/payment/:reservation_info', function (req, res, next) {
+    var info = req.url.split("/")[2].split("&");
+    info_b = info[0];
+    var sql = ' select cinema_name, movie_name, date,screen_no,start_time, screen_no, seat_state from box_office natural join movie natural join cinema natural join screen where box_office_id = ?;'
+    var sql_cou = 'select coupon_able from member where username = ? ;'
+    connection.query(sql + sql_cou, [parseInt(info_b), login.username], function (error, results, field) {
+        var str = String(results[0][0].date).split("-")[0];
+        str = str.split(" ")
+        var date = new Array();
+        for (j = 0; j < 3; j++) {
+            date.push(str[j]);
+        }
+        var seats = results[0][0].seat_state.split('[');
+        seats.splice(0, 2);
+        for (let j = 0; j < seats.length; j++) {
+            seat = new Array();
+            seats[j] = seats[j].split(']')[0];
+            for (let k = 0, l = 0; k < seats[j].length; k++) {
+                if (seats[j][k] != ',') {
+                    seat[l] = parseInt(seats[j][k]);
+                    l++;
+                }
+            }
+            seats[j] = seat
+        }
+        start_time = results[0][0].start_time.split(':');
+        start_time = start_time[0].concat(':', start_time[1]);
+        var coupon_able = results[1][0].coupon_able.split(',');
+        if (coupon_able.length != 0) {
+            var coupon_info = Array.from(Array(coupon_able.length), () => Array());
+            coupon = new Array();
+            for (let j = 0; j < coupon_able.length; j++) {
+                coupon[j] = parseInt(coupon_able[j])
+            }
+            var sql_cou_info = 'select extent,type,end_date,coupon_id from coupon where coupon_id = ?'
+            for (let j = 0; j < coupon_able.length - 1; j++) {
+                sql_cou_info = sql_cou_info.concat(" OR ", 'coupon_id = ?')
+            }
+            connection.query(sql_cou_info, coupon, function (error, result_coupon, field) {
+                for (let j = 0; j < coupon_able.length; j++) {
+                    coupon_info[j][0] = result_coupon[j].type;
+                    coupon_info[j][1] = result_coupon[j].extent;
+                    coupon_info[j][2] = result_coupon[j].end_date;
+                    coupon_info[j][3] = result_coupon[j].coupon_id;
+                }
+                res.render('payment', {
+                    logined: login.logined,
+                    username: login.username,
+                    reservation_information: ["", results[0][0].cinema_name, results[0][0].movie_name, date, String(results[0][0].screen_no).concat("", "관"), start_time, info_b],
+                    info_m: info[1],
+                    info_s: info[2],
+                    coupon_info
+                });
+            })
+        } else {
+
+            res.render('payment', {
+                logined: login.logined,
+                username: login.username,
+                reservation_information: ["", results[0][0].cinema_name, results[0][0].movie_name, date, String(results[0][0].screen_no).concat("", "관"), start_time, info_b],
+                info_m: info[1],
+                info_s: info[2],
+                coupon_info: null
+            });
+        }
+
+    })
 });
 
 
@@ -935,13 +999,71 @@ router.post('/reserv_seat/:box_office_id', function (req, res) {
     var info_m = req.body.info_m;
     var info_s = req.body.info_s;
     var info_b = req.body.info_b;
-    console.log(info_m,info_s,info_b);
-    res.render('payment', {
-        logined: login.logined,
-        username: login.username,
-        info_m
-    });
-   
+    res.redirect(`/payment/${info_b.concat("&", info_m).concat("&", info_s)}`);
+})
+
+
+router.post('/payment/:reservation_info', function (req, res) {
+ 
+    var box_office_id = parseInt(req.body.info_b.split('/')[0])
+    var mem = req.body.info_m.split('/')[0].split(',');
+    var info_s = req.body.info_s.split('/')[0].split(',');
+    var pay_method = req.body.pay_method;
+    var item = req.body.item;
+    var type = pay_method;
+    var amount = parseInt(req.body.amount)
+    var coupon_id = parseInt(req.body.coupon_id);
+    if (pay_method == "신용카드") type = item[0]
+    else if (pay_method == "휴대폰결제") type = item[1];
+    var sql = 'select cinema_id, movie_id, date, seat_state from box_office natural join movie natural join cinema natural join screen where box_office_id = ?;'
+    var sql_mem = 'select coupon_able,member_id from member where username = ? ;'
+    connection.query(sql + sql_mem, [box_office_id, login.username], function (error, results, fields) {
+        console.log(results);
+        member_id = results[1][0].member_id;
+        coupon_able = results[1][0].coupon_able.split(',');
+        var coupon = "";
+        for (let i = 0; i < coupon_able.length; i++) {
+            if (parseInt(coupon_able[i]) - String(coupon_id) != 0) {
+                if (i == coupon_able.length - 1) coupon = coupon.concat(coupon_able[i], "");
+                else coupon = coupon.concat(coupon_able[i], ",");
+            }
+        }
+        connection.query('UPDATE member SET coupon_able =? WHERE username = ?', [coupon, login.username]);
+        connection.query("insert into payment(amount,coupon_id,payment_type) values(?,?,?)", [amount, coupon_id, type], function () {
+        })
+        connection.query("select payment_id from payment where amount = ? and coupon_id = ? and payment_type = ?", [amount, coupon_id, type], function (error, result_payment_id, fields) {
+            payment_id = result_payment_id.payment_id;
+            connection.query("INSERT INTO reservation(youth, adult, preference, box_office_id,member_id, payment_id,seat_no,reservation_status) VALUES(?,?,?,?,?,?,?,?)", [parseInt(mem[0]), parseInt(mem[1]), parseInt(mem[2]), box_office_id, member_id, payment_id, req.body.info_s.split('/')[0],'R'], function () {
+            })
+            connection.query("insert into reservation_log(member_id,movie_id,date,cinema_id,number_of_people) values(?,?,?,?,?)", [member_id, results[0][0].movie_id, results[0][0].date, results[0][0].cinema_id, parseInt(mem[0]) + parseInt(mem[1]) + parseInt(mem[2])], function () {
+            })
+            seat_state = results[0][0].seat_state;
+            var seats = seat_state.split('[');
+            seats.splice(0, 2);
+            for (let j = 0; j < seats.length; j++) {
+                seat = new Array();
+                seats[j] = seats[j].split(']')[0];
+                for (let k = 0, l = 0; k < seats[j].length; k++) {
+                    if (seats[j][k] != ',') {
+                        seat[l] = parseInt(seats[j][k]);
+                        l++;
+                    }
+                }
+                seats[j] = seat
+            }
+            for (let i = 0; i < info_s.length; i++) {
+                info_s[i] = info_s[i].split("-");
+                seats[info_s[i][0].charCodeAt(0) - 65][parseInt(info_s[i][1]) - 1] = 2;
+            }
+            str = "'";
+            connection.query("update box_office set seat_state = ? where box_office_id = ? ", [str.concat( seats,"'"), box_office_id]);
+
+
+        })
+
+
+    })
+    res.redirect('/');
 })
 
 

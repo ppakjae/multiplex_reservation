@@ -27,7 +27,7 @@ form > ul{
 }
 
 
-#Cuppon-list > li > label{
+#Coupon-list > li > label{
   position: relative;
   display: flex;
   flex-direction: row;
@@ -38,20 +38,20 @@ form > ul{
   background-color: rgba(255,255,255,0.2);
 }
 
-#Cuppon-list > li > label h5{
+#Coupon-list > li > label h5{
   margin:0;
 }
 
-.cuppon_name {
+.coupon_name {
 
 }
 
-.cuppon_discounts{
+.coupon_discounts{
   position : absolute;
   bottom: 1vh;
   right: 1vw;
 }
-.cuppon_expireDate{
+.coupon_expireDate{
   position : absolute;
   bottom:1vh;
   left:1vw;

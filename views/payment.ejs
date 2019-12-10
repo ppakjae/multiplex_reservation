@@ -1,59 +1,88 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title></title>
-		<link rel='stylesheet' href='/stylesheets/index.css' />
-		<link rel='stylesheet' href='/stylesheets/payment.css' />
+	<link rel='stylesheet' href='/stylesheets/index.css' />
+	<link rel='stylesheet' href='/stylesheets/payment.css' />
 </head>
+
 <body>
-    <script type="text/javascript" src="/javascripts/ajax.js"></script>
+	<script type="text/javascript">
+		const reservation_information = <%- JSON.stringify(reservation_information) %>; //region,cinema,movie_name,date,screen_no,show_start_time,box_office_id
+		const mem = <%- JSON.stringify(info_m) %>; //region,cinema,movie_name,date,screen_no,show_start_time,box_office_id
+		const select_seats = <%- JSON.stringify(info_s) %>;
+		const coupon = <%- JSON.stringify(coupon_info) %>;
+	</script>
 	<% include nav %>
 	<div id="Content">
-
 		<form action="#" method="Post">
 			<div id="Reservation-Info">
 				<h3>Reservation</h3>
-				<div><p>movie_name:</p></div>
-					<div><p>cinema"</p></div>
-					<div><p>date:</p></div>
-					<div><p>screen:</p></div>
-					<div><p>seats:</p></div>
-					<div><p>cost:</p></div>
+				<div>
+					<p>cinema: <%= reservation_information[1] %> </p>
+				</div>
+				<div>
+					<p>movie_name: <%= reservation_information[2] %></p>
+				</div>
+				<div>
+					<p>date: <%= reservation_information[3] %></p>
+				</div>
+				<div>
+					<p>screen_no: <%= reservation_information[4] %></p>
+				</div>
+				<div>
+					<p>show_start_time: <%= reservation_information[5] %></p>
+				</div>
+				<div>
+					<p id="seats_info">seats: <%= info_s %></p>
+				</div>
+				
 			</div>
-			
-			<ul id="Cuppon-list">
-				<h3>Cuppon List</h3>
+
+			<ul id="Coupon-list">
+				<h3>Coupon List</h3>
 			</ul>
 			<ul id="Payment-methods">
 				<h3>Payment method</h3>
-				<li><label><input type="radio" name="pay_method" value="신용카드"/><h5>신용카드</h5>
-						<select>
-							<option>신한카드</option>
-							<option>BC카드</option>
-							<option>국민카드</option>
-							<option>현대카드</option>
-							<option>우리카드</option>
+				<li><label><input type="radio" name="pay_method" value="신용카드" />
+						<h5>신용카드</h5>
+						<select name="item">
+							<option value = "신한카드">신한카드</option>
+							<option value = "BC카드">BC카드</option>
+							<option value = "국민카드">국민카드</option>
+							<option value = "현대카드">현대카드</option>
+							<option value = "우리카드">우리카드</option>
 						</select>
-				</label>
+					</label>
 				</li>
-				<li><label><input type="radio" name="pay_method" value="휴대폰결제" /><h5>휴대폰결제</h5>
-					<select>
-						<option>payco</option>
-						<option>카카오페이</option>
-						<option>카카오페이</option>
-						<option>카카오페이</option>
-					</select>
-				</label>
+				<li><label><input type="radio" name="pay_method" value="휴대폰결제" />
+						<h5>휴대폰결제</h5>
+						<select name = item>
+							<option value = "payco">payco</option>
+							<option value = "카카오페이">카카오페이</option>
+							
+						</select>
+					</label>
 				</li>
-				<li><label><input type="radio" name="pay_method" value="계좌이체"/><h5>계좌이체</h5></label></li>
-				<li><label><input type="radio" name="pay_method" value="간편결제" /><h5>간편결제</h5></label></li>
+				<li><label><input type="radio" name="pay_method" value="계좌이체" />
+						<h5>계좌이체</h5>
+					</label></li>
+				<li><label><input type="radio" name="pay_method" value="간편결제" />
+						<h5>간편결제</h5>
+					</label></li>
 			</ul>
 			<div id="Payment">
 				<h3>Pay</h3>
 				<p>Tickets Price: <span id="price">8000</span>원</p>
 				<p>Discounts : <span id="discounts">3000</span>원</p>
 				<p>Total : <span id="total_price">3000</span>원</p>
-			<input type="submit" value="Check out!"/>
+				<input type="hidden" id = "amount" name="amount" />
+				<input type="hidden" id="info_s" name="info_s" value = <%- info_s %>/>
+				<input type="hidden" id="info_m" name="info_m" value = <%- info_m %>/>
+				<input type="hidden" id="info_b" name="info_b" value = <%- info_b %>/>
+				<input type="hidden" id="coupon_id" name ="coupon_id" />
+				<input type="submit" value="Check out!" />
 			</div>
 		</form>
 	</div>
@@ -61,4 +90,5 @@
 	<script type="text/javascript" src="/javascripts/index.js"></script>
 	<script type="text/javascript" src="/javascripts/payment.js"></script>
 </body>
+
 </html>
